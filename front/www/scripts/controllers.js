@@ -2,10 +2,10 @@
 var caseDoc;
 var globalVar;
 
-var baseUrl = 'http://139.59.23.184:8001';
-var socket = io.connect('139.59.23.184', {
-    port: 4000
-});
+// var baseUrl = 'http://139.59.23.184:8001';
+// var socket = io.connect('139.59.23.184', {
+//     port: 4000
+// });
 var API_KEY = 'AIzaSyDOCdq5yBdwwuE6A5H4RLxWe_34fEY6WDk';
 //var socket = io();
 var map;
@@ -147,12 +147,22 @@ angular.module('latchApp')
 }])
 
 
-.controller('LandingController', ['$rootScope', '$scope', '$state', '$location', function($rootScope, $scope, $state, $location) {
+.controller('LandingController', ['$rootScope', '$scope', '$state', '$location',function($rootScope, $scope, $state, $location) {
+
+    // $scope.google_sign = function(){
+    //      $cordovaOauth.google("539760702142-9qt6sj0m4dinrctmasa3pbcqa2p4sc9j.apps.googleusercontent.com", ["email"]).then(function(result) {
+    //         // results
+    //         console.log(results);
+    //     }, function(error) {
+    //         // error
+    //     });
+    // }
+
 
     $scope.redirect = function(type) {
         if (type == 'client')
             $state.go('app.login')
-        else if (type == 'lawyer')
+        else if (type == 'admin')
             $state.go('app.lawyer_login')
     }
 
@@ -228,15 +238,15 @@ angular.module('latchApp')
         }
 
     }])
-    .controller('LawyerLoginController', ['$rootScope', '$scope', '$state', '$location', function($rootScope, $scope, $state, $location) {
-        $rootScope.title = 'Lawyer Login';
+    .controller('LaundroLoginController', ['$rootScope', '$scope', '$state', '$location', function($rootScope, $scope, $state, $location) {
+        $rootScope.title = 'Laundromat Admin Login';
 
         $scope.user = {};
 
 
         $scope.submit = function() {
 
-            $state.go('app.lawyer_home');
+            $state.go('app.laundro_home');
             // $.ajax({
             //   method: 'POST',
             //   url: baseUrl + '/main/accounts/lawyer_login/',
@@ -1156,4 +1166,38 @@ angular.module('latchApp')
 }]).controller('UserStatusController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
     $rootScope.title = 'Status';
 
-}]);
+}])
+
+.controller('IdNumController', ['$rootScope', '$scope', '$state', '$location', function($rootScope, $scope, $state, $location) {
+    $rootScope.title = 'ID Number';
+
+    $scope.user = {};
+    // $scope.user.nick = 'parthosa';
+
+    $scope.submit = function() {
+        window.localStorage.setItem('id_no',$scope.user.id_no);
+        var data = {
+            id_no: $scope.user.id_no,
+            session_key: window.localStorage.getItem('session_key')
+        }
+        $state.go('app.user');
+
+        // $.ajax({
+        //     method: 'POST',
+        //     url: baseUrl + '/user/login/',
+        //     data: data,
+        //     success: function(response) {
+        //         if (response.status == 1) {
+        //             // window.localStorage.setItem('nick', data.nick);
+
+        //             $state.go('app.user');
+        //         }
+        //         Materialize.toast(response.message, 1000)
+
+        //     },
+        //     error: function(response) {}
+        // })
+    }
+
+}])
+

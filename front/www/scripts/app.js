@@ -42,14 +42,14 @@ angular.module('latchApp', ['ui.router'])
 
 
 
-        .state('app.nick', {
-                url: 'nick',
+        .state('app.id_num', {
+                url: 'id_num',
                 views: {
                     'header@': {
                         templateUrl: 'views/secondary_header.html',
                     },
                     'content@': {
-                        templateUrl: 'views/nick.html'
+                        templateUrl: 'views/id_num.html'
                     }
                 }
 
@@ -239,14 +239,14 @@ angular.module('latchApp', ['ui.router'])
         })
 
 
-        .state('app.lawyer_login', {
-                url: 'lawyer_login',
+        .state('app.laundro_login', {
+                url: 'laundro_login',
                 views: {
                     'header@': {
                         templateUrl: 'views/secondary_header.html',
                     },
                     'content@': {
-                        templateUrl: 'views/lawyer_login.html'
+                        templateUrl: 'views/laundro_login.html'
                     }
                 }
 

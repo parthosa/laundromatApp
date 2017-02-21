@@ -115,6 +115,11 @@ a.full-btn {
     margin-top: 0.5rem;
 }
 
+
+a.full-btn:focus,a.full-btn:hover,a.full-btn:active{
+    background-color: #005983 !important;
+}
+
 .brief-content{
 	text-align: center;
 }

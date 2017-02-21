@@ -1,0 +1,20 @@
+<div class="container main-content search-results " ng-controller="SearchController">
+    <ul class="collection">
+    <li class="collection-item avatar" ng-repeat="lawyer in lawyers | filter:search.query" ng-click='redirect(this)'>
+      <!-- <img ng-src="{{ lawyer.pic}}" alt="" class="circle"> -->
+      <div class="lawyer-info">
+      <p class="title">{{lawyer.name}}</p>
+      <p class="lawyer-type">{{lawyer.type}}</p>
+    <!-- <a href="#!" class="secondary-content">{{chat.time}}</a> -->
+      </div>
+      <div class="active-status">
+         <p class="text">Experience</p>
+         <p class="law-exp">{{lawyer.exp}}</p>
+
+
+      </div>
+    </li>
+  
+  </ul>
+		
+	</div>
