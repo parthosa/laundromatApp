@@ -4,12 +4,12 @@
             <div class="card">
                 <div class="card-content personal-info">
                     <div class="profile-img">
-                        <img src="images/johndoe.png">
+                        <img ng-src="{{user.img}}">
                     </div>
                     <div class="info-details">
-                        <p class="main-text">Partho Sarthi</p>
-                        <p class="sec-text">2015A7PS088</p>
-                        <p class="sec-text">9999461307</p>
+                        <p class="main-text">{{user.name}}</p>
+                        <p class="sec-text">{{user.id_no}}</p>
+                        <p class="sec-text">{{user.email}}</p>
                     </div>
                 </div>
             </div>

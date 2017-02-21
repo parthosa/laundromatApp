@@ -99,7 +99,9 @@ $(document).ready(function () {
         // Request scopes in addition to 'profile' and 'email'
         // scope: 'additional_scope'
       });
+      try{
       attachSignin(document.getElementById('google_sign_in'));
+    }catch(err){}
     });
   };
 

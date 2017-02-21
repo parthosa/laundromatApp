@@ -12,5 +12,64 @@
              <div id="name"></div>
         </div>
     </div>
+    <script type="text/javascript">
+            // var googleUser = {};
+     var startApp = function() {
+    gapi.load('auth2', function(){
+      // Retrieve the singleton for the GoogleAuth library and set up the client.
+      auth2 = gapi.auth2.init({
+        client_id: '539760702142-9qt6sj0m4dinrctmasa3pbcqa2p4sc9j.apps.googleusercontent.com',
+        cookiepolicy: 'single_host_origin',
+        // Request scopes in addition to 'profile' and 'email'
+        // scope: 'additional_scope'
+      });
+      try{
+      attachSignin(document.getElementById('google_sign_in'));
+    }catch(err){}
+    });
+  };
+
+  function attachSignin(element) {
+    console.log(element.id);
+    auth2.attachClickHandler(element, {},
+        onSignIn
+          
+        , function(error) {
+          alert(JSON.stringify(error, undefined, 2));
+        });
+  }
+
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  window.localStorage.setItem('gid',profile.getId()) 
+  window.localStorage.setItem('name',profile.getName());
+ window.localStorage.setItem('img',profile.getImageUrl());
+ window.localStorage.setItem('email',profile.getEmail());
+
+
+  var data = {
+    gid:profile.getId(),
+    name:profile.getName(),
+    img:profile.getImageUrl(),
+    email:profile.getEmail()
+  } 
+  location.href='/#/id_num';
+
+  // $.ajax({
+  //   method:'POST',
+  //   url:baseUrl + '/user/login/',
+  //   data:data,
+  //   success:function (response) {
+  //    if(response.status == 1)
+        // location.href='/#/id_num';
+  //     else if(response.status == 2)
+  //      alert('Use BITS Mail Only')
+  //    
+  //       location.href='/#/user/'
+  //   }
+  // })
+}
+  startApp();
+    </script>
 </div>
 

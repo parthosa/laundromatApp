@@ -158,7 +158,9 @@ angular.module('latchApp')
     //     });
     // }
 
-
+    try{
+    startApp();
+    }catch(err){}
     $scope.redirect = function(type) {
         if (type == 'client')
             $state.go('app.login')
@@ -1098,6 +1100,7 @@ angular.module('latchApp')
     $scope.redirect = function(ele) {
         console.log(ele);
         $state.go('app.hostel_info')
+
         $rootScope.title = ele;
     }
     try{
@@ -1131,7 +1134,7 @@ angular.module('latchApp')
     // }
 
 }]).controller('HostelInfoController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
-    $rootScope.title = 'Hostel Name';
+    // $rootScope.title = 'Hostel Name';
 
     $scope.students = [
       {
@@ -1159,6 +1162,13 @@ angular.module('latchApp')
 
 }]).controller('UserHomeController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
     $rootScope.title = 'LaundroMat';
+
+    $scope.user = {};
+    $scope.user.name = window.localStorage.getItem('name');
+    $scope.user.id_no = window.localStorage.getItem('id_no');
+    // $scope.user.phone = '9999461307';
+    $scope.user.email = window.localStorage.getItem('email');
+    $scope.user.img = window.localStorage.getItem('img');
 
     $scope.show = function (ele) {
       $('.details').hide();
