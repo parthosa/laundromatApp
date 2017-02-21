@@ -74,7 +74,7 @@ p.ttext {
     padding: 10px;
     cursor: pointer;
     text-align: center;
-    /* color: #47a8fe !important; */
+    /* color: #005983 !important; */
 }
 
 
@@ -82,18 +82,21 @@ p.ttext {
     display: flex;
     margin: 10px 0px;
     justify-content: space-between;
-    align-items: center; }
+    align-items: flex-start;
+    }
 
-    p.thead {     
+    p.thead {
     	font-size: 1.1em;
-    /* flex: 1; */ }
-    p.ttext {    
-     /* flex: 1; */;
+    	flex: 1;
+    	}
+    p.ttext {
+     flex: 1;
+     text-align: right;
  }
 
 
 .card-action.details a {
-    color: #47a8fe !important;
+    color: #005983 !important;
     font-weight: bold;
 }
 
@@ -104,7 +107,7 @@ p.ttext {
 a.full-btn {
     width: 100%;
     font-size: 1.2em;
-    background: #47a8fe;
+    background: #005983;
     padding: 1.5em;
     display: flex;
     justify-content: center;

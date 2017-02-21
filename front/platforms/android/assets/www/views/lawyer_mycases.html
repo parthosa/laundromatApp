@@ -1,0 +1,19 @@
+<div class="container main-content mylawyer lawyer-casespool" ng-controller="LawyerMyCasesController">
+    <ul class="collection">
+    <li class="collection-item avatar" ng-repeat="case in cases | filter:search.query" ng-click='redirect(this)'>
+      <!-- <img ng-src="{{ lawyer.pic}}" alt="" class="circle"> -->
+      <div class="lawyer-info">
+      <p class="title">{{case.name}}</p>
+      <p class="lawyer-type">{{case.client}}</p>
+    <!-- <a href="#!" class="secondary-content">{{chat.time}}</a> -->
+      </div>
+      <div class="active-status">
+         <p class="text" >{{case.date}}</p>
+
+
+      </div>
+    </li>
+  
+  </ul>
+    
+  </div>
