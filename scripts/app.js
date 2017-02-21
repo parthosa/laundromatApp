@@ -382,6 +382,17 @@ angular.module('latchApp', ['ui.router'])
                     }
                 }
 
+            }) .state('app.student_info', {
+                url: 'student_info',
+                views: {
+                    'header@': {
+                        templateUrl: 'views/secondary_header.html',
+                    },
+                    'content@': {
+                        templateUrl: 'views/student_info.html'
+                    }
+                }
+
             })
 
 

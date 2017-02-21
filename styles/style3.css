@@ -82,13 +82,16 @@ p.ttext {
     display: flex;
     margin: 10px 0px;
     justify-content: space-between;
-    align-items: center; }
+    align-items: flex-start;
+    }
 
-    p.thead {     
+    p.thead {
     	font-size: 1.1em;
-    /* flex: 1; */ }
-    p.ttext {    
-     /* flex: 1; */;
+    	flex: 1;
+    	}
+    p.ttext {
+     flex: 1;
+     text-align: right;
  }
 
 

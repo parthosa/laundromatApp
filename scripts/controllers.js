@@ -1095,6 +1095,30 @@ angular.module('latchApp')
     $rootScope.title = 'Update Status';
 
 }]).controller('HostelInfoController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
+    $rootScope.title = 'Hostel Name';
+
+    $scope.students = [
+      {
+        'name':'Partho Sarthi',
+        'id_no':'2015A7PS088P',
+        'hostel':'BD',
+        'room_no':'4104'
+      },
+       {
+        'name':'Partho Sarthi',
+        'id_no':'2015A7PS088P',
+        'hostel':'BD',
+        'room_no':'4104'
+      }
+    ]
+
+    $scope.redirect = function (ele) {
+      $state.go('app.student_info');
+      console.log(ele.student);
+      $rootScope.title = ele.student.name;
+    }
+
+    }]).controller('StudentInfoController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
     // $rootScope.title = 'Hostel Name';
 
     }]).controller('UserHomeController', ['$rootScope', '$scope', '$state', function ($rootScope, $scope, $state) {
@@ -1102,7 +1126,11 @@ angular.module('latchApp')
 
     $scope.show = function (ele) {
       $('.details').hide();
+      $('.wash-info').toggle();
+      $('.wash-info-more').toggle();
+
       $(ele+'.details').show(); 
+      console.log(ele+'.details');
     }
 
     }]).controller('UserStatusController', ['$rootScope', '$scope', '$state', function ($rootScope, $scope, $state) {
