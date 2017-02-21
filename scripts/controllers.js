@@ -1082,14 +1082,34 @@ angular.module('latchApp')
             })
         } else Materialize.toast('Please upload a image', 1000);
     }
-}]).controller('LaundroHomeController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
+}]).controller('LaundroHomeController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state,$cordovaBarcodeScanner) {
     $rootScope.title = 'Laundromat';
 
-    $scope.redirect = function (ele) {
+    $scope.redirect = function(ele) {
         console.log(ele);
         $state.go('app.hostel_info')
         $rootScope.title = ele;
-          }
+    }
+    try{
+    $cordovaBarcodeScanner
+        .scan()
+        .then(function(barcodeData) {
+            // Success! Barcode data is here
+        }, function(error) {
+            // An error occurred
+        });
+
+
+    // NOTE: encoding not functioning yet
+    $cordovaBarcodeScanner
+        .encode(BarcodeScanner.Encode.TEXT_TYPE, "http://www.nytimes.com")
+        .then(function(success) {
+            // Success!
+        }, function(error) {
+            // An error occurred
+        });
+
+  }catch(err){}
 
 }]).controller('ViewStatusController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
     $rootScope.title = 'Update Status';
@@ -1121,7 +1141,7 @@ angular.module('latchApp')
     }]).controller('StudentInfoController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
     // $rootScope.title = 'Hostel Name';
 
-    }]).controller('UserHomeController', ['$rootScope', '$scope', '$state', function ($rootScope, $scope, $state) {
+}]).controller('UserHomeController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
     $rootScope.title = 'LaundroMat';
 
     $scope.show = function (ele) {
@@ -1133,8 +1153,7 @@ angular.module('latchApp')
       console.log(ele+'.details');
     }
 
-    }]).controller('UserStatusController', ['$rootScope', '$scope', '$state', function ($rootScope, $scope, $state) {
+}]).controller('UserStatusController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
     $rootScope.title = 'Status';
 
-    }]);
-
+}]);
