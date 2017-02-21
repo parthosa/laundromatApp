@@ -1094,6 +1094,7 @@ angular.module('latchApp')
         .scan()
         .then(function(barcodeData) {
             // Success! Barcode data is here
+            
         }, function(error) {
             // An error occurred
         });
@@ -1112,6 +1113,11 @@ angular.module('latchApp')
 
 }]).controller('ViewStatusController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
     $rootScope.title = 'Update Status';
+
+
+    // $scope.show = function (ele) {
+    //     $(ele).toggle();
+    // }
 
 }]).controller('HostelInfoController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
     // $rootScope.title = 'Hostel Name';

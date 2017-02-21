@@ -79,3 +79,7 @@ $('.card-action.more.details').click(function () {
 $('.less.details').click(function () {
   $('.wash-info-more').hide();
 })
+
+$('#check_status_btn').click(function () {
+  $('.card.student_status').removeAttr("hidden");  
+});
