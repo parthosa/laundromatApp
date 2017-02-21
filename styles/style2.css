@@ -60,7 +60,7 @@
 }
 
 li.collection-item.avatar {
-    padding-left: 20px !important;
+    padding-left: 20px;
 }
 
 p.case-title {
@@ -223,7 +223,7 @@ span.card-title {}
 }
 
 li.collection-item.avatar {
-    padding-left: 20px !important;
+    /*padding-left: 20px !important;*/
 }
 
 p.case-title {

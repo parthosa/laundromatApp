@@ -69,3 +69,13 @@ function previewFile(canvasId) { 
      }, false);
 
 }
+
+
+$('.card-action.more.details').click(function () {
+  // body...
+  $('.wash-info-more').show();
+});
+
+$('.less.details').click(function () {
+  $('.wash-info-more').hide();
+})

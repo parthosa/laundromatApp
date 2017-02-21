@@ -1115,4 +1115,16 @@ $rootScope.title="Simply Legal";
  }]).controller('LaundroHomeController', ['$rootScope', '$scope', '$state', function ($rootScope, $scope, $state) {
     $rootScope.title = 'LaundroMat';
 
+    }]).controller('UserHomeController', ['$rootScope', '$scope', '$state', function ($rootScope, $scope, $state) {
+    $rootScope.title = 'LaundroMat';
+
+    $scope.show = function (ele) {
+      $('.details').hide();
+      $(ele+'.details').show(); 
+    }
+
+    }]).controller('UserStatusController', ['$rootScope', '$scope', '$state', function ($rootScope, $scope, $state) {
+    $rootScope.title = 'Status';
+
     }]);
+

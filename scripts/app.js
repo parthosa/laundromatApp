@@ -335,6 +335,30 @@ angular.module('latchApp', ['ui.router'])
                               }
 
                           })
+                          .state('app.user', {
+                              url: 'user',
+                              views: {
+                                  'header@': {
+                                      templateUrl: 'views/main_header.html',
+                                  },
+                                  'content@': {
+                                      templateUrl: 'views/user.html'
+                                  }
+                              }
+
+                          })
+                          .state('app.user_status', {
+                              url: 'user_status',
+                              views: {
+                                  'header@': {
+                                      templateUrl: 'views/secondary_header.html',
+                                  },
+                                  'content@': {
+                                      templateUrl: 'views/user_status.html'
+                                  }
+                              }
+
+                          })
 
 
       // route for the test page
