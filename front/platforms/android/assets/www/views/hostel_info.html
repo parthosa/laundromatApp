@@ -1,0 +1,17 @@
+<div class="container hostel-info content-type-2 " ng-controller="HostelInfoController">
+    <ul class="collection">
+        <li class="collection-item avatar " ng-repeat="student in students | filter:search.query"  ng-click='redirect(this)' style="padding-left: 20px;">
+            <!-- <img ng-src="/" alt="" class="circle"> -->
+            <!-- <div class="lawyer-info"> -->
+            <div class="info-type-1">
+            <p class="title">{{student.name}}</p>
+            <p class="id_number">{{student.id_no}}</p>
+            </div>
+            <div class="info-type-2">
+            <p>{{student.hostel}}&nbsp;{{student.room_no}}</p>
+            </div>
+            <!-- <a href="#!" class="secondary-content">{{chat.time}}</a> -->
+            <!-- </div> -->
+        </li>
+    </ul>
+</div>
