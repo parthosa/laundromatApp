@@ -1,0 +1,15 @@
+#scan_btn{
+	color:white;
+}
+.tabs .tab a {
+	color: black;
+}
+.card-tabs .tabs p{
+	padding-left: 10px;
+}
+
+
+.hostel-info li {
+    display: flex;
+    justify-content: space-between;
+}
