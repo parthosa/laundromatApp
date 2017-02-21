@@ -1087,7 +1087,7 @@ $rootScope.title="Simply Legal";
                     //    formData.append('session_key', session_key);
                     //    formData.append('dpic', file);
                     //    console.log(formData.getAll('dpic'))
-                  console.log(dataURL);
+                  console.log(dataURL)
 
                   var data = {
                     session_key: session_key,
@@ -1112,5 +1112,7 @@ $rootScope.title="Simply Legal";
                       })
                     } else Materialize.toast('Please upload a image', 1000);
                   }
+ }]).controller('LaundroHomeController', ['$rootScope', '$scope', '$state', function ($rootScope, $scope, $state) {
+    $rootScope.title = 'LaundroMat';
 
     }]);

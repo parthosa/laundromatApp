@@ -18,7 +18,7 @@ angular.module('latchApp', ['ui.router'])
           url: 'register',
           views: {
               'header@': {
-                  templateUrl: 'views/chat_header.html',
+                  templateUrl: 'views/secondary_header.html',
               },
               'content@': {
                   templateUrl: 'views/register.html'
@@ -31,7 +31,7 @@ angular.module('latchApp', ['ui.router'])
           url: 'login',
           views: {
               'header@': {
-                  templateUrl: 'views/chat_header.html',
+                  templateUrl: 'views/secondary_header.html',
               },
               'content@': {
                   templateUrl: 'views/login.html'
@@ -46,7 +46,7 @@ angular.module('latchApp', ['ui.router'])
           url: 'nick',
           views: {
               'header@': {
-                  templateUrl: 'views/chat_header.html',
+                  templateUrl: 'views/secondary_header.html',
               },
               'content@': {
                   templateUrl: 'views/nick.html'
@@ -58,7 +58,7 @@ angular.module('latchApp', ['ui.router'])
           url: 'profile_pic',
           views: {
               'header@': {
-                  templateUrl: 'views/chat_header.html',
+                  templateUrl: 'views/secondary_header.html',
               },
               'content@': {
                   templateUrl: 'views/profile_pic.html'
@@ -71,7 +71,7 @@ angular.module('latchApp', ['ui.router'])
           url: 'profile',
           views: {
               'header@': {
-                  templateUrl: 'views/chat_header.html',
+                  templateUrl: 'views/secondary_header.html',
               },
               'content@': {
                   templateUrl: 'views/profile.html'
@@ -88,7 +88,7 @@ angular.module('latchApp', ['ui.router'])
           url: 'location',
           views: {
               'header@': {
-                  templateUrl: 'views/chat_header.html',
+                  templateUrl: 'views/secondary_header.html',
               },
               'content@': {
                   templateUrl: 'views/location.html'
@@ -147,7 +147,7 @@ angular.module('latchApp', ['ui.router'])
           url: 'search_results',
           views: {
               'header@': {
-                  templateUrl: 'views/chat_header.html',
+                  templateUrl: 'views/secondary_header.html',
               },
               'content@': {
                   templateUrl: 'views/search_results.html'
@@ -157,7 +157,7 @@ angular.module('latchApp', ['ui.router'])
           url: 'add_case',
           views: {
               'header@': {
-                  templateUrl: 'views/chat_header.html',
+                  templateUrl: 'views/secondary_header.html',
               },
               'content@': {
                   templateUrl: 'views/add_case.html'
@@ -168,7 +168,7 @@ angular.module('latchApp', ['ui.router'])
                 url: 'view_case',
                 views: {
                     'header@': {
-                        templateUrl: 'views/chat_header.html',
+                        templateUrl: 'views/secondary_header.html',
                     },
                     'content@': {
                         templateUrl: 'views/view_case.html'
@@ -184,7 +184,7 @@ angular.module('latchApp', ['ui.router'])
           url: 'message',
           views: {
               'header@': {
-                  templateUrl: 'views/chat_header.html',
+                  templateUrl: 'views/secondary_header.html',
               },
               'content@': {
                   templateUrl: 'views/messages.html'
@@ -198,7 +198,7 @@ angular.module('latchApp', ['ui.router'])
           url: 'settings',
           views: {
               'header@': {
-                  templateUrl: 'views/chat_header.html',
+                  templateUrl: 'views/secondary_header.html',
               },
               'content@': {
                   templateUrl: 'views/settings.html'
@@ -210,7 +210,7 @@ angular.module('latchApp', ['ui.router'])
           url: 'edit_profile',
           views: {
               'header@': {
-                  templateUrl: 'views/chat_header.html',
+                  templateUrl: 'views/secondary_header.html',
               },
               'content@': {
                   templateUrl: 'views/edit_profile.html'
@@ -222,7 +222,7 @@ angular.module('latchApp', ['ui.router'])
           url: 'change_password',
           views: {
               'header@': {
-                  templateUrl: 'views/chat_header.html',
+                  templateUrl: 'views/secondary_header.html',
               },
               'content@': {
                   templateUrl: 'views/change_password.html'
@@ -244,7 +244,7 @@ angular.module('latchApp', ['ui.router'])
           url: 'lawyer_login',
           views: {
               'header@': {
-                  templateUrl: 'views/chat_header.html',
+                  templateUrl: 'views/secondary_header.html',
               },
               'content@': {
                   templateUrl: 'views/lawyer_login.html'
@@ -256,7 +256,7 @@ angular.module('latchApp', ['ui.router'])
               url: 'lawyer_home',
               views: {
                   'header@': {
-                      templateUrl: 'views/lawyer_header.html',
+                      templateUrl: 'views/main_header.html',
                   },
                   'content@': {
                       templateUrl: 'views/lawyer_home.html'
@@ -268,7 +268,7 @@ angular.module('latchApp', ['ui.router'])
               url: 'lawyer_clients',
               views: {
                   'header@': {
-                      templateUrl: 'views/chat_header.html',
+                      templateUrl: 'views/secondary_header.html',
                   },
                   'content@': {
                       templateUrl: 'views/lawyer_clients.html'
@@ -279,7 +279,7 @@ angular.module('latchApp', ['ui.router'])
               url: 'lawyer_upcoming',
               views: {
                   'header@': {
-                      templateUrl: 'views/chat_header.html',
+                      templateUrl: 'views/secondary_header.html',
                   },
                   'content@': {
                       templateUrl: 'views/lawyer_upcoming.html'
@@ -291,7 +291,7 @@ angular.module('latchApp', ['ui.router'])
                       url: 'lawyer_casespool',
                       views: {
                           'header@': {
-                              templateUrl: 'views/chat_header.html',
+                              templateUrl: 'views/secondary_header.html',
                           },
                           'content@': {
                               templateUrl: 'views/lawyer_casespool.html'
@@ -303,7 +303,7 @@ angular.module('latchApp', ['ui.router'])
                               url: 'lawyer_mycases',
                               views: {
                                   'header@': {
-                                      templateUrl: 'views/chat_header.html',
+                                      templateUrl: 'views/secondary_header.html',
                                   },
                                   'content@': {
                                       templateUrl: 'views/lawyer_mycases.html'
@@ -315,10 +315,22 @@ angular.module('latchApp', ['ui.router'])
                               url: 'lawyer_viewcase',
                               views: {
                                   'header@': {
-                                      templateUrl: 'views/chat_header.html',
+                                      templateUrl: 'views/secondary_header.html',
                                   },
                                   'content@': {
                                       templateUrl: 'views/lawyer_viewcase.html'
+                                  }
+                              }
+
+                          })
+                            .state('app.laundro_home', {
+                              url: 'laundro_home',
+                              views: {
+                                  'header@': {
+                                      templateUrl: 'views/main_header.html',
+                                  },
+                                  'content@': {
+                                      templateUrl: 'views/laundro_home.html'
                                   }
                               }
 
@@ -382,7 +394,7 @@ angular.module('latchApp', ['ui.router'])
     //         if  ($location.url() == '/' && loggedIn){
     //             $location.url('/chats')
     //         }
-    //     }  
+    //     }  lau
         
        
     // });
