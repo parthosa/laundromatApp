@@ -87,6 +87,7 @@ $('.less.details').click(function () {
 
 
 
+
 $(document).ready(function () {
     // var googleUser = {};
      var startApp = function() {

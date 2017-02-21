@@ -19,7 +19,7 @@
 .profile-img {
     flex: 2;
     display: flex;
-    justify-content: center;
+    justify-content: cenfter;
     align-items: center;
 }
 
@@ -180,4 +180,8 @@ span.card-title {
 .hostel-info li {
     display: flex;
     justify-content: space-between;
+}
+
+.student_status{
+    /*display: none;*/
 }
