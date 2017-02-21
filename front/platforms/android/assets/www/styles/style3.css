@@ -19,7 +19,7 @@
 .profile-img {
     flex: 2;
     display: flex;
-    justify-content: center;
+    justify-content: cenfter;
     align-items: center;
 }
 
@@ -115,6 +115,11 @@ a.full-btn {
     margin-top: 0.5rem;
 }
 
+
+a.full-btn:focus,a.full-btn:hover,a.full-btn:active{
+    background-color: #005983 !important;
+}
+
 .brief-content{
 	text-align: center;
 }
@@ -175,4 +180,8 @@ span.card-title {
 .hostel-info li {
     display: flex;
     justify-content: space-between;
+}
+
+.student_status{
+    /*display: none;*/
 }

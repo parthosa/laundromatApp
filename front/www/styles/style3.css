@@ -185,3 +185,11 @@ span.card-title {
 .student_status{
     /*display: none;*/
 }
+
+.card-tabs {
+    margin-top: 0.9em;
+}
+
+.student_status {
+    height: 65vh;
+}

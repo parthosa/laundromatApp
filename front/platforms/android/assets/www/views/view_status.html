@@ -1,44 +1,64 @@
 <div class="container view-status content-type-2 " ng-controller="ViewStatusController">
-    <div class="student_status">
-        <div class="card">
-            <div class="card-tabs">
-                <ul class="tabs tabs-fixed-width">
-                    <p>
-                        <input class="with-gap" name="group3" type="radio" id="test5" />
-                        <label for="test5">Check In</label>
-                    </p>
-                </ul>
-                <ul class="tabs tabs-fixed-width">
-                    <p>
-                        <input class="with-gap" name="group3" type="radio" id="test5" />
-                        <label for="test5">Washing Machine</label>
-                    </p>
-                </ul>
-                <ul class="tabs tabs-fixed-width">
-                    <p>
-                        <input class="with-gap" name="group3" type="radio" id="test5" />
-                        <label for="test5">Drier</label>
-                    </p>
-                </ul>
-                <ul class="tabs tabs-fixed-width">
-                    <p>
-                        <input class="with-gap" name="group3" type="radio" id="test5" />
-                        <label for="test5">Iron</label>
-                    </p>
-                </ul>
-                <ul class="tabs tabs-fixed-width">
-                    <p>
-                        <input class="with-gap" name="group3" type="radio" id="test5" />
-                        <label for="test5">Ready</label>
-                    </p>
-                </ul>
-                <ul class="tabs tabs-fixed-width">
-                    <p>
-                        <input class="with-gap" name="group3" type="radio" id="test5" checked />
-                        <label for="test5">Not Available</label>
-                    </p>
-                </ul>
-            </div>
+    <div class="card student_id">
+        <div class="card-content">
+            <form class="col s12">
+                <div class="row">
+                    <div class="col s12">
+                        ID Number:
+                        <div class="input-field inline">
+                            <input id="id_number" class="id_number">
+                        </div>
+                    </div>
+                    <a class="waves-effect waves-light btn right" id="check_status_btn" ng-click="show('.student_status')">Check Status</a>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <div class="card student_status">
+        <div class="card-tabs">
+            <form>
+            <ul class="tabs tabs-fixed-width">
+                <p>
+                    <input class="with-gap" name="group3" type="radio" id="test5" />
+                    <label for="test5">Check In</label>
+                </p>
+            </ul>
+            <ul class="tabs tabs-fixed-width">
+                <p>
+                    <input class="with-gap" name="group3" type="radio" id="test5" />
+                    <label for="test5">Washing Machine</label>
+                </p>
+            </ul>
+            <ul class="tabs tabs-fixed-width">
+                <p>
+                    <input class="with-gap" name="group3" type="radio" id="test5" />
+                    <label for="test5">Drier</label>
+                </p>
+            </ul>
+            <ul class="tabs tabs-fixed-width">
+                <p>
+                    <input class="with-gap" name="group3" type="radio" id="test5" />
+                    <label for="test5">Iron</label>
+                </p>
+            </ul>
+            <ul class="tabs tabs-fixed-width">
+                <p>
+                    <input class="with-gap" name="group3" type="radio" id="test5" />
+                    <label for="test5">Ready</label>
+                </p>
+            </ul>
+            <ul class="tabs tabs-fixed-width">
+                <p>
+                    <input class="with-gap" name="group3" type="radio" id="test5" />
+                    <label for="test5">Not Available</label>
+                </p>
+            </ul>
+            <a class="waves-effect waves-light btn right" id="scan_btn">Update Status</a>
+            </form>
+        </div>
+        <div class="card-content">
+            
         </div>
     </div>
 </div>

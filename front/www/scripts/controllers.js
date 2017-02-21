@@ -1094,7 +1094,7 @@ angular.module('latchApp')
             })
         } else Materialize.toast('Please upload a image', 1000);
     }
-}]).controller('LaundroHomeController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state,$cordovaBarcodeScanner) {
+}]).controller('LaundroHomeController', ['$rootScope', '$scope', '$state','$cordovaBarcodeScanner', function($rootScope, $scope, $state,$cordovaBarcodeScanner) {
     $rootScope.title = 'Laundromat';
 
     $scope.redirect = function(ele) {
@@ -1103,14 +1103,16 @@ angular.module('latchApp')
 
         $rootScope.title = ele;
     }
+    $scope.scanBarcode;
     try{
+        $scope.scanBarcode = function () {
     $cordovaBarcodeScanner
         .scan()
         .then(function(barcodeData) {
-            // Success! Barcode data is here
+            alert(barcodeData);
             
         }, function(error) {
-            // An error occurred
+            alert(error);
         });
 
 
@@ -1122,7 +1124,7 @@ angular.module('latchApp')
         }, function(error) {
             // An error occurred
         });
-
+    }
   }catch(err){}
 
 }]).controller('ViewStatusController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
