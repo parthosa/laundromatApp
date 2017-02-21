@@ -3,7 +3,14 @@ html, body {
     margin: 0;
     padding: 0;
 }
-
+.landing{
+  background-color: #005983;
+  width:100vw;
+  height: 100vh;
+}
+nav{
+  background-color: #005983;
+}
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #E9E8E8;

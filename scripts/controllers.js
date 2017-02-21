@@ -1082,14 +1082,33 @@ angular.module('latchApp')
             })
         } else Materialize.toast('Please upload a image', 1000);
     }
-}]).controller('LaundroHomeController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
+}]).controller('LaundroHomeController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state,$cordovaBarcodeScanner) {
     $rootScope.title = 'Laundromat';
 
-    $scope.redirect = function (ele) {
+    $scope.redirect = function(ele) {
         console.log(ele);
         $state.go('app.hostel_info')
         $rootScope.title = ele;
-          }
+    }
+    $cordovaBarcodeScanner
+        .scan()
+        .then(function(barcodeData) {
+            // Success! Barcode data is here
+        }, function(error) {
+            // An error occurred
+        });
+
+
+    // NOTE: encoding not functioning yet
+    $cordovaBarcodeScanner
+        .encode(BarcodeScanner.Encode.TEXT_TYPE, "http://www.nytimes.com")
+        .then(function(success) {
+            // Success!
+        }, function(error) {
+            // An error occurred
+        });
+
+
 
 }]).controller('ViewStatusController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
     $rootScope.title = 'Update Status';
@@ -1097,16 +1116,15 @@ angular.module('latchApp')
 }]).controller('HostelInfoController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
     // $rootScope.title = 'Hostel Name';
 
-    }]).controller('UserHomeController', ['$rootScope', '$scope', '$state', function ($rootScope, $scope, $state) {
+}]).controller('UserHomeController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
     $rootScope.title = 'LaundroMat';
 
-    $scope.show = function (ele) {
-      $('.details').hide();
-      $(ele+'.details').show(); 
+    $scope.show = function(ele) {
+        $('.details').hide();
+        $(ele + '.details').show();
     }
 
-    }]).controller('UserStatusController', ['$rootScope', '$scope', '$state', function ($rootScope, $scope, $state) {
+}]).controller('UserStatusController', ['$rootScope', '$scope', '$state', function($rootScope, $scope, $state) {
     $rootScope.title = 'Status';
 
-    }]);
-
+}]);
