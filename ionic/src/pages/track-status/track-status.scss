@@ -1,0 +1,38 @@
+page-track-status {
+	ion-card{
+		width: 100% !important;
+	}
+
+	.scroll-content {
+		background: color($colors,secondary);
+		display: flex;
+    	flex-direction: column;
+	    justify-content: space-around;
+	}
+
+	.tfield {
+	    display: flex;
+	    // margin: 5px 0px;
+	    justify-content: space-between;
+	    align-items: flex-start;
+	    margin: 10px 0;
+
+	    p {
+	    	font-size: 1.4rem;
+	    	flex: 1;
+		}
+	    p.ttext {
+		     flex: 1;
+		     text-align: right;
+		     font-weight: bold;
+		 }
+    }
+
+    .not-done{
+    	opacity: 0.2;
+    }
+
+    .done{
+    	color: green;
+    }
+}

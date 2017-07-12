@@ -1,0 +1,12 @@
+page-id-number {
+	.scroll-content {
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    background: color($colors,secondary);
+	}
+
+	.list-ios > .item-block:first-child {
+		border-top: none;
+	}
+}

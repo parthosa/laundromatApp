@@ -1,0 +1,19 @@
+page-wash-details {
+
+	.list-header{
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 0;
+
+	}
+
+	ion-label {
+	    display: flex;
+	    justify-content: space-between;
+	}
+
+	.details-label {
+	    flex: 1;
+	    text-align: center;
+	}
+}
