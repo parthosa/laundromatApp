@@ -20,7 +20,7 @@
 	    <ion-list>
 
 		  <ion-item>
-		    <ion-input type="text" placeholder="ID Number"></ion-input>
+		    <ion-input type="text" placeholder="ID Number" [(ngModel)]="barcodeData"></ion-input>
 		  </ion-item>
 		</ion-list>
 	  <button ion-button full (click)="checkStatus()">Check Status</button>
