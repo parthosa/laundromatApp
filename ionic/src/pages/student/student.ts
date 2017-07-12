@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,App, MenuController } from 'ionic-angular';
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { WashDetailsPage } from '../wash-details/wash-details';
 import { TrackStatusPage } from '../track-status/track-status';
 
@@ -9,7 +9,8 @@ import { TrackStatusPage } from '../track-status/track-status';
 })
 export class StudentPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,app: App,public menu: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public menu: MenuController) {
+    this.menu.enable(false,'adminMenu');
     this.menu.enable(true,'studentMenu');
   }
 
