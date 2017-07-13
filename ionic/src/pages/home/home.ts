@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { IdNumberPage } from '../id-number/id-number';
+import { NavController,AlertController } from 'ionic-angular';
+import { StudentPage } from '../student/student';
 import { AdminLoginPage } from '../admin-login/admin-login';
+import { User } from '@ionic/cloud-angular';
 
+import { HttpService } from '../../providers/http-service';
 // import { User } from '@ionic/cloud-angular';
-// import { GooglePlus } from '@ionic-native/google-plus';
+import { GooglePlus } from 'ionic-native';
 
 @Component({
 	selector: 'page-home',
@@ -13,24 +15,43 @@ import { AdminLoginPage } from '../admin-login/admin-login';
 export class HomePage {
 
 
-	constructor(public navCtrl: NavController) {
+	constructor(public navCtrl: NavController, public user: User,public alertCtrl: AlertController,private httpService: HttpService) {
 		
 	}
 
-	goToIdNumberPage(){
-		this.navCtrl.push(IdNumberPage);
-	}
-
 	goToAdminPage(){
+		// this.httpService.postData('https://jsonplaceholder.typicode.com/posts/',{user:'psarthi16@gmail.com'}).then(post=>
+		// 	console.log(post),
+		// 	error=>console.log(error));
 		this.navCtrl.push(AdminLoginPage);
 	}
 
 	studentLogin(){
-		// console.log(this.googlePlus);
-		// this.googlePlus.login({
-		//     'webClientId': '931784175657-fk7i6o3nfkh2nkpdpa4j2qgflald4442.apps.googleusercontent.com',
-		//     'offline': true
-		//   }).then( res => console.log(res));
+		GooglePlus.login({
+          'webClientId': '931784175657-tnlaleval048phhgbrgbmeqi2hh64pmq.apps.googleusercontent.com'
+        }).then((res) => {
+        	this.user.details = res;
+        	this.httpService.postData('/api/get_id/',this.user.details).then(
+        		(response)=>{
+        			this.user.details['id'] = response.id;
+        			this.navCtrl.setRoot(StudentPage);
+        		},
+        		(err)=>{
+        			this.showAlert('Cannot get ID Number');
+        		});
+        }, (err) => {
+            this.showAlert('Try Again or Contact Us','Authentication Failed');
+        });
+	}
+
+
+	showAlert(message,title=''){
+		let alert = this.alertCtrl.create({
+	      title: title,
+	      subTitle: message,
+	      buttons: ['OK']
+	    });
+	    alert.present();
 	}
 }
 

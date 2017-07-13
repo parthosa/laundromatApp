@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AdminPage } from '../admin/admin';
+import { HttpService } from '../../providers/http-service';
+
 
 @Component({
   selector: 'page-admin-login',
@@ -8,7 +10,10 @@ import { AdminPage } from '../admin/admin';
 })
 export class AdminLoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  adminCreds = {};
+  constructor(public navCtrl: NavController, public navParams: NavParams,private httpService:HttpService) {
+    this.adminCreds['email'] = '';
+    this.adminCreds['password'] = '';
   }
 
   ionViewDidLoad() {
@@ -16,7 +21,10 @@ export class AdminLoginPage {
   }
 
   adminSignIn(){
-  	this.navCtrl.setRoot(AdminPage);
+    this.httpService.postData('https://jsonplaceholder.typicode.com/users',this.adminCreds)
+      .then(response=>{
+        	this.navCtrl.setRoot(AdminPage);
+        });
   }
 
 }

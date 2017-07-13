@@ -46,6 +46,7 @@
     },
     "devDependencies": {
         "@ionic/app-scripts": "1.3.12",
+        "ionic-native": "^2.9.0",
         "typescript": "2.3.4"
     },
     "cordovaPlugins": [
@@ -66,10 +67,10 @@
             "cordova-plugin-statusbar": {},
             "cordova-plugin-whitelist": {},
             "ionic-plugin-keyboard": {},
+            "phonegap-plugin-barcodescanner": {},
             "cordova-plugin-googleplus": {
-                "REVERSED_CLIENT_ID": "com.googleusercontent.apps.931784175657-h9bcie9tc5erv4ik0pt6fo2qu7gqoq0u"
-            },
-            "phonegap-plugin-barcodescanner": {}
+                "REVERSED_CLIENT_ID": "com.googleusercontent.apps.931784175657-ntqck2hms41sapi8od3petjkv1blooa4"
+            }
         },
         "platforms": [
             "android",

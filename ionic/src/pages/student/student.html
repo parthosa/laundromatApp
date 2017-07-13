@@ -16,11 +16,11 @@
 
 	  <ion-item>
 	    <ion-avatar item-start>
-	      <img src="assets/images/johndoe.png">
+	      <img src="{{ user.details.imageUrl}}">
 	    </ion-avatar>
-	    <h2>Partho Sarthi</h2>
-	    <p>2015A7PS088P</p>
-	    <p>f2015088@pilani.bits-pilani.ac.in</p>
+	    <h2>{{ user.details.displayName }}</h2>
+	    <p>{{ user.details.userId }}</p>
+	    <p>{{ user.details.email }}</p>
 	  </ion-item>
 	</ion-card>
 

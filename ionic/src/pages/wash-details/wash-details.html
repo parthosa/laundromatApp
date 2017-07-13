@@ -32,20 +32,12 @@
 			Number
 		</div>
 		</ion-item-divider>
-		<ion-item >
+		<ion-item *ngFor="let washItem of washItems">
 			<div class="details-label">
-				13/06/17
+				{{ washItem.name }}
 			</div>
 			<div class="details-label">
-				1
-			</div>
-		</ion-item>
-		<ion-item >
-			<div class="details-label">
-				28/06/17
-			</div>
-			<div class="details-label">
-				2
+				{{ washItem.id }}
 			</div>
 		</ion-item>
 	</ion-list>

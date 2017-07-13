@@ -25,16 +25,8 @@
   </ion-card-header>
 
   <ion-list>
-    <button ion-item>
-      Ashok
-    </button>
-
-    <button ion-item>
-      Ram
-    </button>
-
-      <button ion-item>
-      Budh
+    <button ion-item *ngFor="let hostel of hostels" (click)="goToHostelPage(hostel)">
+      {{ hostel }}
     </button>
   </ion-list>
 </ion-card>

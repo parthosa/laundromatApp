@@ -1,5 +1,8 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule }   from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { LaundromatApp } from './app.component';
 
@@ -12,8 +15,11 @@ import { WashDetailsPage } from '../pages/wash-details/wash-details';
 import { TrackStatusPage } from '../pages/track-status/track-status';
 import { AdminPage } from '../pages/admin/admin';
 import { AdminLoginPage } from '../pages/admin-login/admin-login';
+import { HostelListPage } from '../pages/hostel-list/hostel-list';
 import { UpdateStatusPage } from '../pages/update-status/update-status';
 import { TabsPage } from '../pages/tabs/tabs';
+
+import { HttpService } from '../providers/http-service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -27,7 +33,7 @@ const cloudSettings: CloudSettings = {
   },
   'auth': {
     'google': {
-      'webClientId': '931784175657-fk7i6o3nfkh2nkpdpa4j2qgflald4442.apps.googleusercontent.com',
+      'webClientId': '931784175657-tnlaleval048phhgbrgbmeqi2hh64pmq.apps.googleusercontent.com',
       'scope': ['permission1', 'permission2']
     }
   }
@@ -46,11 +52,14 @@ const cloudSettings: CloudSettings = {
     TrackStatusPage,
     AdminPage,
     AdminLoginPage,
+    HostelListPage,
     UpdateStatusPage,
     TabsPage
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    HttpModule,
     IonicModule.forRoot(LaundromatApp),
     CloudModule.forRoot(cloudSettings)
   ],
@@ -66,6 +75,7 @@ const cloudSettings: CloudSettings = {
     TrackStatusPage,
     AdminPage,
     AdminLoginPage,
+    HostelListPage,
     UpdateStatusPage,
     TabsPage
   ],
@@ -74,6 +84,7 @@ const cloudSettings: CloudSettings = {
     SplashScreen,
     BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    HttpService
 
   ]
 })
