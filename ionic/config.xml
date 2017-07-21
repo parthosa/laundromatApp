@@ -7,6 +7,7 @@
   <access origin="*"/>
   <allow-navigation href="http://ionic.local/*"/>
   <allow-navigation href="http://192.168.0.107:8100"/>
+  <allow-navigation href="http://192.168.43.161:8101"/>
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>
@@ -81,14 +82,14 @@
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
   <engine name="android" spec="^6.2.3"/>
   <engine name="browser" spec="^4.1.0"/>
-  <plugin name="cordova-plugin-console" spec="1.0.5"/>
-  <plugin name="cordova-plugin-device" spec="1.1.4"/>
-  <plugin name="cordova-plugin-googleplus" spec="^5.1.1">
-    <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.931784175657-ntqck2hms41sapi8od3petjkv1blooa4"/>
+  <plugin name="cordova-plugin-console" spec="^1.0.5"/>
+  <plugin name="cordova-plugin-device" spec="^1.1.4"/>
+  <plugin name="cordova-plugin-googleplus" spec="git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git">
+    <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.ablb9b1rtkjth7g8gq9p2tdr0jl7hv73"/>
   </plugin>
-  <plugin name="cordova-plugin-splashscreen" spec="~4.0.1"/>
-  <plugin name="cordova-plugin-statusbar" spec="2.2.2"/>
-  <plugin name="cordova-plugin-whitelist" spec="1.3.1"/>
-  <plugin name="ionic-plugin-keyboard" spec="~2.2.1"/>
-  <plugin name="phonegap-plugin-barcodescanner" spec="^6.0.6"/>
+  <plugin name="cordova-plugin-splashscreen" spec="^4.0.3"/>
+  <plugin name="cordova-plugin-statusbar" spec="^2.2.2"/>
+  <plugin name="cordova-plugin-whitelist" spec="^1.3.1"/>
+  <plugin name="ionic-plugin-keyboard" spec="^2.2.1"/>
+  <plugin name="phonegap-plugin-barcodescanner" spec="^6.0.7"/>
 </widget>

@@ -20,8 +20,13 @@ export class UpdateStatusPage {
 
   checkStatus(){
   	this.barcodeScanner.scan().then((barcodeData) => {
-  		this.barcodeData = barcodeData.text;
-	});	
+      // Success! Barcode data is here
+		  this.barcodeData = barcodeData.text;
+		}, (err) => {
+			// An error occurred
+			this.barcodeData = "Scan Failed!";  		
+    });	
+    
   }
 
   updateStatus(){

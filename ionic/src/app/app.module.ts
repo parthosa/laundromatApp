@@ -23,9 +23,9 @@ import { HttpService } from '../providers/http-service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 // import { GooglePlus } from '@ionic-native/google-plus';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 const cloudSettings: CloudSettings = {
   'core': {
@@ -33,7 +33,7 @@ const cloudSettings: CloudSettings = {
   },
   'auth': {
     'google': {
-      'webClientId': '931784175657-tnlaleval048phhgbrgbmeqi2hh64pmq.apps.googleusercontent.com',
+      'webClientId': '942120250462-ablb9b1rtkjth7g8gq9p2tdr0jl7hv73.apps.googleusercontent.com',
       'scope': ['permission1', 'permission2']
     }
   }
@@ -82,10 +82,9 @@ const cloudSettings: CloudSettings = {
   providers: [
     StatusBar,
     SplashScreen,
-    BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    HttpService
-
+    HttpService,
+    BarcodeScanner
   ]
 })
 export class AppModule {}

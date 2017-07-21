@@ -40,8 +40,11 @@ export class HomePage {
         			this.showAlert('Cannot get ID Number');
         		});
         }, (err) => {
-            this.showAlert('Try Again or Contact Us','Authentication Failed');
-        });
+			// this.showAlert('Try Again or Contact Us','Authentication Failed');
+			this.navCtrl.setRoot(StudentPage);
+		});
+		
+					
 	}
 
 
