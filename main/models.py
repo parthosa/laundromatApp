@@ -19,12 +19,12 @@ class UserProfile(models.Model):
 	def __unicode__(self):
 		return self.name
 
-	def save(self, *args, **kwargs):
-		if self.dp:
-			self.dp_url = self.dp.url
-		else:
-			pass
-		super(UserProfile, self).save(*args, **kwargs)
+	# def save(self, *args, **kwargs):
+	# 	if self.dp:
+	# 		self.dp_url = self.dp.url
+	# 	else:
+	# 		pass
+	# 	super(UserProfile, self).save(*args, **kwargs)
 
 class Plan(models.Model):
 	plan_num = models.IntegerField(null = True)
