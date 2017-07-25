@@ -39,7 +39,7 @@ def Register(request):
 			user_l = authenticate(username = email, password = gid)
 			login(request, user_l)
 
-			return JsonResponse({'status':1, 'message': 'User saved Successfully'})
+			return JsonResponse({'status':2, 'message': 'User saved Successfully'})
 
 @csrf_exempt
 def additional_info(request):
