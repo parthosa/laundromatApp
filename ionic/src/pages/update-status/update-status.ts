@@ -9,9 +9,10 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 export class UpdateStatusPage {
 
   barcodeData = '';
-  
+  washStatus : any;
   constructor(public navCtrl: NavController, public navParams: NavParams,private barcodeScanner: BarcodeScanner) {
   	this.barcodeData = '';
+    this.washStatus = "2";
   }
 
   ionViewDidLoad() {
@@ -19,9 +20,15 @@ export class UpdateStatusPage {
   }
 
   checkStatus(){
-  	this.barcodeScanner.scan().then((barcodeData) => {
-  		this.barcodeData = barcodeData.text;
-	});	
+    this.barcodeScanner.scan().then((barcodeData) => {
+      // Success! Barcode data is here
+      this.barcodeData = barcodeData.text;
+      // send request to backend
+		}, (err) => {
+			// An error occurred
+			this.barcodeData = "Scan Failed!";  		
+    });	
+    
   }
 
   updateStatus(){

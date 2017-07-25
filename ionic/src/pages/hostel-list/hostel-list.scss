@@ -1,9 +1,36 @@
 page-hostel-list {
 	ion-item{
-		padding-left: 0 !important;
+		// padding-left: 0 !important;
 
 		ion-col{
 			flex-wrap: wrap;
 		}
+	}
+
+	.scroll-content {
+		background: color($colors,secondary);
+		display: flex;
+    	flex-direction: column;
+	    // justify-content: space-around;
+	}
+
+	ion-list{
+		margin-bottom: 0 !important;
+	}
+
+	ion-searchbar{
+		padding:0 !important;
+	}
+
+	ion-grid {
+	    padding: 5px 0 10px 0 !important;
+	}
+
+	ion-col {
+	    padding: 0 !important;
+	}
+
+	ion-searchbar input {
+	    box-shadow: none !important;
 	}
 }

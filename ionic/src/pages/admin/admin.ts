@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { HostelListPage } from '../hostel-list/hostel-list';
-
+import { UpdateStatusPage } from '../update-status/update-status';
 import { HttpService } from '../../providers/http-service';
 
 
@@ -32,6 +32,10 @@ export class AdminPage {
   	this.navCtrl.push(HostelListPage,{
   		hostel: hostel
   	});
+  }
+
+  goToUpdateStatus(){
+    this.navCtrl.push(UpdateStatusPage);
   }
 
 }
