@@ -113,6 +113,12 @@ def Profile(request):
 @csrf_exempt
 def wash_history(request):
 	if request.method == 'POST':
+		req_ob = json.loads(request.body)
+		session_key = req_ob['session_key']
+		session = Session.objects.get(session_key = session_key)
+		uid = session.get_decoded().get('_auth_user_id')
+		user = User.objects.get(pk = uid)
+		
 		user_p = UserProfile.objects.get(user = request.user)
 		washes = Wash.objects.filter(user_p).order_by('id')
 
