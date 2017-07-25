@@ -1,0 +1,54 @@
+page-student {
+
+	ion-card{
+		width: 100% !important;
+	}
+
+	.scroll-content {
+		background: color($colors,secondary);
+		display: flex;
+    	flex-direction: column;
+	    justify-content: space-around;
+	}
+
+	 .item-md ion-avatar img{
+	 	width: 60px;
+	 	height: 60px;
+	 }
+
+
+	.tfield {
+	    display: flex;
+	    // margin: 5px 0px;
+	    justify-content: space-between;
+	    align-items: flex-start;
+
+	    p {
+	    	font-size: 1.3rem;
+	    	flex: 1;
+		}
+	    p.ttext {
+		     flex: 1;
+		     text-align: right;
+		     font-weight: bold;
+		 }
+    }
+
+    .more-detail{
+	    border-top: 1px solid rgba(160, 160, 160, 0.2);
+
+    	ion-col{
+    		padding: 10px;
+		    cursor: pointer;
+		    text-align: center;
+    	}
+
+    	p{
+    		color: color($colors,primary);
+		    font-weight: bold;
+		    margin: 0;
+    	}
+
+
+    }
+}

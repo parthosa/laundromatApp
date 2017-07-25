@@ -1,0 +1,59 @@
+
+<ion-header>
+
+  <ion-navbar>
+	<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Student</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-card no-margin >
+
+	  <ion-item>
+	    <ion-avatar item-start>
+	      <img src="{{ user.details.imageUrl}}">
+	    </ion-avatar>
+	    <h2>{{ user.details.displayName }}</h2>
+	    <p>{{ user.details.userId }}</p>
+	    <p>{{ user.details.email }}</p>
+	  </ion-item>
+	</ion-card>
+
+	<ion-card no-margin >
+	  <ion-card-header>
+	    Washes
+	  </ion-card-header>
+	  <ion-card-content>
+	   <div class="wash-info">
+            	<div class="tfield">
+	            	<p class="thead">Plan</p>
+	            	<p class="ttext">5</p>
+            	</div>
+            	<div class="tfield">
+	            	<p class="thead">Last Apply Date</p>
+	            	<p class="ttext">13/02/2017</p>
+            	</div>
+            	<div class="tfield">
+	            	<p class="thead">Washes Remaining</p>
+	            	<p class="ttext">5</p>
+            	</div>
+            
+
+            </div>
+	  </ion-card-content>
+
+	  <ion-row class="more-detail">
+	    <ion-col>
+	      <p text-center text-uppercase (click)="goToWashDetails()">More Details</p>
+	    </ion-col>
+	  </ion-row>
+	</ion-card>
+
+	<button ion-button full (click)="goToTrackStatus()">Track Status</button>
+
+</ion-content>

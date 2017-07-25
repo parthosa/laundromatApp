@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "942120250462",
+    "project_id": "laundromat-174414"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942120250462:android:8c49b2246687a11c",
+        "android_client_info": {
+          "package_name": "com.ionicframework.laundromat709013"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942120250462-ablb9b1rtkjth7g8gq9p2tdr0jl7hv73.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "942120250462-q0uh7pqbn0qpcdc9igkfi4ha8l5df8dt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ionicframework.laundromat709013",
+            "certificate_hash": "f3177238866b8de1ace8e1ae1d7b512f05c55b5a"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtoTtSC-orwI6_CRlf7wkeNRsHp6crR9c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
