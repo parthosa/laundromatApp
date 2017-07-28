@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^user/logout/$', views.logout, name='logout'),
     url(r'^user/profile/get/$', views.Profile, name='profile'),
     url(r'^user/profile/edit/$', views.edit_profile, name='edit_profile'),
+    url(r'^laundromat/wash/$', views.wash_history, name='wash_history'),
     url(r'^laundromat/scan/$', views.scan_laundro, name='scan_laundro'),
     url(r'^laundromat/status/change/$', views.change_status, name='change_status'),
     url(r'^laundromat/hostel/students/$', views.get_students, name='get_students'),

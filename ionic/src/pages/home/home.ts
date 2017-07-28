@@ -3,7 +3,7 @@ import { NavController,ToastController } from 'ionic-angular';
 import { StudentPage } from '../student/student';
 import { AdminLoginPage } from '../admin-login/admin-login';
 import { User } from '@ionic/cloud-angular';
-
+import { Storage } from '@ionic/storage';
 import { HttpService } from '../../providers/http-service';
 // import { User } from '@ionic/cloud-angular';
 import { GooglePlus } from 'ionic-native';
@@ -15,8 +15,8 @@ import { GooglePlus } from 'ionic-native';
 export class HomePage {
 
 
-	constructor(public navCtrl: NavController, public user: User,public toastCtrl: ToastController,private httpService: HttpService) {
-		
+	constructor(public navCtrl: NavController, public user: User,public toastCtrl: ToastController,public storage: Storage,private httpService: HttpService) {
+
 	}
 
 	goToAdminPage(){
@@ -35,7 +35,8 @@ export class HomePage {
   //       	this.httpService.postData('/api/get_id/',this.user.details).then(
   //       		(response)=>{
   //       			if(response.status == 1){
-	 //        			this.user.details['id'] = response.id;
+   //        			this.user.details['id'] = response.id;
+   //             this.storage.set('session_key', response.session_key);
 	 //        			this.navCtrl.setRoot(StudentPage);
   //       			}
   //       			else{
@@ -59,7 +60,7 @@ export class HomePage {
 		// 	// this.navCtrl.setRoot(StudentPage);
 		// });
 		this.navCtrl.setRoot(StudentPage);
-					
+
 	}
 
 

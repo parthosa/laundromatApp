@@ -31,7 +31,7 @@ export class HostelListPage {
       'room_no':'151'
     }];
 
-    // this.httpService.postData('/api/get_id/',this.hostel).then(
+    // this.httpService.postData('http://localhost:8000//main/laundromat/hostel/students/',this.hostel).then(
     // (response)=>{
     //    if(response.status == 1)
     //      this.students = response.students;
@@ -59,11 +59,11 @@ export class HostelListPage {
           case "1":
             return (student.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
           case "2":
-            return (student.id.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            return (student.bits_id.toLowerCase().indexOf(val.toLowerCase()) > -1);
           case "3":
-            return (student.room_no.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            return (student.room_num.toLowerCase().indexOf(val.toLowerCase()) > -1);
           default:
-            return (student.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            return (student.plan.toLowerCase().indexOf(val.toLowerCase()) > -1);
         }
       })
     }
