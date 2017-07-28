@@ -19,22 +19,22 @@
 			<ion-col col-10 >
 				<ion-list>
 				  <ion-item>
-				    <!-- <ion-label color="primary">Inline Label</ion-label> -->
-				    <ion-input [(ngModel)]="user.id_number" placeholder="ID Number"></ion-input>
+				    <ion-label>ID Number</ion-label>
+				    <ion-input fixed [(ngModel)]="user.id_number"></ion-input>
 				  </ion-item>
 				  <ion-item>
-				    <ion-label>Toppings</ion-label>
+				    <ion-label>Hostel</ion-label>
 				  <ion-select [(ngModel)]="user.hostel_name" multiple="true">
 				    <ion-option *ngFor="let hostel of hostels" [value]="hostel"></ion-option>
 				  </ion-select>
 				  </ion-item>
 				  <ion-item>
-				    <!-- <ion-label color="primary">Inline Label</ion-label> -->
-				    <ion-input [(ngModel)]="user.room_no" placeholder="Room Number"></ion-input>
+				    <ion-label>Room Number</ion-label>
+				    <ion-input fixed [(ngModel)]="user.room_no"></ion-input>
 				  </ion-item>
 				  <ion-item>
-				    <!-- <ion-label color="primary">Inline Label</ion-label> -->
-				    <ion-input [(ngModel)]="user.phone_number" placeholder="Phone Number"></ion-input>
+				    <ion-label>Phone Number</ion-label>
+				    <ion-input fixed [(ngModel)]="user.phone_number"></ion-input>
 				  </ion-item>
 				</ion-list>
 			</ion-col>
