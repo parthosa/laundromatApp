@@ -33,4 +33,4 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 front/
-back/db.sqlite3
+*.sqlite3
