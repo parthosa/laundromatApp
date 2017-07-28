@@ -17,10 +17,10 @@ export class AdminPage {
     this.menu.enable(false,'studentMenu');
     this.menu.enable(true,'adminMenu');
 
-    this.httpService.getData('https://jsonplaceholder.typicode.com/users')
+    this.httpService.getData('http://localhost:8000/main/laundromat/hostels/get/')
       .then(response=>{
-        	// this.hostels =  response.hostels;
-        	this.hostels = ['Ashok','Ram','Budh','Meera','Shankar'];
+        	this.hostels =  response.hostels;
+        	// this.hostels = ['Ashok','Ram','Budh','Meera','Shankar'];
         });
   }
 
