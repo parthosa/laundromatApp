@@ -12,7 +12,6 @@ export class UpdateStatusPage {
   washStatus : any;
   constructor(public navCtrl: NavController, public navParams: NavParams,private barcodeScanner: BarcodeScanner) {
   	this.barcodeData = '';
-    this.washStatus = "2";
   }
 
   ionViewDidLoad() {
@@ -24,6 +23,7 @@ export class UpdateStatusPage {
       // Success! Barcode data is here
       this.barcodeData = barcodeData.text;
       // send request to backend
+      this.washStatus = "2";
 		}, (err) => {
 			// An error occurred
 			this.barcodeData = "Scan Failed!";  		
@@ -32,7 +32,7 @@ export class UpdateStatusPage {
   }
 
   updateStatus(){
-
+    // send id and wash status to backend
   }
 
 }

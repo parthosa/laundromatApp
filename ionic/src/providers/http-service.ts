@@ -13,6 +13,8 @@ import 'rxjs/add/operator/map';
   	*/
 @Injectable()
 export class HttpService {
+	// hello
+	baseUrl = "http://192.168.1.108:8000";
 
 	constructor(public http: Http) {
 		console.log('Hello HttpUtils Provider');
@@ -98,17 +100,17 @@ export class HttpService {
 		
 
 	getData(url){
-		return this.http.get(url)
+		return this.http.get(this.baseUrl+url)
 		.toPromise()
 		.then(res => res.json())
 		.catch(this.handleError);
 	}
 
 	postData(url,data){
-		let headers = new Headers({ 'Content-Type': 'application/json' });
+		let headers = new Headers({ 'Content-Type': 'text/plain' });
 		let options = new RequestOptions({ headers: headers });
 
-		return this.http.post(url, data, options)
+		return this.http.post(this.baseUrl+url, data, options)
 		.toPromise()
 		.then(res => res.json())
 		.catch(this.handleError);

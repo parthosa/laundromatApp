@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login 
 from .models import *
 from django.contrib.admin.views.decorators import staff_member_required
 import uuid
@@ -8,10 +9,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 import json
 
+@csrf_exempt
 def Register(request):
 	if request.method == 'POST':
 		email = json.loads(request.body)['email']
-		gid = json.loads(request.body)['gid']
+		gid = json.loads(request.body)['userId']
 		if email in User.objects.all().values('username'):
 			user = authenticate(username = email, password = gid)
 			if user:
@@ -37,6 +39,7 @@ def Register(request):
 			# hostel.user.add(user_p)
 			# hostel.save()
 			user_l = authenticate(username = email, password = gid)
+			print user_l
 			login(request, user_l)
 
 			return JsonResponse({'status':2, 'message': 'User saved Successfully'})

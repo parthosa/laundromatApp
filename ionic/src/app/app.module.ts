@@ -6,10 +6,8 @@ import { HttpModule } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { LaundromatApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
-import { IdNumberPage } from '../pages/id-number/id-number';
+import { UserDetailsPage } from '../pages/user-details/user-details';
 import { StudentPage } from '../pages/student/student';
 import { WashDetailsPage } from '../pages/wash-details/wash-details';
 import { TrackStatusPage } from '../pages/track-status/track-status';
@@ -17,7 +15,6 @@ import { AdminPage } from '../pages/admin/admin';
 import { AdminLoginPage } from '../pages/admin-login/admin-login';
 import { HostelListPage } from '../pages/hostel-list/hostel-list';
 import { UpdateStatusPage } from '../pages/update-status/update-status';
-import { TabsPage } from '../pages/tabs/tabs';
 
 import { HttpService } from '../providers/http-service';
 
@@ -43,10 +40,8 @@ const cloudSettings: CloudSettings = {
 @NgModule({
   declarations: [
     LaundromatApp,
-    AboutPage,
-    ContactPage,
     HomePage,
-    IdNumberPage,
+    UserDetailsPage,
     StudentPage,
     WashDetailsPage,
     TrackStatusPage,
@@ -54,7 +49,6 @@ const cloudSettings: CloudSettings = {
     AdminLoginPage,
     HostelListPage,
     UpdateStatusPage,
-    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -66,10 +60,8 @@ const cloudSettings: CloudSettings = {
   bootstrap: [IonicApp],
   entryComponents: [
     LaundromatApp,
-    AboutPage,
-    ContactPage,
     HomePage,
-    IdNumberPage,
+    UserDetailsPage,
     StudentPage,
     WashDetailsPage,
     TrackStatusPage,
@@ -77,7 +69,6 @@ const cloudSettings: CloudSettings = {
     AdminLoginPage,
     HostelListPage,
     UpdateStatusPage,
-    TabsPage
   ],
   providers: [
     StatusBar,
