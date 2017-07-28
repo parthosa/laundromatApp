@@ -9,4 +9,18 @@ page-id-number {
 	.list-ios > .item-block:first-child {
 		border-top: none;
 	}
+	.list-ios > .item-block:last-child{
+		border-bottom:none;
+	}
+
+	.item{
+		margin:14px 0 ;
+		border-bottom: none;
+	}
+	.item:not(.item-ios){
+		padding-left:0;
+	}
+	.list-ios .item-block .item-inner{
+		border:none;
+	}
 }

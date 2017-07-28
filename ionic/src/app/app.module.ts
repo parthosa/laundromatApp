@@ -9,7 +9,7 @@ import { LaundromatApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
-import { IdNumberPage } from '../pages/id-number/id-number';
+import { UserDetailsPage } from '../pages/user-details/user-details';
 import { StudentPage } from '../pages/student/student';
 import { WashDetailsPage } from '../pages/wash-details/wash-details';
 import { TrackStatusPage } from '../pages/track-status/track-status';
@@ -46,7 +46,7 @@ const cloudSettings: CloudSettings = {
     AboutPage,
     ContactPage,
     HomePage,
-    IdNumberPage,
+    UserDetailsPage,
     StudentPage,
     WashDetailsPage,
     TrackStatusPage,
@@ -69,7 +69,7 @@ const cloudSettings: CloudSettings = {
     AboutPage,
     ContactPage,
     HomePage,
-    IdNumberPage,
+    UserDetailsPage,
     StudentPage,
     WashDetailsPage,
     TrackStatusPage,
