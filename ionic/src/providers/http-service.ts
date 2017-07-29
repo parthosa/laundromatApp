@@ -15,7 +15,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class HttpService {
 	// hello
-	baseUrl = "http://192.168.1.108:8000";
+	baseUrl = "http://139.59.95.84:8000";
 	public loader;
 	constructor(public http: Http,public loadingCtrl:LoadingController) {
 		console.log('Hello HttpUtils Provider');
