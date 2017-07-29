@@ -250,7 +250,7 @@ def get_students(request):
 		for student in students:
 			if student.plan:
 				response_list.append({'name': student.name, 'bits_id': student.bits_id, 'room_no': student.room,'plan': student.plan.plan_num})
-			else
+			else:
 				response_list.append({'name': student.name, 'bits_id': student.bits_id, 'room_no': student.room})
 
 		return JsonResponse({'status': 1, 'students': response_list})
