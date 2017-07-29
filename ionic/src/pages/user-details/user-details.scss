@@ -18,9 +18,17 @@ page-user-details {
 		border-bottom: none;
 	}
 	.item:not(.item-ios){
-		padding-left:0;
+		// padding-left:0;
 	}
 	.list-ios .item-block .item-inner{
 		border:none;
 	}
+	
+	$text-input-ios-show-focus-highlight:      false !default;
+	$text-input-ios-show-valid-highlight:      $text-input-ios-show-focus-highlight !default;
+	$text-input-ios-show-invalid-highlight:    $text-input-ios-show-focus-highlight !default;
+
+	$text-input-md-show-focus-highlight: false !default;
+	$text-input-md-show-valid-highlight: $text-input-md-show-focus-highlight !default;
+	$text-input-md-show-invalid-highlight: $text-input-md-show-focus-highlight !default;
 }

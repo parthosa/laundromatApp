@@ -7,8 +7,8 @@
 
     <ion-content>
         <ion-list>
-             <button ion-item menuClose (click)="openPage(homePage)">
-                Home
+             <button ion-item menuClose (click)="goToEditDetailsPage()">
+                Edit Details
             </button>
             <button ion-item menuClose (click)="logout()">
                 Logout
@@ -30,8 +30,8 @@
              <button ion-item menuClose (click)="openPage(homePage)">
                 Home
             </button>
-            <button ion-item menuClose (click)="logout()">
-                Logut
+            <button ion-item menuClose (click)="logout(true)">
+                Logout
             </button>
         </ion-list>
     </ion-content>

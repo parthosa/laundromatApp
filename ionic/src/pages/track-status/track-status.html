@@ -19,11 +19,11 @@
 	  <ion-item>
 	    <div class="tfield">
         	<p class="thead">Submitted On</p>
-        	<p class="ttext">{{ submittedOn }}</p>
+        	<p class="ttext">{{ wash.date }}</p>
     	</div>
     	<div class="tfield">
         	<p class="thead">Washes</p>
-        	<p class="ttext">{{ washes }}</p>
+        	<p class="ttext">{{ wash.number }}</p>
     	</div>
 	  </ion-item>
 	</ion-card>
@@ -35,29 +35,29 @@
 	  <ion-card-content>
 	  <div class="status-wrapper" >
 	  	<ion-list>
-		  <ion-item [ngClass]="(washStatus >= 1)?'done':'not-done'">
-		    <ion-icon *ngIf="washStatus >= 1" name="checkmark" item-start></ion-icon>
-		    <ion-icon *ngIf="washStatus < 1" name="close" item-start></ion-icon>
+		  <ion-item [ngClass]="(wash.status_number >= 1)?'done':'not-done'">
+		    <ion-icon *ngIf="wash.status_number >= 1" name="checkmark" item-start></ion-icon>
+		    <ion-icon *ngIf="wash.status_number < 1" name="close" item-start></ion-icon>
 		      Checked In
 		  </ion-item>
-		  <ion-item [ngClass]="(washStatus >= 2)?'done':'not-done'">
-		    <ion-icon *ngIf="washStatus >= 2" name="checkmark" item-start></ion-icon>
-		    <ion-icon *ngIf="washStatus < 2" name="close" item-start></ion-icon>
+		  <ion-item [ngClass]="(wash.status_number >= 2)?'done':'not-done'">
+		    <ion-icon *ngIf="wash.status_number >= 2" name="checkmark" item-start></ion-icon>
+		    <ion-icon *ngIf="wash.status_number < 2" name="close" item-start></ion-icon>
 		      Washing
 		  </ion-item>
-		  <ion-item [ngClass]="(washStatus >= 3)?'done':'not-done'">
-		    <ion-icon *ngIf="washStatus >= 3" name="checkmark" item-start></ion-icon>
-		    <ion-icon *ngIf="washStatus < 3" name="close" item-start></ion-icon>
+		  <ion-item [ngClass]="(wash.status_number >= 3)?'done':'not-done'" *ngIf="wash.with_iron">
+		    <ion-icon *ngIf="wash.status_number >= 3" name="checkmark" item-start></ion-icon>
+		    <ion-icon *ngIf="wash.status_number < 3" name="close" item-start></ion-icon>
 		      Ironing
 		  </ion-item>
-		  <ion-item [ngClass]="(washStatus >= 4)?'done':'not-done'">
-		    <ion-icon *ngIf="washStatus >= 4" name="checkmark" item-start></ion-icon>
-		    <ion-icon *ngIf="washStatus < 4" name="close" item-start></ion-icon>
+		  <ion-item [ngClass]="(wash.status_number >= 4)?'done':'not-done'">
+		    <ion-icon *ngIf="wash.status_number >= 4" name="checkmark" item-start></ion-icon>
+		    <ion-icon *ngIf="wash.status_number < 4" name="close" item-start></ion-icon>
 		      Completed
 		  </ion-item>
-		  <ion-item [ngClass]="(washStatus == 5)?'done':'not-done'">
-		    <ion-icon *ngIf="washStatus == 5" name="checkmark" item-start></ion-icon>
-		    <ion-icon *ngIf="washStatus != 5" name="close" item-start></ion-icon>
+		  <ion-item [ngClass]="(wash.status_number == 5)?'done':'not-done'">
+		    <ion-icon *ngIf="wash.status_number == 5" name="checkmark" item-start></ion-icon>
+		    <ion-icon *ngIf="wash.status_number != 5" name="close" item-start></ion-icon>
 		      Checked Out
 		  </ion-item>
 		</ion-list>

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>User Details</ion-title>
+    <ion-title>Details</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -20,21 +20,21 @@
 				<ion-list>
 				  <ion-item>
 				    <ion-label>ID Number</ion-label>
-				    <ion-input fixed [(ngModel)]="user.id_number"></ion-input>
+				    <ion-input fixed text-right [(ngModel)]="user.bits_id"></ion-input>
 				  </ion-item>
 				  <ion-item>
 				    <ion-label>Hostel</ion-label>
-				  <ion-select [(ngModel)]="user.hostel_name" multiple="true">
-				    <ion-option *ngFor="let hostel of hostels" [value]="hostel"></ion-option>
+				  <ion-select [(ngModel)]="user.hostel">
+				    <ion-option *ngFor="let hostel of hostels" [value]="hostel.short">{{ hostel.short }}</ion-option>
 				  </ion-select>
 				  </ion-item>
 				  <ion-item>
 				    <ion-label>Room Number</ion-label>
-				    <ion-input fixed [(ngModel)]="user.room_no"></ion-input>
+				    <ion-input fixed text-right [(ngModel)]="user.room_no"></ion-input>
 				  </ion-item>
 				  <ion-item>
 				    <ion-label>Phone Number</ion-label>
-				    <ion-input fixed [(ngModel)]="user.phone_number"></ion-input>
+				    <ion-input fixed text-right [(ngModel)]="user.phone"></ion-input>
 				  </ion-item>
 				</ion-list>
 			</ion-col>

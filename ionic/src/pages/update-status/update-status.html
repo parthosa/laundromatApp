@@ -23,9 +23,43 @@
 		    <ion-input type="text" placeholder="ID Number" [(ngModel)]="barcodeData"></ion-input>
 		  </ion-item>
 		</ion-list>
-	  <button ion-button full (click)="checkStatus()">Check Status</button>
-
+	  <div class="buttons-wrapper">
+	  	<ion-grid>
+	  	<ion-row justify-content-center>
+	  	<ion-col col-6 col-md-4>
+		  <button ion-button  full (click)="scan()">Scan</button>
+		</ion-col>
+	    <ion-col col-6 col-md-4>
+		  <button ion-button  full (click)="checkStatus()">Check Status</button>
+		</ion-col>
+		</ion-row>
+		</ion-grid>
+	  </div>
 	  </ion-card-content>
+	</ion-card>
+
+	<ion-card no-margin *ngIf="show_info">
+
+	  <ion-item>
+	    <ion-avatar item-start>
+	      <img src="{{ user.imageUrl}}">
+	    </ion-avatar>
+	    <h2>{{ user.name }}</h2>
+	    <p>{{ user.bits_id }}</p>
+	    <p>{{ user.email }}</p>
+	    <p>{{ user.hostel }} {{ user.room_no }}</p>
+	  </ion-item>
+
+	  <ion-item>
+	    <div class="tfield">
+        	<p class="thead">Submitted On</p>
+        	<p class="ttext">{{ user.date }}</p>
+    	</div>
+    	<div class="tfield">
+        	<p class="thead">Washes</p>
+        	<p class="ttext">{{ user.number }}</p>
+    	</div>
+	  </ion-item>
 	</ion-card>
 
 	<ion-card >
@@ -34,35 +68,35 @@
 	  </ion-card-header>
 	  <ion-card-content>
 	  <div class="status-wrapper">
-	  <ion-list radio-group [(ngModel)]="washStatus">
+	  <ion-list radio-group [(ngModel)]="user.status_number">
 		  <ion-item>
 		    <ion-label>Not Applied</ion-label>
-		    <ion-radio value="1"></ion-radio>
+		    <ion-radio value="0"></ion-radio>
 		  </ion-item>
 
 		  <ion-item>
 		    <ion-label>Checked In</ion-label>
-		    <ion-radio value="2"></ion-radio>
+		    <ion-radio value="1"></ion-radio>
 		  </ion-item>
 
 		  <ion-item>
 		    <ion-label>Washing</ion-label>
+		    <ion-radio value="2"></ion-radio>
+		  </ion-item>
+
+		  <ion-item *ngIf="user.with_iron">
+		    <ion-label>Ironing</ion-label>
 		    <ion-radio value="3"></ion-radio>
 		  </ion-item>
 
 		  <ion-item>
-		    <ion-label>Ironing</ion-label>
+		    <ion-label>Completed</ion-label>
 		    <ion-radio value="4"></ion-radio>
 		  </ion-item>
 
 		  <ion-item>
-		    <ion-label>Completed</ion-label>
-		    <ion-radio value="5"></ion-radio>
-		  </ion-item>
-
-		  <ion-item>
 		    <ion-label>Checked Out</ion-label>
-		    <ion-radio value="6"></ion-radio>
+		    <ion-radio value="5"></ion-radio>
 		  </ion-item>
 
 

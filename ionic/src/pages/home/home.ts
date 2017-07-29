@@ -3,7 +3,7 @@ import { NavController,ToastController } from 'ionic-angular';
 import { StudentPage } from '../student/student';
 import { UserDetailsPage } from '../user-details/user-details';
 import { AdminLoginPage } from '../admin-login/admin-login';
-import { User } from '@ionic/cloud-angular';
+// import { Storage } from '@ionic/storage';
 
 import { HttpService } from '../../providers/http-service';
 // import { User } from '@ionic/cloud-angular';
@@ -15,9 +15,8 @@ import { GooglePlus } from 'ionic-native';
 })
 export class HomePage {
 
-
-	constructor(public navCtrl: NavController, public user: User,public toastCtrl: ToastController,private httpService: HttpService) {
-		
+	user = {};
+	constructor(public navCtrl: NavController,public toastCtrl: ToastController,private httpService: HttpService) {
 	}
 
 	goToAdminPage(){
@@ -29,18 +28,23 @@ export class HomePage {
 
 	studentLogin(){
 		GooglePlus.login({
-          'webClientId': '931784175657-tnlaleval048phhgbrgbmeqi2hh64pmq.apps.googleusercontent.com'
+          'webClientId': '931784175657-tnlaleval048phhgbrgbmeqi2hh64pmq.apps.googleusercontent.com',
+          'hosted_domain': 'pilani@bits-pilani.ac.in'
         }).then((res) => {
-        	this.user.details = res;
-        	// hi
-        	console.log(this.user.details);
-        	this.httpService.postData('/main/users/register/',this.user.details).then(
+        	this.user = res;
+
+        	console.log(this.user);
+        	this.httpService.postData('/main/user/register/',this.user).then(
         		(response)=>{
         			if(response.status == 1){
-	        			this.user.details['id'] = response.id;
+	        			this.user['id'] = response.id;
+	        			localStorage.setItem('user',JSON.stringify(this.user));
+	        			localStorage.setItem('session_key',response.session_key);
 	        			this.navCtrl.setRoot(StudentPage);
         			}
         			else if(response.status == 2){
+	        			localStorage.setItem('user',JSON.stringify(this.user));
+	        			localStorage.setItem('session_key',response.session_key);
 	        			this.navCtrl.push(UserDetailsPage);
         			}else {
         				this.toastCtrl.create({

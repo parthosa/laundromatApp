@@ -16,11 +16,12 @@
 
 	  <ion-item>
 	    <ion-avatar item-start>
-	      <img src="{{ user.details.imageUrl}}">
+	      <img src="{{ user.imageUrl}}">
 	    </ion-avatar>
-	    <h2>{{ user.details.displayName }}</h2>
-	    <p>{{ user.details.userId }}</p>
-	    <p>{{ user.details.email }}</p>
+	    <h2>{{ user.name }}</h2>
+	    <p>{{ user.bits_id }}</p>
+	    <p>{{ user.email }}</p>
+	    <p>{{ user.hostel }} {{ user.room_no }}</p>
 	  </ion-item>
 	</ion-card>
 
@@ -32,15 +33,15 @@
 	   <div class="wash-info">
             	<div class="tfield">
 	            	<p class="thead">Plan</p>
-	            	<p class="ttext">5</p>
+	            	<p class="ttext">{{ user.plan_num }}</p>
             	</div>
             	<div class="tfield">
 	            	<p class="thead">Last Apply Date</p>
-	            	<p class="ttext">13/02/2017</p>
+	            	<p class="ttext">{{ user.apply_date }}</p>
             	</div>
             	<div class="tfield">
 	            	<p class="thead">Washes Remaining</p>
-	            	<p class="ttext">5</p>
+	            	<p class="ttext">{{ user.washes_left }}</p>
             	</div>
             
 

@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { WashDetailsPage } from '../wash-details/wash-details';
 import { TrackStatusPage } from '../track-status/track-status';
-import { User } from '@ionic/cloud-angular';
-import { Storage } from '@ionic/storage';
 import { HttpService } from '../../providers/http-service';
 
 
@@ -16,16 +14,21 @@ export class StudentPage {
   washPlan: string;
   lastApplyDate: Date;
   washesRemaining: any;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,public menu: MenuController,public user: User,public storage: Storage,private httpService:HttpService) {
+  user = {};
+  constructor(public navCtrl: NavController, public navParams: NavParams,public menu: MenuController,private httpService:HttpService) {
     this.menu.enable(false,'adminMenu');
     this.menu.enable(true,'studentMenu');
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.getProfile();
+  }
 
-    this.httpService.postData('http://localhost:8000/main/user/wash/history/',this.storage.get('session_key'))
+  getProfile(){
+     this.httpService.postData('/main/user/profile/get/',{'session_key':localStorage.getItem('session_key')})
       .then(response=>{
-        this.washPlan = response.plan_num;
-        this.lastApplyDate = response.apply_date;
-        this.washesRemaining = response.washes_left;
+        if(response.status == 1){
+          this.user = response.user_data;
+          localStorage.setItem('user',JSON.stringify(response.user_data));
+        }
       });
   }
 

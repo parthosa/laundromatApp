@@ -10,7 +10,7 @@ import { HttpService } from '../../providers/http-service';
 })
 export class HostelListPage {
 
-  hostel = '';
+  hostel = {};
   students = [];
   searchQuery: string = '';
   searchType: any;
@@ -21,28 +21,19 @@ export class HostelListPage {
   }
 
   initStudentList(){
-    this.students = [{
-      'name':'Partho',
-      'id':'2015A7PS088P',
-      'room_no':'150'
-    },{
-      'name':'Amritanshu',
-      'id':'2015ABPS831P',
-      'room_no':'151'
-    }];
 
-    // this.httpService.postData('http://localhost:8000//main/laundromat/hostel/students/',this.hostel).then(
-    // (response)=>{
-    //    if(response.status == 1)
-    //      this.students = response.students;
-    //     else{
-    //       this.toastCtrl.create({
-    //                   message: response.message,
-    //                   duration: 3000,
-    //                 }).present();
-    //     }
+    this.httpService.postData('/main/laundromat/hostel/students/',{'hostel':this.hostel['name']}).then(
+    (response)=>{
+       if(response.status == 1)
+         this.students = response.students;
+        else{
+          this.toastCtrl.create({
+                      message: response.message,
+                      duration: 3000,
+                    }).present();
+        }
 
-    //  });
+     });
   }
 
   getItems(ev: any) {
@@ -61,9 +52,9 @@ export class HostelListPage {
           case "2":
             return (student.bits_id.toLowerCase().indexOf(val.toLowerCase()) > -1);
           case "3":
-            return (student.room_num.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            return (student.room_n0.toLowerCase().indexOf(val.toLowerCase()) > -1);
           default:
-            return (student.plan.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            return (student.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
         }
       })
     }

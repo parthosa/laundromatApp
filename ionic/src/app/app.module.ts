@@ -21,6 +21,8 @@ import { HttpService } from '../providers/http-service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+// import { Storage } from '@ionic/storage';
+
 // import { GooglePlus } from '@ionic-native/google-plus';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
@@ -75,7 +77,7 @@ const cloudSettings: CloudSettings = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpService,
-    BarcodeScanner
+    BarcodeScanner,
   ]
 })
 export class AppModule {}
