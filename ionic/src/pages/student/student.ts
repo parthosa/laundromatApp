@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController,ToastController } from 'ionic-angular';
+import { NavController, NavParams, MenuController,ToastController,LoadingController } from 'ionic-angular';
 import { WashDetailsPage } from '../wash-details/wash-details';
 import { TrackStatusPage } from '../track-status/track-status';
 import { HttpService } from '../../providers/http-service';
@@ -15,7 +15,7 @@ export class StudentPage {
   lastApplyDate: Date;
   washesRemaining: any;
   user = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams,public menu: MenuController,private toastCtrl:ToastController,private httpService:HttpService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController,public menu: MenuController,private toastCtrl:ToastController,private httpService:HttpService) {
     this.menu.enable(false,'adminMenu');
     this.menu.enable(true,'studentMenu');
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -23,6 +23,11 @@ export class StudentPage {
   }
 
   getProfile(){
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    loader.present();
      this.httpService.postData('/main/user/profile/get/',{'session_key':localStorage.getItem('session_key')})
       .then(response=>{
         if(response.status == 1){
@@ -50,6 +55,7 @@ export class StudentPage {
   goToTrackStatus(){
   	this.navCtrl.push(TrackStatusPage);
   }
+
 
 
 }

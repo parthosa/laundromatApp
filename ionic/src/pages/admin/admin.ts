@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController,ToastController } from 'ionic-angular';
+import { NavController, NavParams, MenuController,ToastController,LoadingController } from 'ionic-angular';
 import { HostelListPage } from '../hostel-list/hostel-list';
 import { UpdateStatusPage } from '../update-status/update-status';
 import { HttpService } from '../../providers/http-service';
@@ -13,7 +13,7 @@ export class AdminPage {
 
   hostels = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl:ToastController,public menu: MenuController,private httpService:HttpService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private loadingCtrl:LoadingController,private toastCtrl:ToastController,public menu: MenuController,private httpService:HttpService) {
     this.menu.enable(false,'studentMenu');
     this.menu.enable(true,'adminMenu');
 
@@ -25,8 +25,14 @@ export class AdminPage {
   }
 
   updateHostels(){
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    loader.present();
     this.httpService.getData('/main/laundromat/hostels/get/').then(
     (response)=>{
+      loader.dismiss();
       if(response.status == 1){
         this.hostels = response.hostels;
       }

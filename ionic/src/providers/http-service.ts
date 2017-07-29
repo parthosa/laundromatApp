@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
+import { LoadingController } from 'ionic-angular';
 import { Http,Headers, RequestOptions, Response  } from '@angular/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
@@ -15,9 +16,13 @@ import 'rxjs/add/operator/map';
 export class HttpService {
 	// hello
 	baseUrl = "http://192.168.1.108:8000";
-
-	constructor(public http: Http) {
+	public loader;
+	constructor(public http: Http,public loadingCtrl:LoadingController) {
 		console.log('Hello HttpUtils Provider');
+		this.loader = this.loadingCtrl.create({
+	      content: "Please wait...",
+	      duration: 3000
+	    });
 	}
 
 	login_as_student(BITS_mail: string, Password: string) {

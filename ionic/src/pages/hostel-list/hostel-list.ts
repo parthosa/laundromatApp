@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,ToastController } from 'ionic-angular';
+import { NavController, NavParams,ToastController,LoadingController } from 'ionic-angular';
 
 import { HttpService } from '../../providers/http-service';
 
@@ -14,18 +14,27 @@ export class HostelListPage {
   students = [];
   searchQuery: string = '';
   searchType: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl:ToastController,private httpService:HttpService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private loadingCtrl: LoadingController,private toastCtrl:ToastController,private httpService:HttpService) {
   	this.hostel = this.navParams.get('hostel');
-    this.initStudentList();
+    this.initStudentList(true);
     this.searchType = "1";
   }
 
-  initStudentList(){
-
+  initStudentList(loading){
+    let loader;
+    if(loading){
+    loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    loader.present();
     this.httpService.postData('/main/laundromat/hostel/students/',{'hostel':this.hostel['name']}).then(
     (response)=>{
-       if(response.status == 1)
+      loader.dismiss();
+       if(response.status == 1){
          this.students = response.students;
+         localStorage.setItem('students',JSON.stringify(this.students));
+       }
         else{
           this.toastCtrl.create({
                       message: response.message,
@@ -33,12 +42,16 @@ export class HostelListPage {
                     }).present();
         }
 
-     });
+       });
+    }
+    else{
+      this.students = JSON.parse(localStorage.getItem('students'));
+    }
   }
 
   getItems(ev: any) {
     // Reset items back to all of the items
-    this.initStudentList();
+    this.initStudentList(false);
 
     // set val to the value of the searchbar
     let val = ev.target.value;

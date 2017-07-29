@@ -21,8 +21,10 @@ export class AdminLoginPage {
   }
 
   adminSignIn(){
+    this.httpService.loader.present();
     this.httpService.postData('/main/laundromat/signin/',this.adminCreds)
       .then(response=>{
+        this.httpService.loader.dismiss();
         if(response.status == 1)
           this.navCtrl.setRoot(AdminPage);
         this.toastCtrl.create({

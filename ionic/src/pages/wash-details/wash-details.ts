@@ -15,6 +15,7 @@ export class WashDetailsPage {
 
   	let loader = this.loadingCtrl.create({
       content: "Please wait...",
+      duration: 3000
     });
     loader.present();
   	this.httpService.postData('/main/user/wash/history/',{'session_key':localStorage.getItem('session_key')})

@@ -23,6 +23,7 @@ export class LaundromatApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      console.log(1,platform.platforms());
       statusBar.styleDefault();
       setTimeout(()=>{
         splashScreen.hide();

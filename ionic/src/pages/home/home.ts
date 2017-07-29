@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,ToastController } from 'ionic-angular';
+import { NavController,ToastController,LoadingController } from 'ionic-angular';
 import { StudentPage } from '../student/student';
 import { UserDetailsPage } from '../user-details/user-details';
 import { AdminLoginPage } from '../admin-login/admin-login';
@@ -16,7 +16,7 @@ import { GooglePlus } from 'ionic-native';
 export class HomePage {
 
 	user = {};
-	constructor(public navCtrl: NavController,public toastCtrl: ToastController,private httpService: HttpService) {
+	constructor(public navCtrl: NavController,private loadingCtrl:LoadingController,public toastCtrl: ToastController,private httpService: HttpService) {
 	}
 
 	goToAdminPage(){
@@ -32,10 +32,14 @@ export class HomePage {
           'hosted_domain': 'pilani@bits-pilani.ac.in'
         }).then((res) => {
         	this.user = res;
-
-        	console.log(this.user);
+        	 let loader = this.loadingCtrl.create({
+		      content: "Please wait...",
+		      duration: 3000
+		    });
+        	loader.present();
         	this.httpService.postData('/main/user/register/',this.user).then(
         		(response)=>{
+        			loader.dismiss();
         			if(response.status == 1){
 	        			this.user['id'] = response.id;
 	        			localStorage.setItem('user',JSON.stringify(this.user));
