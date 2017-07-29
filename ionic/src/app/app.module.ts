@@ -28,11 +28,11 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 const cloudSettings: CloudSettings = {
   'core': {
-    'app_id': 'e8104c91'
+    'app_id': '2218f385'
   },
   'auth': {
     'google': {
-      'webClientId': '942120250462-ablb9b1rtkjth7g8gq9p2tdr0jl7hv73.apps.googleusercontent.com',
+      'webClientId': '931784175657-tnlaleval048phhgbrgbmeqi2hh64pmq.apps.googleusercontent.com',
       'scope': ['permission1', 'permission2']
     }
   }

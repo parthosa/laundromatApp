@@ -248,7 +248,10 @@ def get_students(request):
 		# students = hostel.user.all()
 		response_list = []
 		for student in students:
-			response_list.append({'name': student.name, 'bits_id': student.bits_id, 'room_no': student.room,'plan': student.plan.plan_num})
+			if student.plan:
+				response_list.append({'name': student.name, 'bits_id': student.bits_id, 'room_no': student.room,'plan': student.plan.plan_num})
+			else
+				response_list.append({'name': student.name, 'bits_id': student.bits_id, 'room_no': student.room})
 
 		return JsonResponse({'status': 1, 'students': response_list})
 
