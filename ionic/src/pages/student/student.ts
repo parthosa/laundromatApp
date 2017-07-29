@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavController, NavParams, MenuController,ToastController } from 'ionic-angular';
 import { WashDetailsPage } from '../wash-details/wash-details';
 import { TrackStatusPage } from '../track-status/track-status';
 import { HttpService } from '../../providers/http-service';
@@ -15,7 +15,7 @@ export class StudentPage {
   lastApplyDate: Date;
   washesRemaining: any;
   user = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams,public menu: MenuController,private httpService:HttpService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public menu: MenuController,private toastCtrl:ToastController,private httpService:HttpService) {
     this.menu.enable(false,'adminMenu');
     this.menu.enable(true,'studentMenu');
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -27,6 +27,13 @@ export class StudentPage {
       .then(response=>{
         if(response.status == 1){
           this.user = response.user_data;
+          if(response.user_data['has_applied'] == false){
+            this.toastCtrl.create({
+                      message: 'You have not subscribed for Laundromat',
+                      duration: 4000,
+                      cssClass:'error',
+                    }).present();
+          }
           localStorage.setItem('user',JSON.stringify(response.user_data));
         }
       });
