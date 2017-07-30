@@ -1,0 +1,54 @@
+<!--
+  Generated template for the HostelList page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ hostel.name }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<div class="search">
+	<ion-grid>
+	  <ion-row>
+	  <ion-col col-12>
+	<ion-list>
+	  <ion-item>
+	    <ion-label>Search By</ion-label>
+		<ion-select [(ngModel)]="searchType" (ionChange)="onChange()">
+	      <ion-option value="1">Name</ion-option>
+	      <ion-option value="2">ID</ion-option>
+	      <ion-option value="3">Room No</ion-option>
+	    </ion-select>
+	   </ion-item>
+	  </ion-list>
+	  </ion-col>
+	  <ion-col col-12>
+	<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+	</ion-col>
+	</ion-row>
+	</ion-grid>
+	</div>
+	<ion-list no-margin >
+
+	  <ion-item *ngFor = "let student of students">
+		  <ion-row>
+		    <ion-col col-9>
+			    <p><strong>{{ student.name }}</strong></p>
+			    <p>{{ student.bits_id }}</p>
+		    </ion-col>
+		    <ion-col col-3>
+			    <p><strong>Room No</strong></p>
+			    <p>{{ student.room_no }}</p>
+		    </ion-col>
+		   </ion-row>
+	  </ion-item>
+	</ion-list>
+
+</ion-content>
