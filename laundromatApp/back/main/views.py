@@ -64,9 +64,9 @@ def additional_info(request):
 		user_p = UserProfile.objects.get(user = user)
 		hostel = Hostel.objects.get(short = req_ob['hostel'])
 		user_p.hostel = hostel
-		user_p.room = req_ob['room_no']
+		user_p.room = int(req_ob['room_no'])
 		# user_p.apply_date = req_ob['apply_date']
-		user_p.phone = req_ob['phone']
+		user_p.phone = int(req_ob['phone'])
 		user_p.bits_id = req_ob['bits_id']
 		hostel.user.add(user_p)
 		hostel.save()
@@ -86,8 +86,8 @@ def edit_profile(request):
 		user_p = UserProfile.objects.get(user = user)
 		hostel = Hostel.objects.get(short = req_ob['hostel'])
 		user_p.hostel = hostel
-		user_p.room = req_ob['room_no']
-		user_p.phone = req_ob['phone']
+		user_p.room = int(req_ob['room_no'])
+		user_p.phone = int(req_ob['phone'])
 		user_p.bits_id = req_ob['bits_id']
 		user_p.save()
 		return JsonResponse({'status': 1, 'message': 'Profile saved successfully'})
