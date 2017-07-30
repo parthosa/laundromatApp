@@ -43,7 +43,7 @@ class Status(models.Model):
 
 class Hostel(models.Model):
 	name = models.CharField(max_length = 50, null = True)
-	short = models.CharField(max_length = 4, null = True)
+	short = models.CharField(max_length = 6, null = True)
 	user = models.ManyToManyField('UserProfile', blank=True, null = True, related_name = 'hostel_stu')
 
 	def __unicode__(self):
