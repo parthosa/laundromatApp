@@ -28,7 +28,7 @@ export class HomePage {
 
 	studentLogin(){
 		GooglePlus.login({
-          'webClientId': '942120250462-p32rr8omtmv2u242ffdeaqaiej78s9eh.apps.googleusercontent.com',
+          'webClientId': '942120250462-2ptdn5b5aja6pumhufe6cvcj9o78vjod.apps.googleusercontent.com',
           'hosted_domain': 'pilani@bits-pilani.ac.in'
         }).then((res) => {
         	this.user = res;

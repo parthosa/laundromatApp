@@ -32,7 +32,7 @@ const cloudSettings: CloudSettings = {
   },
   'auth': {
     'google': {
-      'webClientId': '942120250462-p32rr8omtmv2u242ffdeaqaiej78s9eh.apps.googleusercontent.com',
+      'webClientId': '942120250462-2ptdn5b5aja6pumhufe6cvcj9o78vjod.apps.googleusercontent.com',
       'scope': ['permission1', 'permission2']
     }
   }
