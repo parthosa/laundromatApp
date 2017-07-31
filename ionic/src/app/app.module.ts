@@ -1,0 +1,94 @@
+import { NgModule, ErrorHandler } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule }   from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { LaundromatApp } from './app.component';
+
+import { HomePage } from '../pages/home/home';
+import { UserDetailsPage } from '../pages/user-details/user-details';
+import { StudentPage } from '../pages/student/student';
+import { WashDetailsPage } from '../pages/wash-details/wash-details';
+import { TrackStatusPage } from '../pages/track-status/track-status';
+import { AdminPage } from '../pages/admin/admin';
+import { AdminLoginPage } from '../pages/admin-login/admin-login';
+import { HostelListPage } from '../pages/hostel-list/hostel-list';
+import { UpdateStatusPage } from '../pages/update-status/update-status';
+import { TermsAndConditions } from '../pages/terms-and-conditions/terms-and-conditions';
+import { HttpService } from '../providers/http-service';
+import { Schedule } from '../pages/schedule/schedule';
+import { ContactUs } from '../pages/contact-us/contact-us';
+import { Developers } from '../pages/developers/developers';
+
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+// import { Storage } from '@ionic/storage';
+
+// import { GooglePlus } from '@ionic-native/google-plus';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': '2218f385'
+  },
+  'auth': {
+    'google': {
+      'webClientId': '942120250462-p32rr8omtmv2u242ffdeaqaiej78s9eh.apps.googleusercontent.com',
+      'scope': ['permission1', 'permission2']
+    }
+  }
+};
+
+
+@NgModule({
+  declarations: [
+    LaundromatApp,
+    HomePage,
+    UserDetailsPage,
+    StudentPage,
+    WashDetailsPage,
+    TrackStatusPage,
+    AdminPage,
+    AdminLoginPage,
+    HostelListPage,
+    UpdateStatusPage,
+    TermsAndConditions,
+    Schedule,
+    ContactUs,
+    Developers
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    IonicModule.forRoot(LaundromatApp),
+    CloudModule.forRoot(cloudSettings)
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    LaundromatApp,
+    HomePage,
+    UserDetailsPage,
+    StudentPage,
+    WashDetailsPage,
+    TrackStatusPage,
+    AdminPage,
+    AdminLoginPage,
+    HostelListPage,
+    UpdateStatusPage,
+    TermsAndConditions,
+    Schedule,
+    ContactUs,
+    Developers
+  ],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    HttpService,
+    BarcodeScanner,
+  ]
+})
+export class AppModule {}
