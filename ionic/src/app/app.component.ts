@@ -62,7 +62,19 @@ export class LaundromatApp {
     }
   }
 
-  goToEditDetailsPage(){
+  schedule(){
+     this.navCtrl.push(Schedule);
+  }
+    instructions(){
+     this.navCtrl.push(TermsAndConditions);
+  }
+    contact(){
+     this.navCtrl.push(ContactUs);
+  }
+    developers(){
+     this.navCtrl.push(Developers);
+  }
+    goToEditDetailsPage(){
      this.navCtrl.push(UserDetailsPage,{'edit':true});
   }
 }
