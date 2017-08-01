@@ -4,6 +4,8 @@ import { StudentPage } from '../student/student';
 
 import { HttpService } from '../../providers/http-service';
 
+// import { Keyboard } from '@ionic-native/keyboard';
+
 @Component({
   selector: 'page-user-details',
   templateUrl: 'user-details.html',
@@ -18,6 +20,7 @@ export class UserDetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController,private httpService: HttpService) {
     this.updateHostels();
     this.getPlans();
+    // this.keyboard.disableScroll(false);
     if(this.navParams.get('edit'))
       this.editing = true;
     if(this.editing)

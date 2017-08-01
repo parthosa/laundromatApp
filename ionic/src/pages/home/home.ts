@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,ToastController,LoadingController } from 'ionic-angular';
+import { NavController,ToastController,LoadingController,AlertController } from 'ionic-angular';
 import { StudentPage } from '../student/student';
 import { UserDetailsPage } from '../user-details/user-details';
 import { AdminLoginPage } from '../admin-login/admin-login';
@@ -8,12 +8,9 @@ import { AdminLoginPage } from '../admin-login/admin-login';
 import { HttpService } from '../../providers/http-service';
 // import { User } from '@ionic/cloud-angular';
 import { GooglePlus } from 'ionic-native';
+import { AppVersion } from '@ionic-native/app-version';
 
 
-import {
-  Push,
-  PushToken
-} from '@ionic/cloud-angular';
 
 @Component({
 	selector: 'page-home',
@@ -22,19 +19,37 @@ import {
 export class HomePage {
 
 	user = {};
-	constructor(public navCtrl: NavController,private loadingCtrl:LoadingController,public push: Push,public toastCtrl: ToastController,private httpService: HttpService) {
+	updateApp = false;
+
+	constructor(public navCtrl: NavController,private loadingCtrl:LoadingController,private appVersion: AppVersion,public alertCtrl: AlertController,public toastCtrl: ToastController,private httpService: HttpService) {
+      this.checkUpdate();
+
 	}
 
 	goToAdminPage(){
+		if(this.updateApp){
+			this.updateAlert();
+		}
+		else{
 		// this.httpService.postData('https://jsonplaceholder.typicode.com/posts/',{user:'psarthi16@gmail.com'}).then(post=>
 		// 	console.log(post),
 		// 	error=>console.log(error));
 		this.navCtrl.push(AdminLoginPage);
 	}
+	}
 
 	studentLogin(){
+		if(this.updateApp){
+			this.updateAlert();
+		}
+		else{
+
 		GooglePlus.logout().then(res=>{
         console.log(res);
+		}).catch(err=>{
+        console.log(err);
+      }).then(()=>{
+
       
 		GooglePlus.login({
           'webClientId': '931784175657-tnlaleval048phhgbrgbmeqi2hh64pmq.apps.googleusercontent.com',
@@ -81,13 +96,41 @@ export class HomePage {
 				            }).present();
 			// this.navCtrl.setRoot(StudentPage);
 		});
-
-		}).catch(err=>{
-        console.log(err);
-      })
+    });
+	}
 					
 	}
 
+	  checkUpdate(){
+    
+    this.httpService.getData('/main/app_version/').then(
+        (response) => {
+          let latest_app_version = response.app_version;
+          console.log(this.appVersion.getVersionNumber()['__zone_symbol__value']<latest_app_version);
+    if(this.appVersion.getVersionNumber()['__zone_symbol__value']<latest_app_version){
+      this.updateApp = true;
+      this.updateAlert();
+    }
+
+    });
+  }
+
+  updateAlert(){
+       let prompt = this.alertCtrl.create ({
+    title: 'Upgrade Required',
+    message: "A newer version of the app is available. Please download from the Store",
+    buttons: [
+      {
+        text: 'Ok',
+        handler: data => {
+          console.log('ok');
+        }
+      }
+    ]
+  });
+     prompt.present();
+ 
+  }
 
 	// showAlert(message,title=''){
 	// 	let alert = this.alertCtrl.create({

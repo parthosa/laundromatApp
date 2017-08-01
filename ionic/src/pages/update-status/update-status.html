@@ -68,7 +68,7 @@
 	  </ion-card-header>
 	  <ion-card-content>
 	  <div class="status-wrapper">
-	  <ion-list radio-group [(ngModel)]="user.status_number">
+	  <ion-list radio-group [(ngModel)]="user.status_number" >
 		  <ion-item>
 		    <ion-label>Not Applied</ion-label>
 		    <ion-radio value="0"></ion-radio>
@@ -76,7 +76,7 @@
 
 		  <ion-item>
 		    <ion-label>Checked In</ion-label>
-		    <ion-radio value="1"></ion-radio>
+		    <ion-radio value="1" (ionSelect)="checkedIn()"></ion-radio>
 		  </ion-item>
 
 		  <ion-item>
