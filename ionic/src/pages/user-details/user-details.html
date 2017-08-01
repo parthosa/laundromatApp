@@ -36,6 +36,16 @@
 				    <ion-label>Phone Number</ion-label>
 				    <ion-input fixed text-right [(ngModel)]="user.phone"></ion-input>
 				  </ion-item>
+				  <ion-item>
+				    <ion-label>Plan</ion-label>
+				  <ion-select [(ngModel)]="user.plan_num" >
+				    <ion-option *ngFor="let plan of plans" [value]="plan.plan_num">{{ plan.plan_name }}</ion-option>
+				  </ion-select>
+				  </ion-item>
+				  <ion-item>
+				    <ion-label>Bag Code</ion-label>
+				    <ion-input fixed text-right [(ngModel)]="user.bag_num"></ion-input>
+				  </ion-item>
 				</ion-list>
 			</ion-col>
 			<ion-col col-10 >

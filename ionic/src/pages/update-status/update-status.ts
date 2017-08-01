@@ -13,6 +13,7 @@ export class UpdateStatusPage {
   barcodeData = '';
   user = {};
   show_info = false;
+  show_info_update = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController,private toastCtrl: ToastController,private httpService:HttpService, private barcodeScanner: BarcodeScanner) {
   	this.barcodeData = '';
     this.user['status_number']="0";
@@ -41,14 +42,30 @@ export class UpdateStatusPage {
       duration: 3000
     });
     loader.present();
-    this.httpService.postData('/main/laundromat/scan/',{'bits_id':this.barcodeData})
+    this.httpService.postData('/main/laundromat/scan/',{'bag_num':this.barcodeData})
     .then(response=>{
       loader.dismiss();
       if(response.status==1){
         this.user = response.user_data;
         this.show_info = true;
+        this.show_info_update = true;
+        // if(response.user_data['has_applied'])
+        //   this.show_info_update = true;
+        // else
+        //   this.show_info_update = false;
+      }
+      if(response.status==0){
+         this.user = response.user_data;
+         this.show_info = true;
+         this.show_info_update = false;
+         this.toastCtrl.create({
+                      message: response.message,
+                      duration: 4000,
+                      cssClass:'error',
+                    }).present();
       }
       });
+
   }
 
   updateStatus(){
@@ -57,7 +74,7 @@ export class UpdateStatusPage {
       duration: 3000
     });
     loader.present();
-    this.httpService.postData('/main/laundromat/status/change/',{'bits_id':this.barcodeData,'status_number':this.user['status_number']})
+    this.httpService.postData('/main/laundromat/status/change/',{'bag_num':this.barcodeData,'status_number':this.user['status_number']})
     .then(response=>{
       loader.dismiss();
       if(response.status == 1){

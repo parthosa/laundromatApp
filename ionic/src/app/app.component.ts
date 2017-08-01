@@ -11,6 +11,11 @@ import { HttpService } from '../providers/http-service';
 import { GooglePlus } from 'ionic-native';
 
 
+import { ContactUsPage } from '../pages/contact-us/contact-us';
+import { DevelopersPage } from '../pages/developers/developers';
+import { Schedule } from '../pages/schedule/schedule';
+import { TermsAndConditions } from '../pages/terms-and-conditions/terms-and-conditions';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -29,6 +34,12 @@ export class LaundromatApp {
         splashScreen.hide();
       },2000);
       this.menuCtrl.enable(false);
+    
+      GooglePlus.logout().then(res=>{
+        console.log(res);
+      }).catch(err=>{
+        console.log(err);
+      })
     });
   }
 
@@ -57,6 +68,19 @@ export class LaundromatApp {
         });
       });
     }
+  }
+
+  schedule(){
+     this.navCtrl.push(Schedule);
+  }
+    instructions(){
+     this.navCtrl.push(TermsAndConditions);
+  }
+    contact(){
+     this.navCtrl.push(ContactUsPage);
+  }
+    developers(){
+     this.navCtrl.push(DevelopersPage);
   }
 
   goToEditDetailsPage(){

@@ -14,26 +14,85 @@
 
 <ion-content padding>
 
-    <ion-list>
+	<ion-card no-margin >
 
-        <ion-row class="developers" text-center>
-            <ion-col class="developer">
-                <img class="developer-picture" src="assets/images/Amritanshu_Jain.jpg">
-                <span class="developer-text">Amritanshu Jain</span>
-                <span class="developer-email">jainamritanshu@gmail.com</span>
-            </ion-col>
-            <ion-col class="developer">
-                <img class="developer-picture" src="assets/images/Mayank_Goel.jpg">
-                <span class="developer-text">Mayank Goel</span>
-                <span class="developer-email">mayankgoel.mail@gmail.com</span>
-            </ion-col>
-            <ion-col class="developer">
-                <img class="developer-picture" src="assets/images/Partho_Sarthi.jpg">
-                <span class="developer-text">Partho Sarthi</span>
-                <span class="developer-email">psarthi16@gmail.com</span>
-            </ion-col>
-        </ion-row>
+	  <ion-item>
+	    <ion-avatar item-start>
+	      <img src="assets/images/Amritanshu_Jain.jpg">
+	    </ion-avatar>
+	    <h2>Amritanshu Jain</h2>
+	    <p>jainamritanshu@gmail.com</p>
+	  </ion-item>
 
-    </ion-list>
+	  <ion-row>
+	    <ion-col>
+	      <button ion-button icon-center clear small (click)="openProfile('amritanshu','github')">
+
+	        <ion-icon name="logo-github"></ion-icon>
+	        <!-- <div>12 Likes</div> -->
+	      </button>
+	    </ion-col>
+	    <ion-col>
+	      <button ion-button icon-center clear small (click)="openProfile('amritanshu','facebook')">
+	        <ion-icon name="logo-facebook"></ion-icon>
+	        <!-- <div>4 Comments</div> -->
+	      </button>
+	    </ion-col>
+	  </ion-row>
+
+	</ion-card>
+
+	<ion-card no-margin >
+
+	  <ion-item>
+	    <ion-avatar item-start>
+	      <img src="assets/images/Partho_Sarthi.jpg">
+	    </ion-avatar>
+	    <h2>Partho Sarthi</h2>
+	    <p>psarthi16@gmail.com</p>
+	  </ion-item>
+
+	  <ion-row>
+	    <ion-col>
+	      <button ion-button icon-center clear small (click)="openProfile('partho','github')">
+	        <ion-icon name="logo-github"></ion-icon>
+	        <!-- <div>12 Likes</div> -->
+	      </button>
+	    </ion-col>
+	    <ion-col>
+	      <button ion-button icon-center clear small (click)="openProfile('partho','facebook')">
+	        <ion-icon name="logo-facebook"></ion-icon>
+	        <!-- <div>4 Comments</div> -->
+	      </button>
+	    </ion-col>
+	  </ion-row>
+	</ion-card>
+
+	<ion-card no-margin >
+
+	  <ion-item>
+	    <ion-avatar item-start>
+	      <img src="assets/images/Mayank_Goel.jpg">
+	    </ion-avatar>
+	    <h2>Mayank Goel</h2>
+	    <p>mayankgoel.mail@gmail.com</p>
+	  </ion-item>
+
+	  <ion-row>
+	    <ion-col>
+	      <button ion-button icon-center clear small (click)="openProfile('mayank','github')">
+	        <ion-icon name="logo-github"></ion-icon>
+	        <!-- <div>12 Likes</div> -->
+	      </button>
+	    </ion-col>
+	    <ion-col>
+	      <button ion-button icon-center clear small (click)="openProfile('mayank','facebook')">
+	        <ion-icon name="logo-facebook"></ion-icon>
+	        <!-- <div>4 Comments</div> -->
+	      </button>
+	    </ion-col>
+	  </ion-row>
+	</ion-card>
+
 
 </ion-content>
