@@ -15,6 +15,10 @@ import { AdminPage } from '../pages/admin/admin';
 import { AdminLoginPage } from '../pages/admin-login/admin-login';
 import { HostelListPage } from '../pages/hostel-list/hostel-list';
 import { UpdateStatusPage } from '../pages/update-status/update-status';
+import { ContactUsPage } from '../pages/contact-us/contact-us';
+import { DevelopersPage } from '../pages/developers/developers';
+import { Schedule } from '../pages/schedule/schedule';
+import { TermsAndConditions } from '../pages/terms-and-conditions/terms-and-conditions';
 
 import { HttpService } from '../providers/http-service';
 
@@ -51,6 +55,10 @@ const cloudSettings: CloudSettings = {
     AdminLoginPage,
     HostelListPage,
     UpdateStatusPage,
+    ContactUsPage,
+    DevelopersPage,
+    Schedule,
+    TermsAndConditions
   ],
   imports: [
     BrowserModule,
@@ -71,6 +79,10 @@ const cloudSettings: CloudSettings = {
     AdminLoginPage,
     HostelListPage,
     UpdateStatusPage,
+    ContactUsPage,
+    DevelopersPage,
+    Schedule,
+    TermsAndConditions
   ],
   providers: [
     StatusBar,
