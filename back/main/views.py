@@ -26,10 +26,10 @@ def Register(request):
 				user_p = UserProfile.objects.get(user = user)
 				if user_p.bits_id == None:
 					login(request, user)
-					return JsonResponse({'status': 2, 'message': 'Successfully logged in', 'session_key': session.session_key})
+					return JsonResponse({'status': 2, 'message': 'Successfully logged in', 'session_key': request.session.session_key})
 				else:
 					login(request, user)
-					return JsonResponse({'status': 1, 'message': 'Successfully logged in', 'session_key': session.session_key})
+					return JsonResponse({'status': 1, 'message': 'Successfully logged in', 'session_key': request.session.session_key})
 			else:
 				return JsonResponse({'status': 0})
 		else:
