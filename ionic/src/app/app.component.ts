@@ -20,7 +20,7 @@ import { GooglePlus } from 'ionic-native';
 export class LaundromatApp {
   @ViewChild('mainNav') navCtrl: NavController
 
-  rootPage:any = Developers;
+  rootPage:any = HomePage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private toastCtrl: ToastController,public httpService: HttpService, public menuCtrl: MenuController,) {
     platform.ready().then(() => {
@@ -44,7 +44,7 @@ export class LaundromatApp {
                         message: response.message,
                         duration: 3000,
                       }).present();
-      this.navCtrl.setRoot(Developers);
+      this.navCtrl.setRoot(HomePage);
       });
     }
     else{
@@ -56,7 +56,7 @@ export class LaundromatApp {
                           message: response.message,
                           duration: 3000,
                         }).present();
-        this.navCtrl.setRoot(Developers);
+        this.navCtrl.setRoot(HomePage);
         });
       });
     }
