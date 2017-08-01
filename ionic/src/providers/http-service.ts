@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
+import { LoadingController } from 'ionic-angular';
 import { Http,Headers, RequestOptions, Response  } from '@angular/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
@@ -13,9 +14,15 @@ import 'rxjs/add/operator/map';
   	*/
 @Injectable()
 export class HttpService {
-
-	constructor(public http: Http) {
+	// hello
+	baseUrl = "http://139.59.95.84:8000";
+	public loader;
+	constructor(public http: Http,public loadingCtrl:LoadingController) {
 		console.log('Hello HttpUtils Provider');
+		this.loader = this.loadingCtrl.create({
+	      content: "Please wait...",
+	      duration: 3000
+	    });
 	}
 
 	login_as_student(BITS_mail: string, Password: string) {
@@ -98,17 +105,17 @@ export class HttpService {
 		
 
 	getData(url){
-		return this.http.get(url)
+		return this.http.get(this.baseUrl+url)
 		.toPromise()
 		.then(res => res.json())
 		.catch(this.handleError);
 	}
 
 	postData(url,data){
-		let headers = new Headers({ 'Content-Type': 'application/json' });
+		let headers = new Headers({ 'Content-Type': 'text/plain' });
 		let options = new RequestOptions({ headers: headers });
 
-		return this.http.post(url, data, options)
+		return this.http.post(this.baseUrl+url, data, options)
 		.toPromise()
 		.then(res => res.json())
 		.catch(this.handleError);

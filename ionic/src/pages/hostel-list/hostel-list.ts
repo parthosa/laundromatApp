@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,ToastController } from 'ionic-angular';
+import { NavController, NavParams,ToastController,LoadingController } from 'ionic-angular';
 
 import { HttpService } from '../../providers/http-service';
 
@@ -10,44 +10,48 @@ import { HttpService } from '../../providers/http-service';
 })
 export class HostelListPage {
 
-  hostel = '';
+  hostel = {};
   students = [];
   searchQuery: string = '';
   searchType: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl:ToastController,private httpService:HttpService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private loadingCtrl: LoadingController,private toastCtrl:ToastController,private httpService:HttpService) {
   	this.hostel = this.navParams.get('hostel');
-    this.initStudentList();
+    this.initStudentList(true);
     this.searchType = "1";
   }
 
-  initStudentList(){
-    this.students = [{
-      'name':'Partho',
-      'id':'2015A7PS088P',
-      'room_no':'150'
-    },{
-      'name':'Amritanshu',
-      'id':'2015ABPS831P',
-      'room_no':'151'
-    }];
+  initStudentList(loading){
+    let loader;
+    if(loading){
+    loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration: 3000
+    });
+    loader.present();
+    this.httpService.postData('/main/laundromat/hostel/students/',{'hostel':this.hostel['name']}).then(
+    (response)=>{
+      loader.dismiss();
+       if(response.status == 1){
+         this.students = response.students;
+         localStorage.setItem('students',JSON.stringify(this.students));
+       }
+        else{
+          this.toastCtrl.create({
+                      message: response.message,
+                      duration: 3000,
+                    }).present();
+        }
 
-    // this.httpService.postData('http://localhost:8000//main/laundromat/hostel/students/',this.hostel).then(
-    // (response)=>{
-    //    if(response.status == 1)
-    //      this.students = response.students;
-    //     else{
-    //       this.toastCtrl.create({
-    //                   message: response.message,
-    //                   duration: 3000,
-    //                 }).present();
-    //     }
-
-    //  });
+       });
+    }
+    else{
+      this.students = JSON.parse(localStorage.getItem('students'));
+    }
   }
 
   getItems(ev: any) {
     // Reset items back to all of the items
-    this.initStudentList();
+    this.initStudentList(false);
 
     // set val to the value of the searchbar
     let val = ev.target.value;
@@ -61,9 +65,9 @@ export class HostelListPage {
           case "2":
             return (student.bits_id.toLowerCase().indexOf(val.toLowerCase()) > -1);
           case "3":
-            return (student.room_num.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            return (student.room_n0.toLowerCase().indexOf(val.toLowerCase()) > -1);
           default:
-            return (student.plan.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            return (student.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
         }
       })
     }

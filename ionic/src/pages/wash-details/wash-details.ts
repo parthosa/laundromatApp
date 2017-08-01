@@ -15,13 +15,18 @@ export class WashDetailsPage {
 
   	let loader = this.loadingCtrl.create({
       content: "Please wait...",
+      duration: 3000
     });
     loader.present();
-  	this.httpService.getData('https://jsonplaceholder.typicode.com/users')
-  		.then(users=>{
+  	this.httpService.postData('/main/user/wash/history/',{'session_key':localStorage.getItem('session_key')})
+  		.then(response=>{
   			loader.dismiss();
-  			this.washItems = users; 
+        if(response.status == 1)
+    			this.washItems = response.washes_list; 
   		});
+    setTimeout(()=>{
+      loader.dismiss();
+    },5000);
   }
 
   ionViewDidLoad() {

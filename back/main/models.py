@@ -2,19 +2,19 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
-	bits_id = models.CharField(max_length = 20, null = True)
+	bits_id = models.CharField(max_length = 20, null = True,unique = True)
 	name = models.CharField(max_length = 20, null = True)
 	room = models.IntegerField(null = True)
 	hostel = models.ForeignKey('Hostel', null = True, related_name  = 'stu_hostel')
-	plan = models.ForeignKey('Plan' ,null= True, related_name = 'stu_plan')
-	apply_date = models.CharField(max_length = 30, null = True)
+	plan = models.ForeignKey('Plan' ,null= True, blank=True,related_name = 'stu_plan')
+	apply_date = models.CharField(max_length = 30, blank=True,null = True)
 	phone = models.IntegerField(null = True)
 	present_wash = models.ForeignKey('Wash', null = True, related_name = 'stu_wash')
 	wash_history = models.ManyToManyField('Wash', related_name = 'stu_wash_history')
 	uid = models.CharField(max_length = 60, null = True)
-	user = models.ForeignKey(User, null = True, related_name = 'user_p')
-	dp = models.ImageField(upload_to = 'dps', null = True)
-	dp_url = models.SlugField(null = True)
+	user = models.ForeignKey(User, null = True)
+	# dp = models.ImageField(upload_to = 'dps', null = True)
+	dp_url = models.CharField(max_length = 150,null = True)
 
 	def __unicode__(self):
 		return self.name
@@ -32,7 +32,7 @@ class Plan(models.Model):
 	with_iron = models.BooleanField(default = False)
 
 	def __unicode__(self):
-		return self.plan_num
+		return str(self.plan_num)
 
 class Status(models.Model):
 	name = models.CharField(max_length= 50, null = True)
@@ -43,14 +43,15 @@ class Status(models.Model):
 
 class Hostel(models.Model):
 	name = models.CharField(max_length = 50, null = True)
-	short = models.CharField(max_length = 4, null = True)
-	user = models.ManyToManyField('UserProfile', null = True, related_name = 'hostel_stu')
+	short = models.CharField(max_length = 6, null = True)
+	user = models.ManyToManyField('UserProfile', blank=True, null = True, related_name = 'hostel_stu')
 
 	def __unicode__(self):
 		return self.name
 
 class Wash(models.Model):
 	user = models.ForeignKey(UserProfile, null = True, related_name = 'wash_use')
+	number = models.IntegerField(default = 1)
 	status = models.ForeignKey(Status, null = True, related_name = 'status_user')
 	date = models.CharField(max_length = 100 ,null = True)
 

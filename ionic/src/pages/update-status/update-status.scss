@@ -10,9 +10,39 @@ page-update-status {
 	}
 
 	.scroll-content {
+		height: calc(100vh - 56px);
 		background: color($colors,secondary);
 	    // justify-content: space-around;
 	}
+
+	.buttons-wrapper{
+		display: flex;
+		justify-content: center;
+		align-content: center;
+	}
+
+	.item-md ion-avatar img{
+	 	width: 60px;
+	 	height: 60px;
+	 }
+
+	.tfield {
+	    display: flex;
+	    // margin: 5px 0px;
+	    justify-content: space-between;
+	    align-items: flex-start;
+	    margin: 10px 0;
+
+	    p {
+	    	font-size: 1.4rem;
+	    	flex: 1;
+		}
+	    p.ttext {
+		     flex: 1;
+		     text-align: right;
+		     font-weight: bold;
+		 }
+    }
 
 
 }

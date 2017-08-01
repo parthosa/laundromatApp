@@ -12,8 +12,8 @@ export class AdminLoginPage {
 
   adminCreds = {};
   constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl:ToastController,private httpService:HttpService) {
-    this.adminCreds['email'] = '';
-    this.adminCreds['password'] = '';
+    this.adminCreds['email'] = 'laundro_admin';
+    this.adminCreds['password'] = 'techiegeek';
   }
 
   ionViewDidLoad() {
@@ -21,17 +21,18 @@ export class AdminLoginPage {
   }
 
   adminSignIn(){
-        	this.navCtrl.setRoot(AdminPage);
-    // this.httpService.postData('https://jsonplaceholder.typicode.com/users',this.adminCreds)
-    //   .then(response=>{
-    //     if(response.status == 1)
-    //       this.navCtrl.setRoot(AdminPage);
-    //     else
-    //       this.toastCtrl.create({
-    //           message: response.message,
-    //           duration: 3000,
-    //         }).present();
-    //     });
+    this.httpService.loader.present();
+    this.httpService.postData('/main/laundromat/signin/',this.adminCreds)
+      .then(response=>{
+        this.httpService.loader.dismiss();
+        if(response.status == 1)
+          this.navCtrl.setRoot(AdminPage);
+        this.toastCtrl.create({
+            message: response.message,
+            duration: 3000,
+          }).present();
+       
+  });
   }
 
 }
