@@ -25,6 +25,7 @@ import { HttpService } from '../providers/http-service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
 // import { Storage } from '@ionic/storage';
 
 // import { GooglePlus } from '@ionic-native/google-plus';
