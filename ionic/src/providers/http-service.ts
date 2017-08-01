@@ -15,7 +15,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class HttpService {
 	// hello
-	baseUrl = "http://192.168.43.219:8001";
+	baseUrl = "http://quicksmartwash.in";
 	public loader;
 	constructor(public http: Http,public loadingCtrl:LoadingController) {
 		console.log('Hello HttpUtils Provider');

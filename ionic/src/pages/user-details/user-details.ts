@@ -4,6 +4,8 @@ import { StudentPage } from '../student/student';
 
 import { HttpService } from '../../providers/http-service';
 
+// import { Keyboard } from '@ionic-native/keyboard';
+
 @Component({
   selector: 'page-user-details',
   templateUrl: 'user-details.html',
@@ -18,12 +20,35 @@ export class UserDetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController,private httpService: HttpService) {
     this.updateHostels();
     this.getPlans();
+    // this.keyboard.disableScroll(false);
     if(this.navParams.get('edit'))
       this.editing = true;
     if(this.editing)
       this.user = JSON.parse(localStorage.getItem('user'));
+      // this.getProfile();
     this.user['session_key'] = localStorage.getItem('session_key');
   }
+
+
+  //   getProfile(){
+
+
+  //   this.httpService.postData('/main/user/profile/get/',{'session_key':localStorage.getItem('session_key')}).then(
+  //   (response)=>{
+  //     if(response.status == 1){
+  //       this.user = response.user;
+  //       console.log(this.user);
+  //     }
+  //     else{
+  //       this.toastCtrl.create({
+  //                     message: 'Could not fetch ',
+  //                     duration: 3000,
+  //                   }).present();
+  //     }
+  //   });
+
+  // }
+
 
   updateHostels(){
 
@@ -82,6 +107,7 @@ export class UserDetailsPage {
         duration: 3000,
       }).present();
       if(response.status == 1){
+        localStorage.setItem('user',JSON.stringify(this.user));
         this.navCtrl.setRoot(StudentPage);
       }
     });

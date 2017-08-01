@@ -20,9 +20,11 @@
         "@angular/http": "4.1.3",
         "@angular/platform-browser": "4.1.3",
         "@angular/platform-browser-dynamic": "4.1.3",
+        "@ionic-native/app-version": "^4.1.0",
         "@ionic-native/barcode-scanner": "^4.1.0",
         "@ionic-native/core": "3.12.1",
         "@ionic-native/google-plus": "^4.1.0",
+        "@ionic-native/keyboard": "^4.1.0",
         "@ionic-native/push": "^4.1.0",
         "@ionic-native/splash-screen": "3.12.1",
         "@ionic-native/status-bar": "3.12.1",
@@ -30,14 +32,15 @@
         "@ionic/storage": "2.0.1",
         "cordova-android": "^6.2.3",
         "cordova-browser": "^4.1.0",
+        "cordova-plugin-app-version": "^0.1.9",
         "cordova-plugin-compat": "^1.1.0",
-        "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-googleplus": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
         "cordova-plugin-splashscreen": "^4.0.3",
         "cordova-plugin-statusbar": "^2.2.2",
         "cordova-plugin-whitelist": "^1.3.1",
         "ionic-angular": "3.5.0",
+        "ionic-plugin-deploy": "^0.6.7",
         "ionic-plugin-keyboard": "^2.2.1",
         "ionicons": "3.0.0",
         "phonegap-plugin-barcodescanner": "^6.0.7",
@@ -63,7 +66,6 @@
     "description": "Laundromat: An Ionic project",
     "cordova": {
         "plugins": {
-            "cordova-plugin-console": {},
             "cordova-plugin-device": {},
             "cordova-plugin-splashscreen": {},
             "cordova-plugin-statusbar": {},
@@ -75,7 +77,9 @@
             },
             "phonegap-plugin-push": {
                 "SENDER_ID": "931784175657"
-            }
+            },
+            "ionic-plugin-deploy": {},
+            "cordova-plugin-app-version": {}
         },
         "platforms": [
             "android",

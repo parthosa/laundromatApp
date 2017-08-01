@@ -36,11 +36,7 @@ export class LaundromatApp {
       }, 2000);
       this.menuCtrl.enable(false);
     
-      GooglePlus.logout().then(res=>{
-        console.log(res);
-      }).catch(err=>{
-        console.log(err);
-      })
+   
       // to check if we have permission
       this.push.hasPermission()
         .then((res: any) => {
@@ -86,7 +82,7 @@ export class LaundromatApp {
             message: response.message,
             duration: 3000,
           }).present();
-          this.navCtrl.setRoot(DevelopersPage);
+          this.navCtrl.setRoot(HomePage);
         });
     }
     else {
@@ -98,7 +94,7 @@ export class LaundromatApp {
               message: response.message,
               duration: 3000,
             }).present();
-            this.navCtrl.setRoot(DevelopersPage);
+            this.navCtrl.setRoot(HomePage);
           });
       });
     }
@@ -120,4 +116,6 @@ export class LaundromatApp {
   goToEditDetailsPage(){
      this.navCtrl.push(UserDetailsPage,{'edit':true}); 
   }
+
+
 }
