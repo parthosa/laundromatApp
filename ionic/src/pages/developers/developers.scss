@@ -15,4 +15,25 @@ page-developers {
         line-height: 36px;
         display: block;
     }
+
+    .scroll-content {
+		background: color($colors,secondary);
+		display: flex;
+    	flex-direction: column;
+	    // justify-content: space-around;
+	}
+
+	ion-card{
+		margin-bottom: 3rem !important;
+	}
+
+	ion-col {
+    justify-content: center;
+    display: flex;
+	}
+
+	ion-avatar img{
+	 	width: 60px !important;
+	 	height: 60px !important;
+	 }
 }

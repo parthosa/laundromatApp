@@ -12,8 +12,10 @@ import { ContactUsPage } from '../pages/contact-us/contact-us';
 import { DevelopersPage } from '../pages/developers/developers';
 
 import { HttpService } from '../providers/http-service';
+
 import { GooglePlus } from 'ionic-native';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -21,7 +23,7 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
 export class LaundromatApp {
   @ViewChild('mainNav') navCtrl: NavController
 
-  rootPage: any = DevelopersPage;
+  rootPage: any = HomePage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private toastCtrl: ToastController, public httpService: HttpService, public menuCtrl: MenuController, private push: Push) {
     platform.ready().then(() => {
@@ -33,6 +35,8 @@ export class LaundromatApp {
         splashScreen.hide();
       }, 2000);
       this.menuCtrl.enable(false);
+    
+   
       // to check if we have permission
       this.push.hasPermission()
         .then((res: any) => {
@@ -49,7 +53,7 @@ export class LaundromatApp {
 
       const options: PushOptions = {
         android: {
-          senderID: '12345679'
+          senderID: '931784175657'
         },
         ios: {
           alert: 'true',
@@ -63,7 +67,7 @@ export class LaundromatApp {
 
       pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
 
-      pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
+      pushObject.on('registration').subscribe((registration: any) => {console.log('Device registered');localStorage.setItem('device_id',registration.registrationId);});
 
       pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
     });
@@ -78,7 +82,7 @@ export class LaundromatApp {
             message: response.message,
             duration: 3000,
           }).present();
-          this.navCtrl.setRoot(DevelopersPage);
+          this.navCtrl.setRoot(HomePage);
         });
     }
     else {
@@ -90,14 +94,10 @@ export class LaundromatApp {
               message: response.message,
               duration: 3000,
             }).present();
-            this.navCtrl.setRoot(DevelopersPage);
+            this.navCtrl.setRoot(HomePage);
           });
       });
     }
-  }
-
-  goToEditDetailsPage() {
-    this.navCtrl.push(UserDetailsPage, { 'edit': true });
   }
 
   schedule(){
@@ -111,5 +111,9 @@ export class LaundromatApp {
   }
     developers(){
      this.navCtrl.push(DevelopersPage);
+  }
+
+  goToEditDetailsPage(){
+     this.navCtrl.push(UserDetailsPage,{'edit':true}); 
   }
 }

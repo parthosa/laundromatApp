@@ -10,6 +10,17 @@
              <button ion-item menuClose (click)="goToEditDetailsPage()">
                 Edit Details
             </button>
+            <button ion-item menuClose (click)="schedule()">
+                Schedule
+            </button>
+            <button ion-item menuClose (click)="instructions()">
+                Instructions
+            </button><button ion-item menuClose (click)="contact()">
+                Contact Us
+            </button>
+            <button ion-item menuClose (click)="developers()">
+                Developers
+            </button>
             <button ion-item menuClose (click)="logout()">
                 Logout
             </button>
@@ -29,6 +40,9 @@
         <ion-list>
              <button ion-item menuClose (click)="openPage(homePage)">
                 Home
+            </button>
+             <button ion-item menuClose (click)="developers()">
+                Developers
             </button>
             <button ion-item menuClose (click)="logout(true)">
                 Logout

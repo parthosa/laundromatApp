@@ -2,4 +2,15 @@ page-terms-and-conditions {
 	 body {
         cursor: url('http://ionicframework.com/img/finger.png'), auto;
     }
+
+    
+    ion-card{
+    	margin-bottom: 3rem !important;
+    }
+
+     .scroll-content {
+		background: color($colors,secondary);
+	    // justify-content: space-around;
+	}
+
 }

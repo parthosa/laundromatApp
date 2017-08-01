@@ -12,8 +12,8 @@ export class AdminLoginPage {
 
   adminCreds = {};
   constructor(public navCtrl: NavController, public navParams: NavParams,private toastCtrl:ToastController,private httpService:HttpService) {
-    this.adminCreds['email'] = 'laundro_admin';
-    this.adminCreds['password'] = 'techiegeek';
+    this.adminCreds['email'] = 'laundro_admin1';
+    this.adminCreds['password'] = 'laundro@admin';
   }
 
   ionViewDidLoad() {
