@@ -9,6 +9,8 @@
     <allow-navigation href="http://192.168.1.107:8100" />
     <allow-navigation href="http://192.168.43.56:8100" />
     <allow-navigation href="http://192.168.1.108:8100" />
+    <allow-navigation href="http://172.17.33.62:8100" />
+    <allow-navigation href="http://192.168.42.138:8100" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -94,4 +96,7 @@
     <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="phonegap-plugin-barcodescanner" spec="^6.0.7" />
+    <plugin name="phonegap-plugin-push" spec="^1.10.5">
+        <variable name="SENDER_ID" value="931784175657" />
+    </plugin>
 </widget>

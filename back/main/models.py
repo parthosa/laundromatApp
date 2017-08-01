@@ -8,7 +8,7 @@ class UserProfile(models.Model):
 	hostel = models.ForeignKey('Hostel', null = True, related_name  = 'stu_hostel')
 	plan = models.ForeignKey('Plan' ,null= True, blank=True,related_name = 'stu_plan')
 	apply_date = models.CharField(max_length = 30, blank=True,null = True)
-	phone = models.IntegerField(null = True)
+	phone = models.CharField(max_length = 20,null = True)
 	present_wash = models.ForeignKey('Wash', null = True, related_name = 'stu_wash')
 	wash_history = models.ManyToManyField('Wash', related_name = 'stu_wash_history')
 	uid = models.CharField(max_length = 60, null = True)

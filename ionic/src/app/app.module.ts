@@ -15,12 +15,17 @@ import { AdminPage } from '../pages/admin/admin';
 import { AdminLoginPage } from '../pages/admin-login/admin-login';
 import { HostelListPage } from '../pages/hostel-list/hostel-list';
 import { UpdateStatusPage } from '../pages/update-status/update-status';
+import { ContactUsPage } from '../pages/contact-us/contact-us';
+import { DevelopersPage } from '../pages/developers/developers';
+import { Schedule } from '../pages/schedule/schedule';
+import { TermsAndConditions } from '../pages/terms-and-conditions/terms-and-conditions';
 
 import { HttpService } from '../providers/http-service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
 // import { Storage } from '@ionic/storage';
 
 // import { GooglePlus } from '@ionic-native/google-plus';
@@ -51,6 +56,10 @@ const cloudSettings: CloudSettings = {
     AdminLoginPage,
     HostelListPage,
     UpdateStatusPage,
+    ContactUsPage,
+    DevelopersPage,
+    Schedule,
+    TermsAndConditions
   ],
   imports: [
     BrowserModule,
@@ -71,6 +80,10 @@ const cloudSettings: CloudSettings = {
     AdminLoginPage,
     HostelListPage,
     UpdateStatusPage,
+    ContactUsPage,
+    DevelopersPage,
+    Schedule,
+    TermsAndConditions
   ],
   providers: [
     StatusBar,
