@@ -10,51 +10,75 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.models import Session
 import json
 import datetime
+from gcm import GCM
 
 @csrf_exempt
 def Register(request):
 	if request.method == 'POST':
 		email = json.loads(request.body)['email']
 		gid = json.loads(request.body)['userId']
+		print gid
 		request.session['email'] = email
 		request.session['gid'] = gid
 		registered_emails = User.objects.all().values('username')
-
-		if email in [ x['username'] for x in registered_emails]:
-			user = authenticate(username = email, password = gid)
-			if user:
-				user_p = UserProfile.objects.get(user = user)
-				if user_p.bits_id == None:
-					login(request, user)
-					return JsonResponse({'status': 2, 'message': 'Successfully logged in', 'session_key': session.session_key})
+		domain_check = email.split('@')[1]
+		if domain_check == 'pilani.bits-pilani.ac.in':
+			if email in [ x['username'] for x in registered_emails]:
+				user = authenticate(username = email, password = gid)
+				print User.objects.get(username = email)
+				if user:
+					user_p = UserProfile.objects.get(user = user)
+					user_p.device_id.add(json.loads(request.body)['device_id'])
+					user_p.save()
+					if user_p.bits_id == None:
+						login(request, user)
+						return JsonResponse({'status': 2, 'message': 'Successfully logged in', 'session_key': request.session.session_key})
+					else:
+						login(request, user)
+						return JsonResponse({'status': 1, 'message': 'Successfully logged in', 'session_key': request.session.session_key})
 				else:
-					login(request, user)
-					return JsonResponse({'status': 1, 'message': 'Successfully logged in', 'session_key': session.session_key})
+					return JsonResponse({'status': 0})
 			else:
-				return JsonResponse({'status': 0})
-		else:
-			User.objects.create(username = email, password = gid)
-			user = User.objects.get(username = email, password = gid)
-			user_p = UserProfile()
-			# user_p.bits_id = json.loads(request.body)['bits_id']
-			user_p.name = json.loads(request.body)['displayName']
-			# hostel = Hostel.objects.get(short = json.loads(request.body)['hostel'])
-			# user_p.hostel = hostel
-			# user_p.room = json.loads(request.body)['room_num']
-			# user_p.apply_date = json.loads(request.body)['appy_date']
-			# user_p.phone = json.loads(request.body)['phone']
-			user_p.uid = gid
-			# user_p.dp = request.FILES['dp']
-			# user = User.objects.get(username = email)
-			user_p.dp_url = json.loads(request.body)['imageUrl']
-			user_p.user = user
-			user_p.save()
-			# hostel.user.add(user_p)
-			# hostel.save()
-			user_l = authenticate(username = email, password = gid)
-			login(request, user_l)
+				User.objects.create_user(username = email, password = gid)
+				user = User.objects.get(username = email)
+				print user
+				user_p = UserProfile()
+				# user_p.bits_id = json.loads(request.body)['bits_id']
+				user_p.name = json.loads(request.body)['displayName']
+				# hostel = Hostel.objects.get(short = json.loads(request.body)['hostel'])
+				# user_p.hostel = hostel
+				# user_p.room = json.loads(request.body)['room_num']
+				# user_p.apply_date = json.loads(request.body)['appy_date']
+				# user_p.phone = json.loads(request.body)['phone']
+				user_p.uid = gid
+				# user_p.dp = request.FILES['dp']
+				# user = User.objects.get(username = email)
+				user_p.dp_url = json.loads(request.body)['imageUrl']
+				user_p.user = user
+				user_p.device_id.add(json.loads(request.body)['device_id'])
+				user_p.save()
+				# hostel.user.add(user_p)
+				# hostel.save()
+				print user
+				user_l = authenticate(username = email, password = gid)
+				login(request, user_l)
 
-			return JsonResponse({'status':2, 'message': 'User saved Successfully','session_key': request.session.session_key})
+				return JsonResponse({'status':2, 'message': 'User saved Successfully','session_key': request.session.session_key})
+		else:
+			return JsonResponse({'status': 0, 'message': 'Please login with your BITS mail'})
+
+@csrf_exempt
+def get_plans(request):
+	washes_list = []
+	print 1
+	plans = Plan.objects.all()
+	for wash in plans:
+		if wash.with_iron:
+			iron_string = " iron"
+		else:
+			iron_string = "out iron"
+		washes_list.append({"plan_num": wash.plan_num, "plan_name": str(wash.washes)+" washes with"+iron_string})
+	return JsonResponse({"plans_list": washes_list, "status": 1})
 
 @csrf_exempt
 def additional_info(request):
@@ -69,8 +93,12 @@ def additional_info(request):
 		hostel = Hostel.objects.get(short = req_ob['hostel'])
 		user_p.hostel = hostel
 		user_p.room = int(req_ob['room_no'])
+		plan = Plan.objects.get(plan_num = int(req_ob['plan_num']))
+		user_p.plan = plan
+		user_p.total_washes = plan.washes
 		# user_p.apply_date = req_ob['apply_date']
 		user_p.phone = int(req_ob['phone'])
+		user_p.bag_num = req_ob['bag_num']
 		user_p.bits_id = req_ob['bits_id']
 		hostel.user.add(user_p)
 		hostel.save()
@@ -200,8 +228,9 @@ def signin_laundro(request):
 def scan_laundro(request):
 	if request.method == 'POST':
 		# gid = json.loads(request.body)['uid']
-		bits_id = json.loads(request.body)['bits_id']
-		user_p = UserProfile.objects.get(bits_id = bits_id)
+		bits_id = json.loads(request.body)['bag_num']
+		user_p = UserProfile.objects.get(bag_num = bits_id)
+		print user_p.present_wash.status
 		user_data = {}
 		user_data['name'] = user_p.name
 		user_data['imageUrl'] = user_p.dp_url
@@ -223,27 +252,36 @@ def scan_laundro(request):
 			user_data['has_applied'] = False
 		return JsonResponse({'status': 1, 'user_data':user_data})
 
-# ye update nahi ho rha 
-#  wash delete krne se user profile v delete ho ja rha hai
 @csrf_exempt
 def change_status(request):
 	if request.method == 'POST':
-		bits_id = json.loads(request.body)['bits_id']
-		user_p = UserProfile.objects.get(bits_id = bits_id)
-		status = Status.objects.get(number = json.loads(request.body)['status_number'])
-		if int(json.loads(request.body)['status_number']) == 1:
-			date = datetime.date.today().strftime("%d/%m/%Y")
-			wash = Wash.objects.create(user = user_p, status = status, date = date)
-			user_p.wash_history.add(wash)
-			user_p.present_wash = wash
-			user_p.save()
+		bits_id = json.loads(request.body)['bag_num']
+		user_p = UserProfile.objects.get(bag_num = bits_id)
+		status = Status.objects.get(number = int(json.loads(request.body)['status_number']))
+		if user_p.num_washes >= user_p.total_washes:
+			return JsonResponse({"status": 0, "message": "The user has no more washes left"})
 		else:
-			user_p.present_wash.status = status
-			user_p.save()
-			print user_p.present_wash.status,status
+			if int(json.loads(request.body)['status_number']) == 1:
+				date = datetime.date.today().strftime("%d/%m/%Y")
+				wash = Wash.objects.create(user = user_p, status = status, date = date)
+				user_p.wash_history.add(wash)
+				user_p.present_wash = wash
+				user_p.num_washes+=1
+				user_p.save()
+			else:
+				present_wash = user_p.present_wash
+				present_wash.status = status
+				present_wash.save()
+				user_p.save()
+				if present_wash.status == 4:
+					gcm = GCM('AAAA2PKqMCk:APA91bGa11EhfPWdotLIb7LheIZSUFZoh_iJ7Vn7j-q5XeBudpKNua0bEKibTJMBOeIV3D7OYbGtgi5xNUWbi88RFCb-5VdAEzIfKMBDEOq0G0wHNBQ9GfFaVXJt-B_6f17M-_heKqwA')
+					device_to_send = user_p.device_id.all().values("device_id")
+					notification = {'title': 'Wash Completed', 'message': "Your wash has been completed", 'additionalData': {'isUser': 'isUser'}}
+					response = gcm.json_request(registration_ids=device_to_send, data=notification)
+				print user_p.present_wash.status,status
 
-		response = {'status': 1, 'message': 'Successfully updated status'}
-		return JsonResponse(response)
+			response = {'status': 1, 'message': 'Successfully updated status'}
+			return JsonResponse(response)
 
 @csrf_exempt
 def get_students(request):
@@ -271,4 +309,41 @@ def get_hostels(request):
 
 	return JsonResponse({'status': 1, 'hostels': hostels_list})
 
+@csrf_exempt
+def add_washes(request):
+	if request.method == 'POST':
+		req_ob = json.loads(request.body)
+		session_key = req_ob['session_key']
+		session = Session.objects.get(session_key = session_key)
+		uid = session.get_decoded().get('_auth_user_id')
+		user = User.objects.get(pk = uid)
+		
+		user_p = UserProfile.objects.get(user = user)
+		user_p.total_washes+=int(req_ob['num_washes'])
+		user_p.save()
 
+	return JsonResponse({'status': 1, 'message': str(req_ob['num_washes'])+' washes added'})
+
+@csrf_exempt
+def push_notif(request):
+	if request.method == "POST":
+		gcm = GCM('AAAA2PKqMCk:APA91bGa11EhfPWdotLIb7LheIZSUFZoh_iJ7Vn7j-q5XeBudpKNua0bEKibTJMBOeIV3D7OYbGtgi5xNUWbi88RFCb-5VdAEzIfKMBDEOq0G0wHNBQ9GfFaVXJt-B_6f17M-_heKqwA')
+		device_to_send = []
+		message = req_ob['message']
+		notification = {'title': 'New message', 'message': message, 'additionalData': {'isUser': 'isUser'}}
+		if req_ob['all_hostels'] == "true":
+			device_to_send = [x.device_id for x in Device_ID.objects.all()]
+			response = gcm.json_request(registration_ids=device_to_send, data=notification)
+		else:
+			try:
+				hostel = req_ob['hostel']
+				users = [x.user for x in Hostel.objects.get(short = hostel)]
+				for user in users:
+					device_to_send.append(user.device_id.all().values("device_id"))
+			except KeyError:
+				bag_num = req_ob['bag_num']
+				user_p = UserProfile.objects.get(bag_num = bag_num)
+				device_to_send = user_p.device_id.all().values("device_id")
+
+			response = gcm.json_request(registration_ids=device_to_send, data=notification)
+		return JsonResponse({'status': 1, 'message': 'notification successfully sent'})
