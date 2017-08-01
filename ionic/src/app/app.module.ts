@@ -25,6 +25,7 @@ import { HttpService } from '../providers/http-service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
 // import { Storage } from '@ionic/storage';
 
 // import { GooglePlus } from '@ionic-native/google-plus';
@@ -38,6 +39,18 @@ const cloudSettings: CloudSettings = {
     'google': {
       'webClientId': '931784175657-tnlaleval048phhgbrgbmeqi2hh64pmq.apps.googleusercontent.com',
       'scope': ['permission1', 'permission2']
+    }
+  },
+  'push': {
+    'sender_id': '931784175657',
+    'pluginConfig': {
+      'ios': {
+        'badge': true,
+        'sound': true
+      },
+      'android': {
+        'iconColor': '#343434'
+      }
     }
   }
 };
@@ -90,6 +103,7 @@ const cloudSettings: CloudSettings = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpService,
     BarcodeScanner,
+    Push
   ]
 })
 export class AppModule {}

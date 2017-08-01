@@ -9,6 +9,12 @@ import { HttpService } from '../../providers/http-service';
 // import { User } from '@ionic/cloud-angular';
 import { GooglePlus } from 'ionic-native';
 
+
+import {
+  Push,
+  PushToken
+} from '@ionic/cloud-angular';
+
 @Component({
 	selector: 'page-home',
 	templateUrl: 'home.html'
@@ -16,7 +22,7 @@ import { GooglePlus } from 'ionic-native';
 export class HomePage {
 
 	user = {};
-	constructor(public navCtrl: NavController,private loadingCtrl:LoadingController,public toastCtrl: ToastController,private httpService: HttpService) {
+	constructor(public navCtrl: NavController,private loadingCtrl:LoadingController,public push: Push,public toastCtrl: ToastController,private httpService: HttpService) {
 	}
 
 	goToAdminPage(){
@@ -37,6 +43,8 @@ export class HomePage {
 		      duration: 3000
 		    });
         	loader.present();
+        	
+			  this.user['device_id'] = localStorage.getItem('device_id');
         	this.httpService.postData('/main/user/register/',this.user).then(
         		(response)=>{
         			loader.dismiss();
