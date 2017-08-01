@@ -17,7 +17,7 @@ class UserProfile(models.Model):
 	# dp = models.ImageField(upload_to = 'dps', null = True)
 	dp_url = models.CharField(max_length = 150,null = True)
 	num_washes = models.IntegerField(null = True)
-	device_id = models.ManyToManyField('Device_ID', related_name = 'user_devices')
+	device_id = models.ForeignKey('Device_ID', related_name = 'user_devices', null = True)
 	total_washes = models.IntegerField(null = True)
 
 	def __unicode__(self):
@@ -40,10 +40,10 @@ class Plan(models.Model):
 
 class Device_ID(models.Model):
 	device_id = models.CharField(max_length = 200)
-	user = models.ForeignKey('UserProfile', related_name = 'device_user')
+	user = models.ForeignKey('UserProfile', related_name = 'device_user', null = True)
 
 	def __unicode__(self):
-		return self.user.name + '_' + self.device_id
+		return self.device_id
 
 class Status(models.Model):
 	name = models.CharField(max_length= 50, null = True)
@@ -69,3 +69,8 @@ class Wash(models.Model):
 	def __unicode__(self):
 		return self.user.name
 
+class App_version(models.Model):
+	version_number = models.CharField(max_length = 10 ,null = True)
+
+	def __unicode__(self):
+		return self.version_number

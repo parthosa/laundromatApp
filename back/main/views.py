@@ -28,8 +28,17 @@ def Register(request):
 				print User.objects.get(username = email)
 				if user:
 					user_p = UserProfile.objects.get(user = user)
-					user_p.device_id.add(json.loads(request.body)['device_id'])
-					user_p.save()
+					try:
+						Device_ID.objects.get(device_id = json.loads(request.body)['device_id'], user = user_p)
+					except:
+						try:
+							device_id = Device_ID.objects.get(device_id = json.loads(request.body)['device_id'])
+							device_id.delete()
+						except:
+							Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+							device_id = Device_ID.objects.get(device_id = json.loads(request.body)['device_id'])
+							user_p.device_id.add(device_id)
+							user_p.save()
 					if user_p.bits_id == None:
 						login(request, user)
 						return JsonResponse({'status': 2, 'message': 'Successfully logged in', 'session_key': request.session.session_key})
@@ -55,7 +64,11 @@ def Register(request):
 				# user = User.objects.get(username = email)
 				user_p.dp_url = json.loads(request.body)['imageUrl']
 				user_p.user = user
-				user_p.device_id.add(json.loads(request.body)['device_id'])
+				user_p.save()
+				Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+				device_id = Device_ID.objects.get(device_id = json.loads(request.body)['device_id'])
+				device_id.save()
+				user_p.device_id.add(device_id)
 				user_p.save()
 				# hostel.user.add(user_p)
 				# hostel.save()
@@ -123,6 +136,7 @@ def edit_profile(request):
 		user_p.room = int(req_ob['room_no'])
 		user_p.phone = int(req_ob['phone'])
 		user_p.bits_id = req_ob['bits_id']
+		user_p.bag_num = req_ob['bag_num']
 		user_p.save()
 		return JsonResponse({'status': 1, 'message': 'Profile saved successfully'})
 
@@ -229,8 +243,10 @@ def scan_laundro(request):
 	if request.method == 'POST':
 		# gid = json.loads(request.body)['uid']
 		bits_id = json.loads(request.body)['bag_num']
-		user_p = UserProfile.objects.get(bag_num = bits_id)
-		print user_p.present_wash.status
+		try:
+			user_p = UserProfile.objects.get(bag_num = bits_id)
+		except:
+			return JsonResponse({"status": 0, "message": "The bag number does not exist"})
 		user_data = {}
 		user_data['name'] = user_p.name
 		user_data['imageUrl'] = user_p.dp_url
@@ -244,9 +260,12 @@ def scan_laundro(request):
 			user_data['with_iron'] = user_p.plan.with_iron
 			user_data['washes'] = user_p.plan.washes
 			user_data['apply_date'] = user_p.apply_date
-			user_data['status_number'] = user_p.present_wash.status.number
-			user_data['date'] = user_p.present_wash.date
-			user_data['number'] = user_p.present_wash.number
+			try:
+				user_data['status_number'] = user_p.present_wash.status.number
+				user_data['date'] = user_p.present_wash.date
+				user_data['number'] = user_p.present_wash.number
+			except:
+				user_data['status_number'] = 0
 			user_data['washes_left'] = user_p.plan.washes - user_p.wash_history.count()
 		else:
 			user_data['has_applied'] = False
@@ -263,10 +282,10 @@ def change_status(request):
 		else:
 			if int(json.loads(request.body)['status_number']) == 1:
 				date = datetime.date.today().strftime("%d/%m/%Y")
-				wash = Wash.objects.create(user = user_p, status = status, date = date)
+				wash = Wash.objects.create(user = user_p, status = status, date = date, number = int(json.loads(request.body)['washes']))
 				user_p.wash_history.add(wash)
 				user_p.present_wash = wash
-				user_p.num_washes+=1
+				# user_p.num_washes+=1
 				user_p.save()
 			else:
 				present_wash = user_p.present_wash
@@ -278,6 +297,7 @@ def change_status(request):
 					device_to_send = user_p.device_id.all().values("device_id")
 					notification = {'title': 'Wash Completed', 'message': "Your wash has been completed", 'additionalData': {'isUser': 'isUser'}}
 					response = gcm.json_request(registration_ids=device_to_send, data=notification)
+					print response
 				print user_p.present_wash.status,status
 
 			response = {'status': 1, 'message': 'Successfully updated status'}
@@ -347,3 +367,8 @@ def push_notif(request):
 
 			response = gcm.json_request(registration_ids=device_to_send, data=notification)
 		return JsonResponse({'status': 1, 'message': 'notification successfully sent'})
+
+@csrf_exempt
+def get_app_version(request):
+	app_version = App_version.objects.get(pk = 1)
+	return JsonResponse({'status':1,'app_version':app_version.version_number})
