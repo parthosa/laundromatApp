@@ -15,12 +15,18 @@ def Register(request):
 		if email in User.objects.all().values('username'):
 			user = authenticate(username = email, password = gid)
 			if user:
-				login(request, user)
-				return JsonResponse({'status': 1, 'message': 'Successfully logged in', 'session_key': session.session_key})
+				user_p = UserProfile.objects.get(user = user)
+				if user_p.bits_id == '':
+					login(request, user)
+					return JsonResponse({'status': 2, 'message': 'Successfully logged in', 'session_key': session.session_key})
+				else:
+					login(request, user)
+					return JsonResponse({'status': 1, 'message': 'Successfully logged in', 'session_key': session.session_key})
 			else:
 				return JsonResponse({'status': 0})
 		else:
 			User.objects.create(username = email, password = gid)
+			user = User.objects.get(username = email, password = gid)
 			user_p = UserProfile()
 			# user_p.bits_id = json.loads(request.body)['bits_id']
 			user_p.name = json.loads(request.body)['displayName']
@@ -39,7 +45,7 @@ def Register(request):
 			user_l = authenticate(username = email, password = gid)
 			login(request, user_l)
 
-			return JsonResponse({'status':2, 'message': 'User saved Successfully'})
+			return JsonResponse({'status': 2, 'message': 'User saved Successfully'})
 
 @csrf_exempt
 def additional_info(request):
@@ -60,6 +66,8 @@ def additional_info(request):
 		hostel.user.add(user_p)
 		hostel.save()
 		user_p.save()
+		user.is_active = True
+		user.save()
 
 		return JsonResponse({'status': 1, 'message': 'Profile created successfully'})
 
