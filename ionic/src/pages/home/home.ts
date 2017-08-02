@@ -106,11 +106,13 @@ export class HomePage {
     this.httpService.getData('/main/app_version/').then(
         (response) => {
           let latest_app_version = response.app_version;
-          console.log(this.appVersion.getVersionNumber()['__zone_symbol__value']<latest_app_version);
-    if(this.appVersion.getVersionNumber()['__zone_symbol__value']<latest_app_version){
-      this.updateApp = true;
-      this.updateAlert();
-    }
+          this.appVersion.getVersionNumber().then(version => {
+				console.log(version,latest_app_version);
+		    if(version<latest_app_version){
+		      this.updateApp = true;
+		      this.updateAlert();
+		    }
+	});
 
     });
   }

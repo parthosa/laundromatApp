@@ -115,6 +115,7 @@ export class LaundromatApp {
 
   goToEditDetailsPage(){
      this.navCtrl.push(UserDetailsPage,{'edit':true}); 
+     
   }
 
 
