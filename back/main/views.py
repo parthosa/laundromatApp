@@ -69,9 +69,8 @@ def Register(request):
 				user_p.user = user
 				user_p.save()
 				Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
-				device_id = Device_ID.objects.get(device_id = json.loads(request.body)['device_id'])
-				device_id.save()
-				user_p.device_id.add(device_id)
+				device_id = Device_ID.objects.get(user = user_p)
+				user_p.device_id = device_id
 				user_p.save()
 				# hostel.user.add(user_p)
 				# hostel.save()
