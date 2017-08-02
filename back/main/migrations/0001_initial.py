@@ -13,6 +13,16 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='App_version',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('version_number', models.CharField(max_length=10, null=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='Device_ID',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),

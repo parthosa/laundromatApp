@@ -34,6 +34,7 @@ class Plan(models.Model):
 	plan_num = models.IntegerField(null = True)
 	washes = models.IntegerField(null = True)
 	with_iron = models.BooleanField(default = False)
+	price = models.IntegerField(null = True)
 
 	def __unicode__(self):
 		return str(self.plan_num)

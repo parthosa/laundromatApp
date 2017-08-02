@@ -92,7 +92,7 @@ def get_plans(request):
 			iron_string = " iron"
 		else:
 			iron_string = "out iron"
-		washes_list.append({"plan_num": wash.plan_num, "plan_name": str(wash.washes)+" washes with"+iron_string})
+		washes_list.append({"plan_num": wash.plan_num, "plan_name": str(wash.washes)+" washes with"+iron_string+" ,Rs "+wash.price})
 	return JsonResponse({"plans_list": washes_list, "status": 1})
 
 @csrf_exempt
