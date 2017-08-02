@@ -1,8 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ionicframework.laundromat709013" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Laundromat</name>
+<<<<<<< HEAD
+    <description>An awesome Ionic/Cordova app.</description>
+    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+=======
     <description>Quick Smart Wash Solutions</description>
     <author email="info@quicksmartwash.com" href="http://quicksmartwash.com/">Laundromat Team</author>
+>>>>>>> caadd498441bcaed82621dffadd483f63d66a65c
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
@@ -10,6 +15,8 @@
     <allow-navigation href="http://192.168.43.56:8100" />
     <allow-navigation href="http://192.168.1.108:8100" />
     <allow-navigation href="http://172.17.33.62:8100" />
+    <allow-navigation href="http://192.168.42.138:8100" />
+    <allow-navigation href="http://192.168.43.161:8100" />
     <allow-navigation href="http://quicksmartwash.in" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -87,6 +94,7 @@
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <engine name="android" spec="^6.2.3" />
     <engine name="browser" spec="^4.1.0" />
+    <plugin name="cordova-plugin-console" spec="^1.0.5" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-googleplus" spec="git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git">
