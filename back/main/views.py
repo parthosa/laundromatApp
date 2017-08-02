@@ -29,18 +29,19 @@ def Register(request):
 				if user:
 					user_p = UserProfile.objects.get(user = user)
 					try:
-						Device_ID.objects.get(device_id = json.loads(request.body)['device_id'], user = user_p)
+						device_id = Device_ID.objects.get(user = user_p)
+						device_id.delete()
+						Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+						device_id = Device_ID.objects.get(user=user_p)
+						user_p.device_id = device_id
+						user_p.save()
 					except:
-						try:
-							device_id = Device_ID.objects.get(device_id = json.loads(request.body)['device_id'])
-							device_id.delete()
-						except:
-							Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
-							device_id = Device_ID.objects.get(device_id = json.loads(request.body)['device_id'])
-							# user_p.save()
-							# user_p.device_id.add(device_id)
-							user_p.device_id = device_id
-							user_p.save()
+						Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+						device_id = Device_ID.objects.get(user = user_p)
+						# user_p.save()
+						# user_p.device_id.add(device_id)
+						user_p.device_id = device_id
+						user_p.save()
 					if user_p.bits_id == None:
 						login(request, user)
 						return JsonResponse({'status': 2, 'message': 'Successfully logged in', 'session_key': request.session.session_key})
