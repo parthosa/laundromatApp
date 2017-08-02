@@ -37,8 +37,9 @@ def Register(request):
 						except:
 							Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
 							device_id = Device_ID.objects.get(device_id = json.loads(request.body)['device_id'])
-							user_p.save()
-							user_p.device_id.add(device_id)
+							# user_p.save()
+							# user_p.device_id.add(device_id)
+							user_p.device_id = device_id
 							user_p.save()
 					if user_p.bits_id == None:
 						login(request, user)
