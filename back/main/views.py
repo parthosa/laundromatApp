@@ -135,23 +135,26 @@ def additional_info(request):
 		user = User.objects.get(pk = uid)
 
 		user_p = UserProfile.objects.get(user = user)
-		hostel = Hostel.objects.get(short = req_ob['hostel'])
-		user_p.hostel = hostel
-		user_p.room = int(req_ob['room_no'])
-		plan = Plan.objects.get(plan_num = int(req_ob['plan_num']))
-		user_p.plan = plan
-		user_p.total_washes = plan.washes
-		# user_p.apply_date = req_ob['apply_date']
-		user_p.phone = int(req_ob['phone'])
-		user_p.bag_num = req_ob['bag_num']
-		user_p.bits_id = req_ob['bits_id']
-		hostel.user.add(user_p)
-		hostel.save()
-		user_p.save()
-		user.is_active = True
-		user.save()
+		try:
+			hostel = Hostel.objects.get(short = req_ob['hostel'])
+			user_p.hostel = hostel
+			user_p.room = int(req_ob['room_no'])
+			plan = Plan.objects.get(plan_num = int(req_ob['plan_num']))
+			user_p.plan = plan
+			user_p.total_washes = plan.washes
+			# user_p.apply_date = req_ob['apply_date']
+			user_p.phone = int(req_ob['phone'])
+			user_p.bag_num = req_ob['bag_num']
+			user_p.bits_id = req_ob['bits_id']
+			hostel.user.add(user_p)
+			hostel.save()
+			user_p.save()
+			user.is_active = True
+			user.save()
+			return JsonResponse({'status': 1, 'message': 'Profile created successfully'})
+		except:
+			return JsonResponse({'status': 0, 'message': 'Kindly fill all the required fields'})
 
-		return JsonResponse({'status': 1, 'message': 'Profile created successfully'})
 
 @csrf_exempt
 def edit_profile(request):
