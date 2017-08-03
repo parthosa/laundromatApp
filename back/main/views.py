@@ -360,7 +360,8 @@ def get_student_info(request):
 	if request.method == "POST":
 		student = UserProfile.objects.get(bits_id = json.loads(request.body)['bits_id'])
 		wash_items = []
-		for wash in student.wash_history:
+		wash_history = Wash.objects.filter(user = student)
+		for wash in wash_history:
 			wash_items.append({'date': wash.date, 'number': wash.number})
 		info = {'name': student.name, 'bits_id': student.bits_id, 'email': student.user.username, 'room_no': student.room, 'phone': room.phone, 'hostel': room.hostel, 'plan_num': student.plan.plan_num, 'date': student.present_wash.date, 'washes_left': student.total_washes - student.wash_history.count(), 'washItems': wash_items, 'imageUrl': student.dp_url}
 		if student.present_wash:
