@@ -28,7 +28,24 @@ def Register(request):
 				print User.objects.get(username = email)
 				if user:
 					print "user"
-					user_p = UserProfile.objects.get(user = User.objects.get(username = email))
+					try:
+						user_p = UserProfile.objects.get(user = User.objects.get(username = email))
+					except:
+						user = User.objects.get(username = email)
+						print user
+						user_p = UserProfile()
+						user_p.name = json.loads(request.body)['displayName']
+						user_p.uid = gid
+						user_p.dp_url = json.loads(request.body)['imageUrl']
+						user_p.user = user
+						user_p.save()
+						try:
+							Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+							device_id = Device_ID.objects.get(user = user_p)
+							user_p.device_id = device_id
+							user_p.save()
+						except:
+							pass
 					print user_p
 					try:
 						print 1
