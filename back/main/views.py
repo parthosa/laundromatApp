@@ -27,15 +27,23 @@ def Register(request):
 				user = authenticate(username = email, password = gid)
 				print User.objects.get(username = email)
 				if user:
-					user_p = UserProfile.objects.get(user = user)
+					print "user"
+					user_p = UserProfile.objects.get(user = User.objects.get(username = email))
+					print user_p
 					try:
+						print 1
 						device_id = Device_ID.objects.get(user = user_p)
-						device_id.delete()
-						Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
-						device_id = Device_ID.objects.get(user=user_p)
+						#device_id.delete()
+						#Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+						#device_id = Device_ID.objects.get(user=user_p)
+						device_id.device_id = json.loads(request.body)['device_id']
+						device_id.save()
 						user_p.device_id = device_id
+						print 1
+						print device_id
 						user_p.save()
 					except:
+						print 1
 						Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
 						device_id = Device_ID.objects.get(user = user_p)
 						# user_p.save()
@@ -92,7 +100,7 @@ def get_plans(request):
 			iron_string = " iron"
 		else:
 			iron_string = "out iron"
-		washes_list.append({"plan_num": wash.plan_num, "plan_name": str(wash.washes)+" washes with"+iron_string+" ,Rs "+wash.price})
+		washes_list.append({"plan_num": wash.plan_num, "plan_name": str(wash.washes)+" washes with"+iron_string+" @Rs "+str(wash.price)})
 	return JsonResponse({"plans_list": washes_list, "status": 1})
 
 @csrf_exempt
@@ -168,6 +176,7 @@ def Profile(request):
 		user_data['room_no'] = user_p.room
 		user_data['email'] = user.username
 		user_data['apply_date'] = user_p.apply_date
+		user_data['bag_num'] = user_p.bag_num
 		# if not applied uska ?
 		if user_p.plan != None:
 			user_data['has_applied'] = True
