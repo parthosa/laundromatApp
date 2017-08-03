@@ -43,13 +43,15 @@ def Register(request):
 						print device_id
 						user_p.save()
 					except:
-						print 1
-						Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
-						device_id = Device_ID.objects.get(user = user_p)
-						# user_p.save()
-						# user_p.device_id.add(device_id)
-						user_p.device_id = device_id
-						user_p.save()
+						try:
+							Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+							device_id = Device_ID.objects.get(user = user_p)
+							# user_p.save()
+							# user_p.device_id.add(device_id)
+							user_p.device_id = device_id
+							user_p.save()
+						except:
+							pass
 					if user_p.bits_id == None:
 						login(request, user)
 						return JsonResponse({'status': 2, 'message': 'Successfully logged in', 'session_key': request.session.session_key})
@@ -76,10 +78,13 @@ def Register(request):
 				user_p.dp_url = json.loads(request.body)['imageUrl']
 				user_p.user = user
 				user_p.save()
-				Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
-				device_id = Device_ID.objects.get(user = user_p)
-				user_p.device_id = device_id
-				user_p.save()
+				try:
+					Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+					device_id = Device_ID.objects.get(user = user_p)
+					user_p.device_id = device_id
+					user_p.save()
+				except:
+					pass
 				# hostel.user.add(user_p)
 				# hostel.save()
 				print user
