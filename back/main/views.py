@@ -363,10 +363,11 @@ def get_student_info(request):
 		wash_history = Wash.objects.filter(user = student)
 		for wash in wash_history:
 			wash_items.append({'date': wash.date, 'number': wash.number})
-		info = {'name': student.name, 'bits_id': student.bits_id, 'email': student.user.username, 'room_no': student.room, 'phone': room.phone, 'hostel': room.hostel, 'plan_num': student.plan.plan_num, 'date': student.present_wash.date, 'washes_left': student.total_washes - student.wash_history.count(), 'washItems': wash_items, 'imageUrl': student.dp_url}
+		info = {'name': student.name, 'bits_id': student.bits_id, 'email': student.user.username, 'room_no': student.room, 'phone': room.phone, 'hostel': room.hostel, 'plan_num': student.plan.plan_num, 'washes_left': student.total_washes - student.wash_history.count(), 'washItems': wash_items, 'imageUrl': student.dp_url}
 		if student.present_wash:
 			info['status'] = student.present_wash.status.name
 			info['date'] = student.present_wash.date
+		return JsonResponse({'status': 1, 'info': info})
 
 @csrf_exempt
 def get_hostels(request):
