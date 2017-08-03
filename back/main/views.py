@@ -209,7 +209,7 @@ def Profile(request):
 			user_data['with_iron'] = user_p.plan.with_iron
 			user_data['washes'] = user_p.plan.washes
 			print user_p.wash_history.count()
-			user_data['washes_left'] = user_p.plan.washes - user_p.wash_history.count()
+			user_data['washes_left'] = user_p.total_washes - user_p.wash_history.count()
 		else:
 			user_data['has_applied'] = False
 
@@ -354,6 +354,18 @@ def get_students(request):
 				response_list.append({'name': student.name, 'bits_id': student.bits_id, 'room_no': student.room})
 
 		return JsonResponse({'status': 1, 'students': response_list})
+
+@csrf_exempt
+def get_student_info(request):
+	if request.method == "POST":
+		student = UserProfile.objects.get(bits_id = json.loads(request.body)['bits_id'])
+		wash_items = []
+		for wash in student.wash_history:
+			wash_items.append({'date': wash.date, 'number': wash.number})
+		info = {'name': student.name, 'bits_id': student.bits_id, 'email': student.user.username, 'room_no': student.room, 'phone': room.phone, 'hostel': room.hostel, 'plan_num': student.plan.plan_num, 'date': student.present_wash.date, 'washes_left': student.total_washes - student.wash_history.count(), 'washItems': wash_items, 'imageUrl': student.dp_url}
+		if student.present_wash:
+			info['status'] = student.present_wash.status.name
+			info['date'] = student.present_wash.date
 
 @csrf_exempt
 def get_hostels(request):
