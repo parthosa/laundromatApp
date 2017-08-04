@@ -374,3 +374,8 @@ def push_notif(request):
 def get_app_version(request):
 	app_version = App_version.objects.get(pk = 1)
 	return JsonResponse({'status':1,'app_version':app_version.version_number})
+
+
+@csrf_exempt
+def laundromat_admin(request):
+	return render(request,'main/index.html')

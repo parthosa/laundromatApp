@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^plans/get/$', views.get_plans, name='get_plans'),
     url(r'^user/wash/history/$', views.wash_history, name='wash_history'),
     url(r'^user/wash/track/$', views.track_status, name='track_status'),
+    url(r'^laundromat/admin/$', views.laundromat_admin, name='laundromat_admin'),
     url(r'^laundromat/signin/$', views.signin_laundro, name='signin_laundro'),
     url(r'^laundromat/scan/$', views.scan_laundro, name='scan_laundro'),
     url(r'^laundromat/status/change/$', views.change_status, name='change_status'),
