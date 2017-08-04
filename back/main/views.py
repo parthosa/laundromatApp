@@ -27,21 +27,48 @@ def Register(request):
 				user = authenticate(username = email, password = gid)
 				print User.objects.get(username = email)
 				if user:
-					user_p = UserProfile.objects.get(user = user)
+					print "user"
 					try:
+						user_p = UserProfile.objects.get(user = User.objects.get(username = email))
+					except:
+						user = User.objects.get(username = email)
+						print user
+						user_p = UserProfile()
+						user_p.name = json.loads(request.body)['displayName']
+						user_p.uid = gid
+						user_p.dp_url = json.loads(request.body)['imageUrl']
+						user_p.user = user
+						user_p.save()
+						try:
+							Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+							device_id = Device_ID.objects.get(user = user_p)
+							user_p.device_id = device_id
+							user_p.save()
+						except:
+							pass
+					print user_p
+					try:
+						print 1
 						device_id = Device_ID.objects.get(user = user_p)
-						device_id.delete()
-						Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
-						device_id = Device_ID.objects.get(user=user_p)
+						#device_id.delete()
+						#Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+						#device_id = Device_ID.objects.get(user=user_p)
+						device_id.device_id = json.loads(request.body)['device_id']
+						device_id.save()
 						user_p.device_id = device_id
+						print 1
+						print device_id
 						user_p.save()
 					except:
-						Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
-						device_id = Device_ID.objects.get(user = user_p)
-						# user_p.save()
-						# user_p.device_id.add(device_id)
-						user_p.device_id = device_id
-						user_p.save()
+						try:
+							Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+							device_id = Device_ID.objects.get(user = user_p)
+							# user_p.save()
+							# user_p.device_id.add(device_id)
+							user_p.device_id = device_id
+							user_p.save()
+						except:
+							pass
 					if user_p.bits_id == None:
 						login(request, user)
 						return JsonResponse({'status': 2, 'message': 'Successfully logged in', 'session_key': request.session.session_key})
@@ -68,10 +95,13 @@ def Register(request):
 				user_p.dp_url = json.loads(request.body)['imageUrl']
 				user_p.user = user
 				user_p.save()
-				Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
-				device_id = Device_ID.objects.get(user = user_p)
-				user_p.device_id = device_id
-				user_p.save()
+				try:
+					Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+					device_id = Device_ID.objects.get(user = user_p)
+					user_p.device_id = device_id
+					user_p.save()
+				except:
+					pass
 				# hostel.user.add(user_p)
 				# hostel.save()
 				print user
@@ -92,7 +122,7 @@ def get_plans(request):
 			iron_string = " iron"
 		else:
 			iron_string = "out iron"
-		washes_list.append({"plan_num": wash.plan_num, "plan_name": str(wash.washes)+" washes with"+iron_string+" ,Rs "+wash.price})
+		washes_list.append({"plan_num": wash.plan_num, "plan_name": str(wash.washes)+" washes with"+iron_string+" @Rs "+str(wash.price)})
 	return JsonResponse({"plans_list": washes_list, "status": 1})
 
 @csrf_exempt
@@ -105,23 +135,26 @@ def additional_info(request):
 		user = User.objects.get(pk = uid)
 
 		user_p = UserProfile.objects.get(user = user)
-		hostel = Hostel.objects.get(short = req_ob['hostel'])
-		user_p.hostel = hostel
-		user_p.room = int(req_ob['room_no'])
-		plan = Plan.objects.get(plan_num = int(req_ob['plan_num']))
-		user_p.plan = plan
-		user_p.total_washes = plan.washes
-		# user_p.apply_date = req_ob['apply_date']
-		user_p.phone = int(req_ob['phone'])
-		user_p.bag_num = req_ob['bag_num']
-		user_p.bits_id = req_ob['bits_id']
-		hostel.user.add(user_p)
-		hostel.save()
-		user_p.save()
-		user.is_active = True
-		user.save()
+		try:
+			hostel = Hostel.objects.get(short = req_ob['hostel'])
+			user_p.hostel = hostel
+			user_p.room = int(req_ob['room_no'])
+			plan = Plan.objects.get(plan_num = int(req_ob['plan_num']))
+			user_p.plan = plan
+			user_p.total_washes = plan.washes
+			# user_p.apply_date = req_ob['apply_date']
+			user_p.phone = int(req_ob['phone'])
+			user_p.bag_num = req_ob['bag_num']
+			user_p.bits_id = req_ob['bits_id']
+			hostel.user.add(user_p)
+			hostel.save()
+			user_p.save()
+			user.is_active = True
+			user.save()
+			return JsonResponse({'status': 1, 'message': 'Profile created successfully'})
+		except:
+			return JsonResponse({'status': 0, 'message': 'Kindly fill all the required fields'})
 
-		return JsonResponse({'status': 1, 'message': 'Profile created successfully'})
 
 @csrf_exempt
 def edit_profile(request):
@@ -168,6 +201,7 @@ def Profile(request):
 		user_data['room_no'] = user_p.room
 		user_data['email'] = user.username
 		user_data['apply_date'] = user_p.apply_date
+		user_data['bag_num'] = user_p.bag_num
 		# if not applied uska ?
 		if user_p.plan != None:
 			user_data['has_applied'] = True
@@ -175,7 +209,7 @@ def Profile(request):
 			user_data['with_iron'] = user_p.plan.with_iron
 			user_data['washes'] = user_p.plan.washes
 			print user_p.wash_history.count()
-			user_data['washes_left'] = user_p.plan.washes - user_p.wash_history.count()
+			user_data['washes_left'] = user_p.total_washes - user_p.wash_history.count()
 		else:
 			user_data['has_applied'] = False
 
@@ -320,6 +354,20 @@ def get_students(request):
 				response_list.append({'name': student.name, 'bits_id': student.bits_id, 'room_no': student.room})
 
 		return JsonResponse({'status': 1, 'students': response_list})
+
+@csrf_exempt
+def get_student_info(request):
+	if request.method == "POST":
+		student = UserProfile.objects.get(bits_id = json.loads(request.body)['bits_id'])
+		wash_items = []
+		wash_history = Wash.objects.filter(user = student)
+		for wash in wash_history:
+			wash_items.append({'date': wash.date, 'number': wash.number})
+		info = {'name': student.name, 'bits_id': student.bits_id, 'email': student.user.username, 'room_no': student.room, 'phone': student.phone, 'hostel': student.hostel, 'plan_num': student.plan.plan_num, 'washes_left': student.total_washes - student.wash_history.count(), 'washItems': wash_items, 'imageUrl': student.dp_url}
+		if student.present_wash:
+			info['status'] = student.present_wash.status.name
+			info['date'] = student.present_wash.date
+		return JsonResponse({'status': 1, 'info': info})
 
 @csrf_exempt
 def get_hostels(request):
