@@ -423,6 +423,54 @@ def get_app_version(request):
 	app_version = App_version.objects.get(pk = 1)
 	return JsonResponse({'status':1,'app_version':app_version.version_number})
 
+def student_data(request):
+	import xlsxwriter
+
+	try:
+                        import cStringIO as StringIO
+        except ImportError:
+                        import StringIO
+        a_list = []
+
+        output = StringIO.StringIO()
+        workbook = xlsxwriter.Workbook(output)
+        worksheet = workbook.add_worksheet('stu_data')
+        students = UserProfile.objects.all()
+
+        worksheet.write(0,0,"Name")
+        worksheet.write(0,1,"BITS ID")
+        worksheet.write(0,2,"Total Washes")
+        worksheet.write(0,3,"Washes left")
+        worksheet.write(0,4,"With Iron")
+        worksheet.write(0,5,"Hostel")
+        worksheet.write(0,6,"Room")
+        worksheet.write(0,7,"Bag number")
+
+        rowno = 1
+        for student in students:
+        	try:
+		        worksheet.write(rowno,0, student.name )
+		        worksheet.write(rowno,1, student.bits_id )
+		        worksheet.write(rowno,2, student.total_washes )
+		        worksheet.write(rowno,3, student.total_washes - student.num_washes )
+		        if student.plan.with_iron:
+		        	worksheet.write(rowno,4, "True" )
+		        else:
+		        	worksheet.write(rowno,4, "False" )
+		        worksheet.write(rowno,5, student.hostel )
+		        worksheet.write(rowno,6, student.room )
+		        worksheet.write(rowno,7, student.bag_num )
+	        	rowno+=1
+	        except ObjectDoesNotExist:
+	        	pass
+
+
+        workbook.close()
+        filename = 'student_data.xlsx'
+        output.seek(0)
+        response = HttpResponse(output.read(), content_type="application/ms-excel")
+        response['Content-Disposition'] = 'attachment; filename=%s' % filename
+        return response
 
 @csrf_exempt
 def laundromat_admin(request):
