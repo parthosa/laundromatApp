@@ -452,8 +452,11 @@ def student_data(request):
 		        worksheet.write(rowno,0, student.name )
 		        worksheet.write(rowno,1, student.bits_id )
 		        worksheet.write(rowno,2, student.total_washes )
-		        worksheet.write(rowno,3, student.total_washes - student.num_washes )
-		        if student.plan.with_iron:
+		        if student.num_washes is not None:
+		        	worksheet.write(rowno,3, student.total_washes - student.num_washes )
+		        else:
+		        	worksheet.write(rowno,3, student.total_washes )
+		        if student.plan.with_iron == True:
 		        	worksheet.write(rowno,4, "True" )
 		        else:
 		        	worksheet.write(rowno,4, "False" )
@@ -461,7 +464,7 @@ def student_data(request):
 		        worksheet.write(rowno,6, student.room )
 		        worksheet.write(rowno,7, student.bag_num )
 	        	rowno+=1
-	        except ObjectDoesNotExist:
+	        except:
 	        	pass
 
 
