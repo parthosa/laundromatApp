@@ -17,5 +17,6 @@ urlpatterns = [
     url(r'^laundromat/get/student/$', views.get_student_info, name='get_student_info'),
     url(r'^laundromat/hostels/get/$', views.get_hostels, name='get_hostels'),
     url(r'^laundromat/notification/$', views.push_notif, name='push_notif'),
+    url(r'^laundromat/sheet/$', views.student_data, name='student_data'),
     url(r'^app_version/$', views.get_app_version, name='get_app_version'),
 ]
