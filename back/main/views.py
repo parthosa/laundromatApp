@@ -461,7 +461,8 @@ def student_data(request):
 		        	worksheet.write(rowno,4, "True" )
 		        else:
 		        	worksheet.write(rowno,4, "False" )
-		        worksheet.write(rowno,5, student.hostel )
+		        stu_hostel = student.hostel
+		        worksheet.write(rowno,5, stu_hostel.name )
 		        worksheet.write(rowno,6, student.room )
 		        worksheet.write(rowno,7, student.bag_num )
 	        	rowno+=1
