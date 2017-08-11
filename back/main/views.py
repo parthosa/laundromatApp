@@ -464,7 +464,7 @@ def student_data(request):
 		        worksheet.write(rowno,6, student.room )
 		        worksheet.write(rowno,7, student.bag_num )
 	        	rowno+=1
-	        except ObjectDoesNotExist:
+	        except:
 	        	pass
 
 
