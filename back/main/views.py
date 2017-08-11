@@ -471,3 +471,7 @@ def student_data(request):
         response = HttpResponse(output.read(), content_type="application/ms-excel")
         response['Content-Disposition'] = 'attachment; filename=%s' % filename
         return response
+
+@csrf_exempt
+def laundromat_admin(request):
+	return render(request,'main/index.html')
