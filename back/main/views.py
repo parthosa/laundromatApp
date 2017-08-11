@@ -452,10 +452,14 @@ def student_data(request):
 		        worksheet.write(rowno,0, student.name )
 		        worksheet.write(rowno,1, student.bits_id )
 		        worksheet.write(rowno,2, student.total_washes )
-		        if student.num_washes is not None:
-		        	worksheet.write(rowno,3, student.total_washes - student.num_washes )
-		        else:
-		        	worksheet.write(rowno,3, student.total_washes )
+		        washes = Wash.objects.filter(user = student)
+		        washes_done = 0
+		        for wash in washes:
+		        	washes_done+=wash.number
+		        # if student.num_washes is not None:
+		        worksheet.write(rowno,3, student.total_washes - washes_done )
+		        # else:
+		        	# worksheet.write(rowno,3, student.total_washes )
 		        stu_plan = student.plan
 		        if stu_plan.with_iron == True:
 		        	worksheet.write(rowno,4, "True" )
