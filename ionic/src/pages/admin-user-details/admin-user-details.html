@@ -1,0 +1,90 @@
+<!--
+  Generated template for the AdminUserDetails page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Student Info</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+		<ion-card no-margin class="basic-info">
+
+	  <ion-item>
+	    <ion-avatar item-start>
+	      <img src="{{ user.imageUrl}}">
+	    </ion-avatar>
+	    <h2>{{ user.name }}</h2>
+	    <p>{{ user.bits_id }}</p>
+	    <p>{{ user.email }}</p>
+	    <p>{{ user.hostel }} {{ user.room_no }}</p>
+	    <p>{{ user.phone }}</p>
+	  </ion-item>
+	</ion-card>
+
+	<ion-card no-margin >
+	  <ion-card-header>
+	    Washes
+	  </ion-card-header>
+	  <ion-card-content>
+	   <div class="wash-info">
+            	<div class="tfield">
+	            	<p class="thead">Plan</p>
+	            	<p class="ttext">{{ user.plan_num }}</p>
+            	</div>
+            	<div class="tfield">
+	            	<p class="thead">Last Apply Date</p>
+	            	<p class="ttext">{{ user.date }}</p>
+            	</div>
+            	<div class="tfield">
+	            	<p class="thead">Washes Remaining</p>
+	            	<p class="ttext">{{ user.washes_left }}</p>
+            	</div>
+            
+
+            </div>
+	  </ion-card-content>
+
+
+	</ion-card>
+
+	<ion-card no-margin >
+	  <ion-card-header>
+	    History
+	  </ion-card-header>
+	  <ion-list>
+	<!-- 	<ion-list-header>
+		<div class="details-label">
+			Date
+		</div>
+		<div class="details-label">
+			Number
+		</div>
+		</ion-list-header> -->
+		<ion-item-divider color="light">
+		<div class="details-label">
+			Date
+		</div>
+		<div class="details-label">
+			Number
+		</div>
+		</ion-item-divider>
+		<ion-item *ngFor="let washItem of user.washItems">
+			<div class="details-label">
+				{{ washItem.date }}
+			</div>
+			<div class="details-label">
+				{{ washItem.number }}
+			</div>
+		</ion-item>
+	</ion-list>
+  </ion-card>
+
+
+</ion-content>

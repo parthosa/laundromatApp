@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams,ToastController,LoadingController } from 'ionic-angular';
 
 import { HttpService } from '../../providers/http-service';
+import { AdminUserDetails } from '../admin-user-details/admin-user-details';
 
 
 @Component({
@@ -79,6 +80,12 @@ export class HostelListPage {
 
   onChange(){
     console.log(this.searchType);
+  }
+
+  goToPage(bits_id){
+    this.navCtrl.push(AdminUserDetails,{
+      'bits_id':bits_id
+    });
   }
 
 }

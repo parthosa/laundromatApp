@@ -37,7 +37,7 @@
 	</div>
 	<ion-list no-margin >
 
-	  <ion-item *ngFor = "let student of students">
+	  <ion-item *ngFor = "let student of students" (click)="goToPage(student.bits_id)">
 		  <ion-row>
 		    <ion-col col-9>
 			    <p><strong>{{ student.name }}</strong></p>

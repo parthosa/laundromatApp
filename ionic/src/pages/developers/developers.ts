@@ -18,15 +18,18 @@ export class DevelopersPage {
   	let profiles = {
   		'amritanshu':{
   			'github':'http://github.com/jainamritanshu',
-  			'facebook':'https://www.facebook.com/jainamritanshu'
+  			'facebook':'https://www.facebook.com/jainamritanshu',
+        'linkedin':'https://www.linkedin.com/in/amritanshu-jain-b78371120/'
   		},
   		'partho':{
   			'github':'http://github.com/parthosa',
-  			'facebook':'https://www.facebook.com/parthosarthi'
+  			'facebook':'https://www.facebook.com/parthosarthi',
+        'linkedin':'https://www.linkedin.com/in/partho-sarthi/'
   		},
   		'mayank':{
   			'github':'https://github.com/goelmayank',
-  			'facebook':'https://www.facebook.com/mayank.goyal.52438'
+  			'facebook':'https://www.facebook.com/mayank.goyal.52438',
+        'linkedin':'https://www.linkedin.com/in/mayank-goel-636121b0/'
   		}
   	}
   	let url = profiles[user][type];

@@ -52,20 +52,19 @@ export class HomePage {
 
       
 		GooglePlus.login({
-          'webClientId': '931784175657-tnlaleval048phhgbrgbmeqi2hh64pmq.apps.googleusercontent.com',
-          'hosted_domain': 'pilani@bits-pilani.ac.in'
+          'webClientId': '931784175657-fkp2jg5hibji6nlc0ln8cnm9tbr5nef8.apps.googleusercontent.com',
+
         }).then((res) => {
         	this.user = res;
-      //   	 let loader = this.loadingCtrl.create({
-		    //   content: "Please wait...",
-		    //   duration: 3000
-		    // });
-      //   	loader.present();
+		    this.user['device_id'] = localStorage.getItem('device_id');
+        	 let loader = this.loadingCtrl.create({
+		      content: "Please wait...",
+		    });
+        	loader.present();
         	
-			  this.user['device_id'] = localStorage.getItem('device_id');
         	this.httpService.postData('/main/user/register/',this.user).then(
         		(response)=>{
-        			// loader.dismiss();
+        			loader.dismiss();
         			if(response.status == 1){
 	        			this.user['id'] = response.id;
 	        			localStorage.setItem('user',JSON.stringify(this.user));

@@ -17,17 +17,21 @@
 
 
 <ion-content padding>
-  <button ion-button full (click)="goToUpdateStatus()">Scan</button>
 
-  <ion-card>
+<!--   <ion-card>
   <ion-card-header>
     Hostels
-  </ion-card-header>
-
+  </ion-card-header> -->
+<div class="hostel-list">
+  <button ion-button full (click)="goToUpdateStatus()" class="scan">Scan</button>
   <ion-list>
+  <ion-list-header>
+    Hostels
+  </ion-list-header>
     <button ion-item *ngFor="let hostel of hostels" (click)="goToHostelPage(hostel)">
       {{ hostel.name }}
     </button>
   </ion-list>
-</ion-card>
+  </div>
+<!-- </ion-card> -->
 </ion-content>

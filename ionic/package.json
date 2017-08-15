@@ -34,6 +34,7 @@
         "cordova-browser": "^4.1.0",
         "cordova-plugin-app-version": "^0.1.9",
         "cordova-plugin-compat": "^1.1.0",
+        "cordova-plugin-console": "^1.0.7",
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-googleplus": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
         "cordova-plugin-splashscreen": "^4.0.3",
@@ -57,7 +58,6 @@
     "cordovaPlugins": [
         "cordova-plugin-device",
         "cordova-plugin-statusbar",
-        "cordova-plugin-console",
         "cordova-plugin-whitelist",
         "ionic-plugin-keyboard",
         "cordova-plugin-splashscreen"
@@ -79,7 +79,8 @@
                 "SENDER_ID": "931784175657"
             },
             "ionic-plugin-deploy": {},
-            "cordova-plugin-app-version": {}
+            "cordova-plugin-app-version": {},
+            "cordova-plugin-console": {}
         },
         "platforms": [
             "android",

@@ -37,7 +37,7 @@
             	</div>
             	<div class="tfield">
 	            	<p class="thead">Last Apply Date</p>
-	            	<p class="ttext">{{ user.apply_date }}</p>
+	            	<p class="ttext">{{ user.date }}</p>
             	</div>
             	<div class="tfield">
 	            	<p class="thead">Washes Remaining</p>
@@ -49,8 +49,11 @@
 	  </ion-card-content>
 
 	  <ion-row class="more-detail">
-	    <ion-col>
+	    <ion-col col-6>
 	      <p text-center text-uppercase (click)="goToWashDetails()">More Details</p>
+	    </ion-col>
+	    <ion-col col-6>
+	      <p text-center text-uppercase (click)="getProfile()">Refresh Data</p>
 	    </ion-col>
 	  </ion-row>
 	</ion-card>

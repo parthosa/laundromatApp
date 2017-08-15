@@ -14,6 +14,7 @@ export class UpdateStatusPage {
   user = {};
   show_info = false;
   show_info_update = false;
+  number = "1";
   // prompt: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController,public loadingCtrl: LoadingController,private toastCtrl: ToastController,private httpService:HttpService, private barcodeScanner: BarcodeScanner) {
     this.barcodeData = '';
@@ -71,13 +72,13 @@ export class UpdateStatusPage {
 
   }
 
-  updateStatus(washes=1){
+  updateStatus(){
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
       duration: 3000
     });
     loader.present();
-    this.httpService.postData('/main/laundromat/status/change/',{'bag_num':this.barcodeData,'status_number':this.user['status_number'],'washes':washes})
+    this.httpService.postData('/main/laundromat/status/change/',{'bag_num':this.barcodeData,'status_number':this.user['status_number'],'washes':this.number})
     .then(response=>{
       loader.dismiss();
       if(response.status == 1){
@@ -107,13 +108,14 @@ export class UpdateStatusPage {
         text: 'Cancel',
         handler: data => {
           console.log('Cancel clicked');
+          this.number = "1";
         }
       },
       {
         text: 'Submit',
         handler: data => {
           // console.log('Saved clicked');
-          this.updateStatus(data.washes);
+          this.number = data.washes.toString();
         }
       }
     ]
@@ -121,5 +123,9 @@ export class UpdateStatusPage {
      if(this.user['status_number']==1)
       prompt.present();
   }
+
+  // notCheckedIn(){
+  //   this.number =  "1";
+  // }
 
 }

@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-
+<div class="wrapper">
 	<ion-card >
 	  <ion-card-content>
 	    <ion-list>
@@ -71,7 +71,7 @@
 	  <ion-list radio-group [(ngModel)]="user.status_number" >
 		  <ion-item>
 		    <ion-label>Getting Started</ion-label>
-		    <ion-radio value="0"></ion-radio>
+		    <ion-radio value="0" ></ion-radio>
 		  </ion-item>
 
 		  <ion-item>
@@ -81,22 +81,22 @@
 
 		  <ion-item>
 		    <ion-label>Washing</ion-label>
-		    <ion-radio value="2"></ion-radio>
+		    <ion-radio value="2" ></ion-radio>
 		  </ion-item>
 
 		  <ion-item *ngIf="user.with_iron">
 		    <ion-label>Ironing</ion-label>
-		    <ion-radio value="3"></ion-radio>
+		    <ion-radio value="3" ></ion-radio>
 		  </ion-item>
 
 		  <ion-item>
 		    <ion-label>Completed</ion-label>
-		    <ion-radio value="4"></ion-radio>
+		    <ion-radio value="4" ></ion-radio>
 		  </ion-item>
 
 		  <ion-item>
 		    <ion-label>Checked Out</ion-label>
-		    <ion-radio value="5"></ion-radio>
+		    <ion-radio value="5" ></ion-radio>
 		  </ion-item>
 
 
@@ -108,5 +108,5 @@
 	  </ion-card-content>
 
 	</ion-card>
-
+</div>	
 </ion-content>

@@ -1,8 +1,9 @@
 page-user-details {
 	.scroll-content {
-	    display: flex;
-	    justify-content: center;
-	    align-items: center;
+	    // display: flex;
+	    // justify-content: center;
+	    // align-items: center;
+	    // height: calc(100vh - 56px);
 	    background: color($colors,secondary);
 	}
 
@@ -32,4 +33,13 @@ page-user-details {
 	$text-input-md-show-focus-highlight: false !default;
 	$text-input-md-show-valid-highlight: $text-input-md-show-focus-highlight !default;
 	$text-input-md-show-invalid-highlight: $text-input-md-show-focus-highlight !default;
+
+	ion-col button{
+		margin-bottom: 1rem;
+	}
+
+	ion-note{
+		color:#333 !important;
+		padding-top: 1em !important;
+	}
 }

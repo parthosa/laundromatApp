@@ -25,11 +25,13 @@ export class StudentPage {
   getProfile(){
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
-      duration: 3000
+      duration:10000
     });
     loader.present();
      this.httpService.postData('/main/user/profile/get/',{'session_key':localStorage.getItem('session_key')})
       .then(response=>{
+        loader.dismiss();
+
         if(response.status == 1){
           this.user = response.user_data;
           if(response.user_data['has_applied'] == false){

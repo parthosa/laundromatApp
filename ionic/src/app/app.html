@@ -6,22 +6,32 @@
 	</ion-header>
 
     <ion-content>
-        <ion-list>
+        <ion-list no-lines>
+            <button ion-item menuClose (click)="goToHomePage(false)">
+            <ion-icon item-start name="home"></ion-icon>
+                Home
+            </button>
              <button ion-item menuClose (click)="goToEditDetailsPage()">
-                Edit Details
+                <ion-icon item-start name="create"></ion-icon>
+                Edit Profile
             </button>
             <button ion-item menuClose (click)="schedule()">
+                <ion-icon item-start name="calendar"></ion-icon>
                 Schedule
             </button>
             <button ion-item menuClose (click)="instructions()">
-                Instructions
+                <ion-icon item-start name="document"></ion-icon>
+                Terms and Conditions
             </button><button ion-item menuClose (click)="contact()">
+                <ion-icon item-start name="call"></ion-icon>
                 Contact Us
             </button>
             <button ion-item menuClose (click)="developers()">
+                <ion-icon item-start name="code"></ion-icon>
                 Developers
             </button>
             <button ion-item menuClose (click)="logout()">
+                <ion-icon item-start name="exit"></ion-icon>
                 Logout
             </button>
         </ion-list>
@@ -37,14 +47,20 @@
 	</ion-header>
 
     <ion-content>
-        <ion-list>
-             <button ion-item menuClose (click)="openPage(homePage)">
+        <ion-list no-lines>
+             <button ion-item menuClose (click)="goToHomePage(true)">
+            <ion-icon item-start name="home"></ion-icon>
+
                 Home
             </button>
              <button ion-item menuClose (click)="developers()">
+                <ion-icon item-start name="code"></ion-icon>
+
                 Developers
             </button>
             <button ion-item menuClose (click)="logout(true)">
+                <ion-icon item-start name="log-out"></ion-icon>
+
                 Logout
             </button>
         </ion-list>

@@ -5,6 +5,7 @@ import { StudentPage } from '../student/student';
 import { HttpService } from '../../providers/http-service';
 
 // import { Keyboard } from '@ionic-native/keyboard';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-user-details',
@@ -17,7 +18,7 @@ export class UserDetailsPage {
   plans = [];
   editing = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController,public toastCtrl: ToastController,private httpService: HttpService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController,public loadingCtrl: LoadingController,public toastCtrl: ToastController,private httpService: HttpService) {
     this.updateHostels();
     this.getPlans();
     // this.keyboard.disableScroll(false);

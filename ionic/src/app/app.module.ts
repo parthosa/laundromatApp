@@ -13,6 +13,7 @@ import { WashDetailsPage } from '../pages/wash-details/wash-details';
 import { TrackStatusPage } from '../pages/track-status/track-status';
 import { AdminPage } from '../pages/admin/admin';
 import { AdminLoginPage } from '../pages/admin-login/admin-login';
+import { AdminUserDetails } from '../pages/admin-user-details/admin-user-details';
 import { HostelListPage } from '../pages/hostel-list/hostel-list';
 import { UpdateStatusPage } from '../pages/update-status/update-status';
 import { ContactUsPage } from '../pages/contact-us/contact-us';
@@ -40,7 +41,7 @@ const cloudSettings: CloudSettings = {
   },
   'auth': {
     'google': {
-      'webClientId': '931784175657-tnlaleval048phhgbrgbmeqi2hh64pmq.apps.googleusercontent.com',
+      'webClientId': '931784175657-fkp2jg5hibji6nlc0ln8cnm9tbr5nef8.apps.googleusercontent.com',
       'scope': ['permission1', 'permission2']
     }
   },
@@ -69,6 +70,7 @@ const cloudSettings: CloudSettings = {
     TrackStatusPage,
     AdminPage,
     AdminLoginPage,
+    AdminUserDetails,
     HostelListPage,
     UpdateStatusPage,
     ContactUsPage,
@@ -93,6 +95,7 @@ const cloudSettings: CloudSettings = {
     TrackStatusPage,
     AdminPage,
     AdminLoginPage,
+    AdminUserDetails,
     HostelListPage,
     UpdateStatusPage,
     ContactUsPage,

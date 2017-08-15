@@ -2,9 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController, ToastController,LoadingController } from 'ionic-angular';
 
 import { HomePage } from '../pages/home/home';
+import { StudentPage } from '../pages/student/student';
+import { AdminPage } from '../pages/admin/admin';
 import { UserDetailsPage } from '../pages/user-details/user-details';
 import { TermsAndConditions } from '../pages/terms-and-conditions/terms-and-conditions';
 import { Schedule } from '../pages/schedule/schedule';
@@ -23,9 +25,10 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
 export class LaundromatApp {
   @ViewChild('mainNav') navCtrl: NavController
 
+  
   rootPage: any = HomePage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private toastCtrl: ToastController, public httpService: HttpService, public menuCtrl: MenuController, private push: Push) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private loadingCtrl:LoadingController, private toastCtrl: ToastController, public httpService: HttpService, public menuCtrl: MenuController, private push: Push) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -74,10 +77,16 @@ export class LaundromatApp {
   }
 
   logout(admin) {
-    console.log(admin);
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+      duration:10000
+    });
+    loader.present();
     if (admin) {
       this.httpService.getData('/main/user/logout/').then(
         (response) => {
+          loader.dismiss();
+          localStorage.removeItem('admin');
           this.toastCtrl.create({
             message: response.message,
             duration: 3000,
@@ -90,6 +99,7 @@ export class LaundromatApp {
         console.log(res);
         this.httpService.getData('/main/user/logout/').then(
           (response) => {
+            loader.dismiss();
             this.toastCtrl.create({
               message: response.message,
               duration: 3000,
@@ -97,6 +107,15 @@ export class LaundromatApp {
             this.navCtrl.setRoot(HomePage);
           });
       });
+    }
+  }
+
+  goToHomePage(admin){
+    if (admin) {
+      this.navCtrl.setRoot(AdminPage);
+    }
+    else{
+      this.navCtrl.setRoot(StudentPage);
     }
   }
 
@@ -115,7 +134,7 @@ export class LaundromatApp {
 
   goToEditDetailsPage(){
      this.navCtrl.push(UserDetailsPage,{'edit':true}); 
-     
+
   }
 
 
