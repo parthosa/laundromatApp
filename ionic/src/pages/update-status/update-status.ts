@@ -17,7 +17,7 @@ export class UpdateStatusPage {
   number = "1";
   // prompt: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController,public loadingCtrl: LoadingController,private toastCtrl: ToastController,private httpService:HttpService, private barcodeScanner: BarcodeScanner) {
-    this.barcodeData = '';
+    this.barcodeData = 'QSWPL-';
     this.user['status_number']="0";
     
   }
@@ -34,7 +34,7 @@ export class UpdateStatusPage {
       this.barcodeData = barcodeData.text;
     }, (err) => {
       // An error occurred
-      this.barcodeData = "Scan Failed!";      
+      this.barcodeData = 'QSWPL-';
     });  
     
   }
