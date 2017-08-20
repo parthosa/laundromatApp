@@ -39,36 +39,37 @@ def Register(request):
 						user_p.dp_url = json.loads(request.body)['imageUrl']
 						user_p.user = user
 						user_p.save()
-						try:
-							Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
-							device_id = Device_ID.objects.get(user = user_p)
-							user_p.device_id = device_id
-							user_p.save()
-						except:
-							pass
+					
+						# try:
+						# 	Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+						# 	device_id = Device_ID.objects.get(user = user_p)
+						# 	user_p.device_id = device_id
+						# 	user_p.save()
+						# except:
+						# 	pass
 					print user_p
-					try:
-						print 1
-						device_id = Device_ID.objects.get(user = user_p)
-						#device_id.delete()
-						#Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
-						#device_id = Device_ID.objects.get(user=user_p)
-						device_id.device_id = json.loads(request.body)['device_id']
-						device_id.save()
-						user_p.device_id = device_id
-						print 1
-						print device_id
-						user_p.save()
-					except:
-						try:
-							Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
-							device_id = Device_ID.objects.get(user = user_p)
-							# user_p.save()
-							# user_p.device_id.add(device_id)
-							user_p.device_id = device_id
-							user_p.save()
-						except:
-							pass
+					# try:
+					# 	print 1
+					# 	device_id = Device_ID.objects.get(user = user_p)
+					# 	#device_id.delete()
+					# 	#Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+					# 	#device_id = Device_ID.objects.get(user=user_p)
+					# 	device_id.device_id = json.loads(request.body)['device_id']
+					# 	device_id.save()
+					# 	user_p.device_id = device_id
+					# 	print 1
+					# 	print device_id
+					# 	user_p.save()
+					# except:
+					# 	try:
+					# 		Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+					# 		device_id = Device_ID.objects.get(user = user_p)
+					# 		# user_p.save()
+					# 		# user_p.device_id.add(device_id)
+					# 		user_p.device_id = device_id
+					# 		user_p.save()
+					# 	except:
+					# 		pass
 					if user_p.bits_id == None:
 						login(request, user)
 						return JsonResponse({'status': 2, 'message': 'Successfully logged in', 'session_key': request.session.session_key})
@@ -95,13 +96,13 @@ def Register(request):
 				user_p.dp_url = json.loads(request.body)['imageUrl']
 				user_p.user = user
 				user_p.save()
-				try:
-					Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
-					device_id = Device_ID.objects.get(user = user_p)
-					user_p.device_id = device_id
-					user_p.save()
-				except:
-					pass
+				# try:
+				# 	Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+				# 	device_id = Device_ID.objects.get(user = user_p)
+				# 	user_p.device_id = device_id
+				# 	user_p.save()
+				# except:
+				# 	pass
 				# hostel.user.add(user_p)
 				# hostel.save()
 				print user
@@ -488,3 +489,37 @@ def student_data(request):
 @csrf_exempt
 def laundromat_admin(request):
 	return render(request,'main/index.html')
+
+
+@csrf_exempt
+def get_device_id(request):
+	session_key = json.loads(request.body)['session_key']
+	session = Session.objects.get(session_key = session_key)
+	uid = session.get_decoded().get('_auth_user_id')
+	user = User.objects.get(pk = uid)
+	user_p = UserProfile.objects.get(user = user)
+	try:
+		device_id = Device_ID.objects.get(user = user_p)
+		#device_id.delete()
+		#Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+		#device_id = Device_ID.objects.get(user=user_p)
+		device_id.device_id = json.loads(request.body)['device_id']
+		device_id.save()
+		user_p.device_id = device_id
+		print device_id
+		user_p.save()
+		return JsonResponse({'status': 1, 'message': 'Device id registered'})
+	except:
+		try:
+			Device_ID.objects.create(device_id = json.loads(request.body)['device_id'], user = user_p)
+			device_id = Device_ID.objects.get(user = user_p)
+			# user_p.save()
+			# user_p.device_id.add(device_id)
+			user_p.device_id = device_id
+			print device_id
+			user_p.save()
+			return JsonResponse({'status': 1, 'message': 'Device id registered'})
+		except:
+			pass
+	return JsonResponse({'status': 0, 'message': 'Could not fetch device id'})
+    

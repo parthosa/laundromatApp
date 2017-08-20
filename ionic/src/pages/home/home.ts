@@ -56,7 +56,7 @@ export class HomePage {
 
         }).then((res) => {
         	this.user = res;
-		    this.user['device_id'] = localStorage.getItem('device_id');
+		    // this.user['device_id'] = localStorage.getItem('device_id');
         	 let loader = this.loadingCtrl.create({
 		      content: "Please wait...",
 		    });

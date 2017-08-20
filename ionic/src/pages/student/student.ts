@@ -20,6 +20,7 @@ export class StudentPage {
     this.menu.enable(true,'studentMenu');
     this.user = JSON.parse(localStorage.getItem('user'));
     this.getProfile();
+    this.updateDeviceID();
   }
 
   getProfile(){
@@ -58,6 +59,19 @@ export class StudentPage {
   	this.navCtrl.push(TrackStatusPage);
   }
 
+
+  updateDeviceID(){
+    this.httpService.postData('/main/user/profile/device_id/',{'session_key':localStorage.getItem('session_key'),'device_id': localStorage.getItem('device_id')})
+      .then(response=>{
+        if(response.status != 1){
+          this.toastCtrl.create({
+                      message: response.message,
+                      duration: 4000,
+                      cssClass:'error',
+                    }).present();
+        }
+      });
+  }
 
 
 }

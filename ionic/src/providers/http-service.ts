@@ -16,6 +16,8 @@ import 'rxjs/add/operator/map';
 export class HttpService {
 	// hello
 	baseUrl = "http://quicksmartwash.in";
+	// baseUrl = "http://192.168.43.56:8000";
+	
 	public loader;
 	constructor(public http: Http,public loadingCtrl:LoadingController) {
 		console.log('Hello HttpUtils Provider');
