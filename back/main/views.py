@@ -353,7 +353,7 @@ def get_students(request):
 			else:
 				response_list.append({'name': student.name, 'bits_id': student.bits_id, 'room_no': student.room})
 
-		return JsonResponse({'status': 1, 'students': response_list})
+		return JsonResponse({'status': 1, 'students': response_list, 'count': len(students)})
 
 @csrf_exempt
 def get_student_info(request):
@@ -373,11 +373,12 @@ def get_student_info(request):
 def get_hostels(request):
 	hostels = Hostel.objects.all()
 	hostels_list = []
+	up = UserProfile.objects.all()
 
 	for hostel in hostels:
 		hostels_list.append({'name':hostel.name,'short':hostel.short})
 
-	return JsonResponse({'status': 1, 'hostels': hostels_list})
+	return JsonResponse({'status': 1, 'hostels': hostels_list,'total_count':len(up)})
 
 @csrf_exempt
 def add_washes(request):
