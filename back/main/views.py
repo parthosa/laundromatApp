@@ -440,13 +440,13 @@ def student_data(request):
 
         worksheet.write(0,0,"Name")
         worksheet.write(0,1,"BITS ID")
-        worksheet.write(0,1,"Phone")
-        worksheet.write(0,2,"Total Washes")
-        worksheet.write(0,3,"Washes left")
-        worksheet.write(0,4,"With Iron")
-        worksheet.write(0,5,"Hostel")
-        worksheet.write(0,6,"Room")
-        worksheet.write(0,7,"Bag number")
+        worksheet.write(0,2,"Phone")
+        worksheet.write(0,3,"Total Washes")
+        worksheet.write(0,4,"Washes left")
+        worksheet.write(0,5,"With Iron")
+        worksheet.write(0,6,"Hostel")
+        worksheet.write(0,7,"Room")
+        worksheet.write(0,8,"Bag number")
 
         rowno = 1
         for student in students:
@@ -458,7 +458,7 @@ def student_data(request):
 		        washes = Wash.objects.filter(user = student)
 		        washes_done = 0
 		        for wash in washes:
-		        	print wash
+		        	print wash.number
 		        	washes_done+=wash.number
 		        # if student.num_washes is not None:
 		        worksheet.write(rowno,4, student.total_washes - washes_done )
