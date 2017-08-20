@@ -68,7 +68,7 @@ export class HostelListPage {
           case "2":
             return (student.bits_id.toLowerCase().indexOf(val.toLowerCase()) > -1);
           case "3":
-            return (student.room_n0.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            return (student.room_no.toLowerCase().indexOf(val.toLowerCase()) > -1);
           default:
             return (student.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
         }
