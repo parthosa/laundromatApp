@@ -12,6 +12,7 @@ import { HttpService } from '../../providers/http-service';
 export class AdminPage {
 
   hostels = [];
+  total_count = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private loadingCtrl:LoadingController,private toastCtrl:ToastController,public menu: MenuController,private httpService:HttpService) {
     this.menu.enable(false,'studentMenu');
@@ -35,6 +36,7 @@ export class AdminPage {
       loader.dismiss();
       if(response.status == 1){
         this.hostels = response.hostels;
+        this.total_count = Number.parseInt(response.total_count);
       }
       else{
         this.toastCtrl.create({

@@ -132,6 +132,10 @@ export class LaundromatApp {
      this.navCtrl.push(DevelopersPage);
   }
 
+  downloadExcel(){
+    window.open('http://quicksmartwash.in/main/laundromat/sheet/', '_system');
+  }
+
   goToEditDetailsPage(){
      this.navCtrl.push(UserDetailsPage,{'edit':true}); 
 

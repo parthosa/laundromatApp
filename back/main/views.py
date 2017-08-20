@@ -440,6 +440,7 @@ def student_data(request):
 
         worksheet.write(0,0,"Name")
         worksheet.write(0,1,"BITS ID")
+        worksheet.write(0,1,"Phone")
         worksheet.write(0,2,"Total Washes")
         worksheet.write(0,3,"Washes left")
         worksheet.write(0,4,"With Iron")
@@ -452,24 +453,26 @@ def student_data(request):
         	try:
 		        worksheet.write(rowno,0, student.name )
 		        worksheet.write(rowno,1, student.bits_id )
-		        worksheet.write(rowno,2, student.total_washes )
+		        worksheet.write(rowno,2, student.phone )
+		        worksheet.write(rowno,3, student.total_washes )
 		        washes = Wash.objects.filter(user = student)
 		        washes_done = 0
 		        for wash in washes:
+		        	print wash
 		        	washes_done+=wash.number
 		        # if student.num_washes is not None:
-		        worksheet.write(rowno,3, student.total_washes - washes_done )
+		        worksheet.write(rowno,4, student.total_washes - washes_done )
 		        # else:
 		        	# worksheet.write(rowno,3, student.total_washes )
 		        stu_plan = student.plan
 		        if stu_plan.with_iron == True:
-		        	worksheet.write(rowno,4, "True" )
+		        	worksheet.write(rowno,5, "Iron" )
 		        else:
-		        	worksheet.write(rowno,4, "False" )
+		        	worksheet.write(rowno,5, "" )
 		        stu_hostel = student.hostel
-		        worksheet.write(rowno,5, stu_hostel.name )
-		        worksheet.write(rowno,6, student.room )
-		        worksheet.write(rowno,7, student.bag_num )
+		        worksheet.write(rowno,6, stu_hostel.name )
+		        worksheet.write(rowno,7, student.room )
+		        worksheet.write(rowno,8, student.bag_num )
 	        	rowno+=1
 	        except Exception as e:
 	        	print e

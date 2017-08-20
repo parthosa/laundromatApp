@@ -12,6 +12,7 @@ import { AdminUserDetails } from '../admin-user-details/admin-user-details';
 export class HostelListPage {
 
   hostel = {};
+  count = 0;
   students = [];
   searchQuery: string = '';
   searchType: any;
@@ -34,6 +35,7 @@ export class HostelListPage {
       loader.dismiss();
        if(response.status == 1){
          this.students = response.students;
+         this.count = response.count;
          localStorage.setItem('students',JSON.stringify(this.students));
        }
         else{
