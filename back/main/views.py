@@ -458,9 +458,10 @@ def student_data(request):
 		        worksheet.write(rowno,3, student.total_washes )
 		        washes = Wash.objects.filter(user = student)
 		        washes_done = 0
-		        for wash in washes:
-		        	print wash.number
-		        	washes_done+=wash.number
+		        if len(washes) > 0:
+			        for wash in washes:
+			        	print wash.number
+			        	washes_done+=wash.number
 		        # if student.num_washes is not None:
 		        worksheet.write(rowno,4, student.total_washes - washes_done )
 		        # else:
