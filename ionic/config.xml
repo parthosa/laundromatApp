@@ -3,7 +3,7 @@
     <name>Laundromat</name>
     <description>Quick Smart Wash Solutions</description>
     <author email="info@quicksmartwash.com" href="http://quicksmartwash.com/">Laundromat Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://10.42.0.1:8100" />
     <access origin="*" />
     <access launch-external="yes" origin="tel:*" />
     <allow-navigation href="http://ionic.local/*" />
@@ -84,6 +84,8 @@
         <splash height="1280" src="resources/wp8/splash/SplashScreenImage.png" width="768" />
     </platform>
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
+    <allow-navigation href="http://172.21.1.103:8100" />
+    <allow-navigation href="http://10.42.0.1:8100" />
     <engine name="android" spec="^6.2.3" />
     <engine name="browser" spec="^4.1.0" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />

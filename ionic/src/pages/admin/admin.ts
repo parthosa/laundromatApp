@@ -56,6 +56,6 @@ export class AdminPage {
 
   goToUpdateStatus(){
     this.navCtrl.push(UpdateStatusPage);
-  }
+  }zzz
 
 }

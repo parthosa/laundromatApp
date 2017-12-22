@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController } from 'ionic-angular';
+import { Platform, MenuController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NavController, ToastController,LoadingController } from 'ionic-angular';
@@ -25,10 +25,10 @@ import { Push, PushObject, PushOptions } from '@ionic-native/push';
 export class LaundromatApp {
   @ViewChild('mainNav') navCtrl: NavController
 
-  
+
   rootPage: any = HomePage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private loadingCtrl:LoadingController, private toastCtrl: ToastController, public httpService: HttpService, public menuCtrl: MenuController, private push: Push) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,private loadingCtrl:LoadingController, private toastCtrl: ToastController, public httpService: HttpService, public menuCtrl: MenuController, private push: Push, public alertCtrl: AlertController) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -38,43 +38,75 @@ export class LaundromatApp {
         splashScreen.hide();
       }, 2000);
       this.menuCtrl.enable(false);
-    
-   
-      // to check if we have permission
-      this.push.hasPermission()
-        .then((res: any) => {
-
-          if (res.isEnabled) {
-            console.log('We have permission to send push notifications');
-          } else {
-            console.log('We do not have permission to send push notifications');
-          }
-
-        });
-
-      // to initialize push notifications
-
-      const options: PushOptions = {
-        android: {
-          senderID: '931784175657'
-        },
-        ios: {
-          alert: 'true',
-          badge: true,
-          sound: 'false'
-        },
-        windows: {}
-      };
-
-      const pushObject: PushObject = this.push.init(options);
-
-      pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
-
-      pushObject.on('registration').subscribe((registration: any) => {console.log('Device registered');localStorage.setItem('device_id',registration.registrationId);});
-
-      pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
+      this.initPushNotification();
     });
   }
+
+  initPushNotification() {
+    if (!this.platform.is('cordova')) {
+      console.warn('Push notifications not initialized. Cordova is not available - Run in physical device');
+      return;
+    }
+    // to check if we have permission
+    this.push.hasPermission()
+      .then((res: any) => {
+
+        if (res.isEnabled) {
+          console.log('We have permission to send push notifications');
+        } else {
+          console.log('We do not have permission to send push notifications');
+        }
+
+      });
+    const options: PushOptions = {
+      android: {
+        senderID: '931784175657'
+      },
+      ios: {
+        alert: 'true',
+        badge: false,
+        sound: 'true'
+      },
+      windows: {}
+    };
+    const pushObject: PushObject = this.push.init(options);
+
+    pushObject.on('registration').subscribe((data: any) => {
+      console.log('device token -> ' + data.registrationId);
+      //TODO - send device token to server
+    });
+
+    pushObject.on('notification').subscribe((data: any) => {
+      console.log('message -> ' + data.message);
+      //if user using app and push notification comes
+      if (data.additionalData.foreground) {
+        // if application open, show popup
+        let confirmAlert = this.alertCtrl.create({
+          title: 'New Notification',
+          message: data.message,
+          buttons: [{
+            text: 'Ignore',
+            role: 'cancel'
+          }, {
+            text: 'View',
+            handler: () => {
+              //TODO: Your logic here
+              this.nav.push(DetailsPage, { message: data.message });
+            }
+          }]
+        });
+        confirmAlert.present();
+      } else {
+        //if user NOT using app and push notification comes
+        //TODO: Your logic on click of push notification directly
+        this.nav.push(DetailsPage, { message: data.message });
+        console.log('Push notification clicked');
+      }
+    });
+
+    pushObject.on('error').subscribe(error => console.error('Error with Push plugin' + error));
+  }
+}
 
   logout(admin) {
     let loader = this.loadingCtrl.create({
@@ -137,7 +169,7 @@ export class LaundromatApp {
   }
 
   goToEditDetailsPage(){
-     this.navCtrl.push(UserDetailsPage,{'edit':true}); 
+     this.navCtrl.push(UserDetailsPage,{'edit':true});
 
   }
 

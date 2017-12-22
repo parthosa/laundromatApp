@@ -22,7 +22,7 @@ export class HomePage {
 	updateApp = false;
 
 	constructor(public navCtrl: NavController,private loadingCtrl:LoadingController,private appVersion: AppVersion,public alertCtrl: AlertController,public toastCtrl: ToastController,private httpService: HttpService) {
-      this.checkUpdate();
+      // this.checkUpdate();
 
 	}
 
@@ -50,7 +50,7 @@ export class HomePage {
         console.log(err);
       }).then(()=>{
 
-      
+
 		GooglePlus.login({
           'webClientId': '931784175657-fkp2jg5hibji6nlc0ln8cnm9tbr5nef8.apps.googleusercontent.com',
 
@@ -61,7 +61,7 @@ export class HomePage {
 		      content: "Please wait...",
 		    });
         	loader.present();
-        	
+
         	this.httpService.postData('/main/user/register/',this.user).then(
         		(response)=>{
         			loader.dismiss();
@@ -97,11 +97,11 @@ export class HomePage {
 		});
     });
 	}
-					
+
 	}
 
 	  checkUpdate(){
-    
+
     this.httpService.getData('/main/app_version/').then(
         (response) => {
           let latest_app_version = response.app_version;
@@ -130,7 +130,7 @@ export class HomePage {
     ]
   });
      prompt.present();
- 
+
   }
 
 	// showAlert(message,title=''){
@@ -142,4 +142,3 @@ export class HomePage {
 	//     alert.present();
 	// }
 }
-

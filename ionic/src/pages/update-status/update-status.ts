@@ -19,7 +19,7 @@ export class UpdateStatusPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController,public loadingCtrl: LoadingController,private toastCtrl: ToastController,private httpService:HttpService, private barcodeScanner: BarcodeScanner) {
     this.barcodeData = 'QSWPL-';
     this.user['status_number']="0";
-    
+
   }
 
   ionViewDidLoad() {
@@ -35,8 +35,8 @@ export class UpdateStatusPage {
     }, (err) => {
       // An error occurred
       this.barcodeData = 'QSWPL-';
-    });  
-    
+    });
+
   }
 
   checkStatus(){
