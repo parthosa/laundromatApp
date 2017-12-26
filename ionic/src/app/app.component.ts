@@ -43,7 +43,7 @@ export class LaundromatApp {
   }
 
   initPushNotification() {
-    if (!this.platform.is('cordova')) {
+    if (!platform.is('cordova')) {
       console.warn('Push notifications not initialized. Cordova is not available - Run in physical device');
       return;
     }
@@ -74,6 +74,12 @@ export class LaundromatApp {
     pushObject.on('registration').subscribe((data: any) => {
       console.log('device token -> ' + data.registrationId);
       //TODO - send device token to server
+      this.httpService.postData('/main/laundromat/notification/', data.registrationId).then(
+        (response) => {
+          console.log(response);
+          // data=response;
+        });
+
     });
 
     pushObject.on('notification').subscribe((data: any) => {
@@ -91,7 +97,7 @@ export class LaundromatApp {
             text: 'View',
             handler: () => {
               //TODO: Your logic here
-              this.nav.push(DetailsPage, { message: data.message });
+              this.navCtrl.push(StudentPage, { message: data.message });
             }
           }]
         });
@@ -99,14 +105,14 @@ export class LaundromatApp {
       } else {
         //if user NOT using app and push notification comes
         //TODO: Your logic on click of push notification directly
-        this.nav.push(DetailsPage, { message: data.message });
+        this.navCtrl.push(StudentPage, { message: data.message });
         console.log('Push notification clicked');
       }
     });
 
     pushObject.on('error').subscribe(error => console.error('Error with Push plugin' + error));
   }
-}
+
 
   logout(admin) {
     let loader = this.loadingCtrl.create({
