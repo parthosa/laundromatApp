@@ -38,15 +38,16 @@ export class LaundromatApp {
         splashScreen.hide();
       }, 2000);
       this.menuCtrl.enable(false);
+      if (!platform.is('cordova')) {
+        console.warn('Push notifications not initialized. Cordova is not available - Run in physical device');
+        return;
+      }
       this.initPushNotification();
     });
+
   }
 
   initPushNotification() {
-    if (!platform.is('cordova')) {
-      console.warn('Push notifications not initialized. Cordova is not available - Run in physical device');
-      return;
-    }
     // to check if we have permission
     this.push.hasPermission()
       .then((res: any) => {
