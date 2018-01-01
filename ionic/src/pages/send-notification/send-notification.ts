@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { HttpService } from '../../providers/http-service';
 
 /**
  * Generated class for the SendNotificationPage page.
@@ -12,37 +13,29 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'send-notification.html',
 })
 export class SendNotificationPage {
-  myrequests;
-  myfriends;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  message:any="";
+  all_hostels:any=false;
+  hostel:any="VK";
+  bag_num:any="2014768";
+  constructor(public navCtrl: NavController, private httpService:HttpService, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SendNotificationPage');
   }
 
-  ionViewWillEnter() {
-
-  }
-
-  ionViewDidLeave() {
-
-  }
-
-
-  addbuddy() {
-
-  }
-
-  accept(item) {
-
-  }
-
-  ignore(item) {
-
-  }
-
-  buddychat(buddy) {
-    
+  sendNotification(){
+    this.httpService.postData('/main/laundromat/notification/',{
+      'message':this.message,
+      'all_hostels':this.all_hostels,
+      'hostel':this.hostel,
+      'bag_num':this.bag_num
+    })
+    .then(response=>{
+      console.log(response);
+    })
+    .catch(err=>{
+      console.log(err);
+    })
   }
 }

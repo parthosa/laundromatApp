@@ -29,9 +29,9 @@
       </ion-item>
     </ion-list>
     <br>
-    <ion-item [hidden]="singleStudent.value == 'singleStudent'">
+    <ion-item *ngIf="singleStudent.value == 'singleStudent'">
     <ion-label color="primary">Bag Number</ion-label>
     <ion-input placeholder="Text Input"></ion-input>
   </ion-item>
-   <button ion-button block>Send</button>
+   <button ion-button block (click)="sendNotification()">Send</button>
 </ion-content>
