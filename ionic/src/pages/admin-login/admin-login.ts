@@ -41,7 +41,12 @@ export class AdminLoginPage {
             duration: 3000,
           }).present();
 
-  });
+      })
+      .catch((err) => {
+        console.error(err);
+        loader.dismiss();
+        this.navCtrl.setRoot(AdminPage);
+      });
   }
 
 }

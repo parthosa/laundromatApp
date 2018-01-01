@@ -20,6 +20,7 @@ import { ContactUsPage } from '../pages/contact-us/contact-us';
 import { DevelopersPage } from '../pages/developers/developers';
 import { Schedule } from '../pages/schedule/schedule';
 import { TermsAndConditions } from '../pages/terms-and-conditions/terms-and-conditions';
+import { SendNotificationPage } from '../pages/send-notification/send-notification';
 
 import { HttpService } from '../providers/http-service';
 
@@ -76,7 +77,8 @@ const cloudSettings: CloudSettings = {
     ContactUsPage,
     DevelopersPage,
     Schedule,
-    TermsAndConditions
+    TermsAndConditions,
+    SendNotificationPage
   ],
   imports: [
     BrowserModule,
@@ -101,7 +103,8 @@ const cloudSettings: CloudSettings = {
     ContactUsPage,
     DevelopersPage,
     Schedule,
-    TermsAndConditions
+    TermsAndConditions,
+    SendNotificationPage
   ],
   providers: [
     StatusBar,

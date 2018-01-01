@@ -15,9 +15,9 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class HttpService {
 	// hello
-	baseUrl = "http://quicksmartwash.in";
-	// baseUrl = "http://192.168.43.56:8000";
-	
+	// baseUrl = "http://quicksmartwash.in";
+	baseUrl = "http://192.168.43.161:8000";
+
 	public loader;
 	constructor(public http: Http,public loadingCtrl:LoadingController) {
 		console.log('Hello HttpUtils Provider');
@@ -35,7 +35,7 @@ export class HttpService {
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json()));
 	}
-	
+
 	login_as_admin(admin_mail: string, Password: string) {
     	let body_obj: any = { admin_mail, Password };
         const body = JSON.stringify(body_obj);
@@ -104,7 +104,7 @@ export class HttpService {
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json()));
 	}
-		
+
 
 	getData(url){
 		return this.http.get(this.baseUrl+url)

@@ -12,6 +12,7 @@ import { TermsAndConditions } from '../pages/terms-and-conditions/terms-and-cond
 import { Schedule } from '../pages/schedule/schedule';
 import { ContactUsPage } from '../pages/contact-us/contact-us';
 import { DevelopersPage } from '../pages/developers/developers';
+import { SendNotificationPage } from '../pages/send-notification/send-notification';
 
 import { HttpService } from '../providers/http-service';
 
@@ -75,11 +76,7 @@ export class LaundromatApp {
     pushObject.on('registration').subscribe((data: any) => {
       console.log('device token -> ' + data.registrationId);
       //TODO - send device token to server
-      this.httpService.postData('/main/laundromat/notification/', data.registrationId).then(
-        (response) => {
-          console.log(response);
-          // data=response;
-        });
+
 
     });
 
@@ -178,6 +175,10 @@ export class LaundromatApp {
   goToEditDetailsPage(){
      this.navCtrl.push(UserDetailsPage,{'edit':true});
 
+  }
+
+  sendNotification(){
+    this.navCtrl.push(SendNotificationPage);
   }
 
 
