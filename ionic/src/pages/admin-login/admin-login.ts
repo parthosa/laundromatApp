@@ -15,8 +15,8 @@ export class AdminLoginPage {
     if(localStorage.getItem('admin')){
       this.adminCreds = JSON.parse(localStorage.getItem('admin'));
     }
-    this.adminCreds['email'] = 'laundro_admin1';
-    this.adminCreds['password'] = 'laundro@admin';
+    this.adminCreds['email'] = 'shashank';
+    this.adminCreds['password'] = 'shashank@laundro';
   }
 
   ionViewDidLoad() {

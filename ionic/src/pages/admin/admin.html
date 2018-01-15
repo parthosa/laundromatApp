@@ -18,10 +18,42 @@
 
 <ion-content padding>
 
-<!--   <ion-card>
-  <ion-card-header>
-    Hostels
-  </ion-card-header> -->
+  <div class="search">
+  <ion-grid>
+    <ion-row>
+    <ion-col col-12>
+  <ion-list>
+    <ion-item>
+      <ion-label>Search By</ion-label>
+    <ion-select [(ngModel)]="searchType" (ionChange)="onChange()">
+        <ion-option value="1">Name</ion-option>
+        <ion-option value="2">ID</ion-option>
+        <ion-option value="3">Room No</ion-option>
+      </ion-select>
+     </ion-item>
+    </ion-list>
+    </ion-col>
+    <ion-col col-12>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  </ion-col>
+  </ion-row>
+  </ion-grid>
+  </div>
+  <ion-list no-margin >
+
+    <ion-item *ngFor = "let student of students" (click)="goToPage(student.bits_id)">
+      <ion-row>
+        <ion-col col-9>
+          <p><strong>{{ student.name }}</strong></p>
+          <p>{{ student.bits_id }}</p>
+        </ion-col>
+        <ion-col col-3>
+          <p><strong>Room No</strong></p>
+          <p>{{ student.room_no }}</p>
+        </ion-col>
+       </ion-row>
+    </ion-item>
+  </ion-list>
 <div class="hostel-list">
   <button ion-button full (click)="goToUpdateStatus()" class="scan">Scan</button>
   <ion-list>

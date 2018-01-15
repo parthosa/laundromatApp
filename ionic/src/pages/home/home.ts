@@ -87,12 +87,14 @@ export class HomePage {
 				              message: 'Try Again',
 				              duration: 3000,
 				            }).present();
+										console.log(err,1);
         		});
         }, (err) => {
 			this.toastCtrl.create({
 				              message: 'Try Again',
 				              duration: 3000,
 				            }).present();
+										console.log(err,2);
 			// this.navCtrl.setRoot(StudentPage);
 		});
     });
